@@ -12,7 +12,20 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+Route::get('index.html', function () {
+    return view('index');
+});
+Route::get('/tour.html', function () {
+    return view('tour');
+});
+Route::get('/hotel.html', function () {
+    return view('hotel');
+});
+Route::view('/hotel-single.html', 'hotel-single');
+Route::view('/about.html', 'about');
+Route::view('/blog.html', 'blog');
+Route::view('/blog-single.html', 'blog-single');
+Route::view('/contact.html', 'contact');
