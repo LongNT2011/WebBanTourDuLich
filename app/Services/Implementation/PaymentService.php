@@ -28,5 +28,17 @@ class PaymentService implements IPaymentService
             ]
         ]);
     }
+    // http_response_code(303);
+    //header("Location: " . $checkout_session->url);
+    public function ValidatePayment(string $sessionId) : PaymentResponse{
+        $service = new SessionService();
+        $session = $service->Get($sessionId);
+        if ($session->PaymentStatus == "paid") {
+            $paymentResponse = new PaymentResponse();
+            $paymentResponse->StripeSessionId = $session->Id;
+            $paymentResponse->PaymentIntentId = $session->PaymentIntentId;
+            return $paymentResponse;
+        }
+    }
 }
 ?>
