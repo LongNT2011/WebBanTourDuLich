@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
+Route::get('test', function () {
+    return view('test');
+});
+Route::post("PaymentService.php", function () {
+    return view('PaymentService');
+});
 Route::get('index.html', function () {
     return view('index');
 });
