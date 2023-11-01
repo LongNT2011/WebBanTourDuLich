@@ -1,4 +1,4 @@
-@extends('layoutadmin.layoutadmin')
+@extends('admin.layoutadmin.layoutadmin')
 
 @section('content')
   <main class="main-content position-relative border-radius-lg ">
@@ -691,4 +691,4 @@
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
-  @stop
+@endsection
