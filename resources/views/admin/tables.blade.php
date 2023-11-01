@@ -1,4 +1,4 @@
-@extends('layoutadmin.layoutadmin')
+@extends('.admin.layoutadmin.layoutadmin')
 
 @section('content')
   <main class="main-content position-relative border-radius-lg ">
@@ -643,4 +643,4 @@
       </div>
     </div>
   </div>
-  @stop
+@endsection

@@ -5,11 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Site extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    public function order(){
-        return $this->hasMany(Order::class);
+    public function location(){
+        return $this->belongsTo(Location::class);
+    }
+    public function tour(){
+        return $this->hasMany(Tour::class);
     }
 }

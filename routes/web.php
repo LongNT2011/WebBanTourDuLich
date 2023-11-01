@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HotelController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,8 +22,8 @@ Route::get('test', function () {
 Route::get('index.html', function () {
     return view('index');
 });
-Route::get('/tour.html', function () {
-    return view('tour');
+Route::get('/hotel.html', function () {
+    return view('hotel');
 });
 Route::get('/hotel.html', function () {
     return view('hotel');
@@ -37,15 +38,29 @@ Route::view('/contact.html', 'contact');
 // admin
 Route::group(['prefix' => '/admin'], function () {
     // Các route trong thư mục admin
-    Route::get('/admin', function () {
-        return view('admin/dashboard');
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
     });
-    Route::view('/admin/billing.html', 'billing');
-    Route::view('/admin/dashboard.html', 'dashboard');
-    Route::view('/admin/profile.html', 'profile');
-    Route::view('/admin/rtf.html', 'rtf');
-    Route::view('/admin/sign-in.html', 'sign-in');
-    Route::view('/admin/sign-up.html', 'sign-up');
-    Route::view('/admin/tables.html', 'tables');
-    Route::view('/admin/virtual-reality.html', 'virtual-reality');
+    Route::resource('/hotels',HotelController::class);
+    Route::get('/hotels/search', [HotelController::class, 'search'])->name('hotels.search');
+
+
+
+
+
+    Route::get('/tables',function (){
+        return view('admin.tables');
+    })->name('admin.tables');
+    Route::get('/billing',function (){
+        return view('admin.billing');
+    })->name('admin.billing');
+    Route::get('/rtl',function (){
+        return view('admin.rtl');
+    })->name('admin.rtl');
+    Route::get('/vr',function (){
+        return view('admin.virtual-reality');
+    })->name('admin.vr');
+
 });
+
+
