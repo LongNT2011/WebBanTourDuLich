@@ -6,14 +6,20 @@ use App\Http\Controllers\Controller;
 use App\Models\Hotel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Brian2694\Toastr\Facades\Toastr;
+use JsValidator;
 
 class HotelController extends Controller
 {
+    public $validationRules = [
+        'rating' => 'required'
+    ];
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        Toastr::success('Hotel added successfully!' );
         $hotels = Hotel::paginate(5);
         return view('admin.hotel.index', compact('hotels'));
     }
@@ -22,7 +28,10 @@ class HotelController extends Controller
      * Show the form for creating a new resource.
      */
     public function create(){
-        return view('admin.hotel.create');
+        $validator = JsValidator::make($this->validationRules);
+        return view('admin.hotel.create')->with([
+            'validator' => $validator
+        ]);
     }
 
     /**
@@ -30,18 +39,17 @@ class HotelController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'imageUrl' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+        // $request->validate([
+        //     'imageUrl' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        // ]);
+        $validator = JsValidator::make($this->validationRules);
         $image = $request->file('imageUrl')->store(
             'hotels/images', 'public'
         );
+       
         Hotel::create($request->except('imageUrl') + ['imageUrl' => $image]);
-
-        return redirect()->route('hotels.index')->with([
-                'message' => 'Success Created !',
-                'alert-type' => 'success'
-            ]);
+        Toastr::success('Hotel added successfully!' );
+        return redirect()->route('hotels.index');
 
 
     }
