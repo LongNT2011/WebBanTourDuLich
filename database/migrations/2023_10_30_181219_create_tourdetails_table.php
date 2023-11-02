@@ -16,7 +16,6 @@ return new class extends Migration
             $table->dateTime('checkInDate');
             $table->dateTime('checkOutDate');
             $table->string('vehicle');
-            $table->string('status');
             $table->integer('maxParticipant');
             $table->decimal('childrenPrice');
             $table->decimal('adultPrice');
@@ -24,6 +23,7 @@ return new class extends Migration
             $table->string('depatureLocation');
             $table->text('tripDescription')->nullable();
             $table->foreignId('tour_id')->constrained('tours');
+            $table->timestamps();
         });
     }
 
