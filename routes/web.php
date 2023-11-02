@@ -21,10 +21,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', function () {
+    Toastr::success('Hotel added successfully!' );
     return view('index');
-});
-Route::get('test', function () {
-    return view('test');
 });
 Route::get('index.html', function () {
     return view('index');
@@ -40,7 +38,8 @@ Route::view('/about.html', 'about');
 Route::view('/blog.html', 'blog');
 Route::view('/blog-single.html', 'blog-single');
 Route::view('/contact.html', 'contact');
-
+Route::view('/sign-in', 'sign-in');
+Route::view('/sign-up', 'sign-up');
 
 // admin
 Route::group(['prefix' => '/admin'], function () {

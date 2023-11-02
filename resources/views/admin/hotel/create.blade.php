@@ -6,7 +6,7 @@
       <div class="row">
           <div class="col-lg-12">
               <div class="card p-3">
-                  <form method="post" action="{{route('hotels.store')}}" enctype="multipart/form-data">
+                  <form method="post" action="{{route('hotels.store')}}" enctype="multipart/form-data" id="my-form">
                       @csrf
                       <div class="form-group row border-bottom pb-4">
                           <label for="title" class="col-sm-2 col-form-label">Tên khách sạn</label>
@@ -52,6 +52,12 @@
           </div>
       </div>
   </div>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+<!-- Laravel Javascript Validation -->
+<script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+{!! $validator->selector('#my-form') !!}
 @endsection
 @section('styles')
     <style>
