@@ -19,6 +19,7 @@
   <link href="{{asset('admin/assets/css/nucleo-svg.css')}}" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="{{asset('admin/assets/css/argon-dashboard.css?v=2.0.4')}}" rel="stylesheet" />
+  <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
 </head>
 
@@ -107,32 +108,6 @@
 
   </aside>
 
-  @if (session('success'))
-{
-<script src="{{ asset('js/jquery.min.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script type="text/javascript">
-Swal.fire({
-icon: 'success',
-title: '',
-text: '{{ session('success') }}',
-}).once();
-</script>
-{{ session()->forget('success') }}
-}
-@if (session('error'))
-{
-<script src="{{ asset('js/jquery.min.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script type="text/javascript">
-Swal.fire({
-icon: 'error',
-title: '',
-text: '{{ session('error') }}',
-}).once();
-</script>
-{{ session()->forget('error') }}
-}
 
   <main class="main-content position-relative border-radius-lg ">
     <!-- Navbar -->
@@ -386,6 +361,9 @@ text: '{{ session('error') }}',
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{{asset('admin/assets/js/argon-dashboard.min.js?v=2.0.4')}}"></script>
+  <script src="{{asset('js/jquery.min.js')}}"></script>
+  <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+  {!! Toastr::message() !!}
   @yield('scripts')
 </body>
 

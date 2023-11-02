@@ -18,10 +18,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', function () {
+    Toastr::success('Hotel added successfully!' );
     return view('index');
-});
-Route::get('test', function () {
-    return view('test');
 });
 Route::get('index.html', function () {
     return view('index');
