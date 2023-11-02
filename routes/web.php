@@ -32,7 +32,8 @@ Route::view('/about.html', 'about');
 Route::view('/blog.html', 'blog');
 Route::view('/blog-single.html', 'blog-single');
 Route::view('/contact.html', 'contact');
-
+Route::view('/sign-in', 'sign-in');
+Route::view('/sign-up', 'sign-up');
 
 // admin
 Route::group(['prefix' => '/admin'], function () {
@@ -44,8 +45,7 @@ Route::group(['prefix' => '/admin'], function () {
     Route::view('/admin/dashboard.html', 'dashboard');
     Route::view('/admin/profile.html', 'profile');
     Route::view('/admin/rtf.html', 'rtf');
-    Route::view('/admin/sign-in.html', 'sign-in');
-    Route::view('/admin/sign-up.html', 'sign-up');
+
     Route::view('/admin/tables.html', 'tables');
     Route::view('/admin/virtual-reality.html', 'virtual-reality');
 });
