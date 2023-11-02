@@ -12,5 +12,8 @@ class TourDetail extends Model
     public function tour(){
         return $this->belongsTo(Tour::class);
     }
+    public function tourImage(){
+        return $this->hasMany(TourImage::class);
+    }
 
 }

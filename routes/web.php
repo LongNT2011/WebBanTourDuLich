@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\HotelController;
-use App\Http\Controllers\LocationController;
-use App\Http\Controllers\SiteController;
-use App\Http\Controllers\userController;
+use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\HotelController;
+use App\Http\Controllers\admin\LocationController;
+use App\Http\Controllers\admin\SiteController;
+use App\Http\Controllers\admin\userController;
 use Illuminate\Support\Facades\Route;
 
 /*
