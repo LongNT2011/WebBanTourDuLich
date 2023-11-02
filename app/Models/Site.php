@@ -13,6 +13,6 @@ class Site extends Model
         return $this->belongsTo(Location::class);
     }
     public function tour(){
-        return $this->hasMany(Tour::class);
+        return $this->belongsToMany(Tour::class,'tour_site','site_id','tour_id');
     }
 }

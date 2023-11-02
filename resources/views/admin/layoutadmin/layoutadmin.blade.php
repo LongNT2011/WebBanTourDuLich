@@ -69,13 +69,21 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="../admin/pages/rtl.html">
+          <a class="nav-link " href="{{route('tours.index')}}">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">RTL</span>
+            <span class="nav-link-text ms-1">Tours</span>
           </a>
         </li>
+          <li class="nav-item">
+              <a class="nav-link " href="{{route('tourdetails.index')}}">
+                  <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                      <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
+                  </div>
+                  <span class="nav-link-text ms-1">Tour Details</span>
+              </a>
+          </li>
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
         </li>
@@ -120,7 +128,7 @@
           </ol>
           <h6 class="font-weight-bolder text-white mb-0">Tables</h6>
         </nav>
-            <form action="{{ route('hotels.search') }}" method="get">
+            <form action="{{route('hotels.search')}}" method="post">
                 @csrf
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -348,6 +356,8 @@
   <script src="{{asset('admin/assets/js/core/bootstrap.min.js')}}"></script>
   <script src="{{asset('admin/assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
   <script src="{{asset('admin/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {

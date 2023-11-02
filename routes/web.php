@@ -4,6 +4,9 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\HotelController;
 use App\Http\Controllers\admin\LocationController;
 use App\Http\Controllers\admin\SiteController;
+use App\Http\Controllers\admin\TourController;
+use App\Http\Controllers\admin\TourDetailController;
+use App\Http\Controllers\admin\TourImageController;
 use App\Http\Controllers\admin\userController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,28 +46,20 @@ Route::group(['prefix' => '/admin'], function () {
     // Các route trong thư mục admin
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
     Route::resource('/hotels',HotelController::class);
-    Route::get('/hotels/search', [HotelController::class, 'search'])->name('hotels.search');
+    Route::post('/hotels/search', [HotelController::class,'search'])->name('hotels.search');
     Route::resource('/locations',LocationController::class);
     Route::resource('/sites',SiteController::class);
     Route::resource('/users',UserController::class);
+    Route::resource('/tours',TourController::class);
+    Route::resource('/tourdetails',TourDetailController::class);
+    Route::resource('/tourdetails.image',TourImageController::class)->except(['create', 'index','show']);
 
 
 
 
 
 
-    Route::get('/tables',function (){
-        return view('admin.tables');
-    })->name('admin.tables');
-    Route::get('/billing',function (){
-        return view('admin.billing');
-    })->name('admin.billing');
-    Route::get('/rtl',function (){
-        return view('admin.rtl');
-    })->name('admin.rtl');
-    Route::get('/vr',function (){
-        return view('admin.virtual-reality');
-    })->name('admin.vr');
+
 
 });
 

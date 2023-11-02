@@ -9,11 +9,13 @@ class Tour extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    public function tour(){
-        return $this->belongsTo(Site::class);
-    }
+
     public function tourDetail(){
         return $this->hasMany(TourDetail::class);
+    }
+
+    public function site(){
+        return $this->belongsToMany(Site::class,'tour_site','tour_id','site_id');
     }
 
 }
