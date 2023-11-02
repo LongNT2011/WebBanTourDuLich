@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tourdetails', function (Blueprint $table) {
+            $table->id();
             $table->dateTime('checkInDate');
             $table->dateTime('checkOutDate');
             $table->string('vehicle');

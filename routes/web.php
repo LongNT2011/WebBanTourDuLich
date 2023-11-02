@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\HotelController;
+use App\Http\Controllers\admin\LocationController;
+use App\Http\Controllers\admin\SiteController;
+use App\Http\Controllers\admin\userController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,8 +26,8 @@ Route::get('test', function () {
 Route::get('index.html', function () {
     return view('index');
 });
-Route::get('/tour.html', function () {
-    return view('tour');
+Route::get('/hotel.html', function () {
+    return view('hotel');
 });
 Route::get('/hotel.html', function () {
     return view('hotel');
@@ -38,14 +43,31 @@ Route::view('/sign-up', 'sign-up');
 // admin
 Route::group(['prefix' => '/admin'], function () {
     // Các route trong thư mục admin
-    Route::get('/admin', function () {
-        return view('admin/dashboard');
-    });
-    Route::view('/admin/billing.html', 'billing');
-    Route::view('/admin/dashboard.html', 'dashboard');
-    Route::view('/admin/profile.html', 'profile');
-    Route::view('/admin/rtf.html', 'rtf');
+    Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+    Route::resource('/hotels',HotelController::class);
+    Route::get('/hotels/search', [HotelController::class, 'search'])->name('hotels.search');
+    Route::resource('/locations',LocationController::class);
+    Route::resource('/sites',SiteController::class);
+    Route::resource('/users',UserController::class);
 
-    Route::view('/admin/tables.html', 'tables');
-    Route::view('/admin/virtual-reality.html', 'virtual-reality');
+
+
+
+
+
+    Route::get('/tables',function (){
+        return view('admin.tables');
+    })->name('admin.tables');
+    Route::get('/billing',function (){
+        return view('admin.billing');
+    })->name('admin.billing');
+    Route::get('/rtl',function (){
+        return view('admin.rtl');
+    })->name('admin.rtl');
+    Route::get('/vr',function (){
+        return view('admin.virtual-reality');
+    })->name('admin.vr');
+
 });
+
+

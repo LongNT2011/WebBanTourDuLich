@@ -1,4 +1,4 @@
-@extends('layoutadmin.layoutadmin')
+@extends('admin.layoutadmin.layoutadmin')
 
 @section('content')
   <div class="main-content position-relative max-height-vh-100 h-100">

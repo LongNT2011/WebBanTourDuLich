@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('paymentStatus')->nullable();
             $table->string('sessionId')->nullable();
             $table->string('paymentIntentId')->nullable();
+            $table->string('hotelId')->nullable();
+            $table->string('name')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
             $table->foreignId('tour_id')->constrained('tours');
             $table->foreignId('user_id')->constrained('users');
         });

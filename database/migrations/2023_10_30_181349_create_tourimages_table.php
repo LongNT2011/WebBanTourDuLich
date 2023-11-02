@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('imageUrl')->nullable();
             $table->timestamps();
-            $table->foreignId('tour_id')->constrained('tours');
+            $table->foreignId('tourDetail_id')->constrained('tourdetails');
 
         });
     }

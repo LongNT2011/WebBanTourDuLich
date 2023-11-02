@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class TourImage extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    public function order(){
-        return $this->hasMany(Order::class);
+    public function tourdetail(){
+        return $this->belongsTo(TourDetail::class);
     }
 }
