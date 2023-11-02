@@ -105,6 +105,34 @@
     </div>
     
   </aside>
+
+  @if (session('success'))
+{
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+Swal.fire({
+icon: 'success',
+title: '',
+text: '{{ session('success') }}',
+}).once();
+</script>
+{{ session()->forget('success') }}
+}
+@if (session('error'))
+{
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+Swal.fire({
+icon: 'error',
+title: '',
+text: '{{ session('error') }}',
+}).once();
+</script>
+{{ session()->forget('error') }}
+}
+
   @yield('content')
   <!--   Core JS Files   -->
   <script src="../admin/assets/js/core/popper.min.js"></script>

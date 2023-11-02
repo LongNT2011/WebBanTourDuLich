@@ -50,6 +50,8 @@
     </div>
   </nav>
 
+
+  
   @yield('content')
 
   <footer class="ftco-footer ftco-bg-dark ftco-section">
