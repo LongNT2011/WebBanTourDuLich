@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Hotel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -14,7 +15,7 @@ class HotelController extends Controller
     public function index()
     {
         $hotels = Hotel::paginate(5);
-        return view('admin.hotel.hotel', compact('hotels'));
+        return view('admin.hotel.index', compact('hotels'));
     }
 
     /**
@@ -113,7 +114,7 @@ class HotelController extends Controller
             ->orWhere('pricePerPerson', 'like', "%$query%")
             ->paginate(5);
 
-        return view('admin.hotel.hotel', compact('hotels'));
+        return view('admin.hotel.index', compact('hotels'));
 
     }
 

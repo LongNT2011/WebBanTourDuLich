@@ -1,6 +1,10 @@
 <?php
 
-use App\Http\Controllers\HotelController;
+use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\HotelController;
+use App\Http\Controllers\admin\LocationController;
+use App\Http\Controllers\admin\SiteController;
+use App\Http\Controllers\admin\userController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,11 +42,13 @@ Route::view('/contact.html', 'contact');
 // admin
 Route::group(['prefix' => '/admin'], function () {
     // Các route trong thư mục admin
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    });
+    Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
     Route::resource('/hotels',HotelController::class);
     Route::get('/hotels/search', [HotelController::class, 'search'])->name('hotels.search');
+    Route::resource('/locations',LocationController::class);
+    Route::resource('/sites',SiteController::class);
+    Route::resource('/users',UserController::class);
+
 
 
 

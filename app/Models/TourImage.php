@@ -9,7 +9,7 @@ class TourImage extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    public function tour(){
-        return $this->belongsTo(Tour::class);
+    public function tourdetail(){
+        return $this->belongsTo(TourDetail::class);
     }
 }
