@@ -41,6 +41,14 @@ Route::view('/contact.html', 'contact');
 Route::view('/sign-in', 'sign-in');
 Route::view('/sign-up', 'sign-up');
 
+
+Route::prefix('admin/dashboard')->group(function () {
+    Route::get('booking-total', [DashboardController::class, 'GetTotalBookingRadialChartDataDb']);
+    Route::get('registered-users', [DashboardController::class, 'GetRegisteredUserChartDataDb']);
+    Route::get('revenue', [DashboardController::class, 'GetRevenueChartDataDb']);
+    Route::get('booking-pie-chart', [DashboardController::class, 'GetBookingPieChartDataDb']);
+    Route::get('member-booking-line-chart', [DashboardController::class, 'GetMemberAndBookingLineChartDataDb']);
+});
 // admin
 Route::group(['prefix' => '/admin'], function () {
     // Các route trong thư mục admin

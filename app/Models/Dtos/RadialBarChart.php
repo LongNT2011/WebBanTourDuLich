@@ -1,4 +1,5 @@
 <?php
+namespace App\Models\Dtos;
 class RadialBarChart{
     public $TotalCount;
     public $CountInCurrentMonth;

@@ -20,6 +20,7 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="{{asset('admin/assets/css/argon-dashboard.css?v=2.0.4')}}" rel="stylesheet" />
   <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+  <link rel="stylesheet" href="{{asset('admin/assets/dashboard/apexcharts.css')}}" />
 
 </head>
 
@@ -373,6 +374,7 @@
   <script src="{{asset('admin/assets/js/argon-dashboard.min.js?v=2.0.4')}}"></script>
   <script src="{{asset('js/jquery.min.js')}}"></script>
   <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   {!! Toastr::message() !!}
   @yield('scripts')
 </body>
