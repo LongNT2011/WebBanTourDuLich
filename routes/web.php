@@ -4,6 +4,9 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\HotelController;
 use App\Http\Controllers\admin\LocationController;
 use App\Http\Controllers\admin\SiteController;
+use App\Http\Controllers\admin\TourController;
+use App\Http\Controllers\admin\TourDetailController;
+use App\Http\Controllers\admin\TourImageController;
 use App\Http\Controllers\admin\userController;
 use App\Http\Controllers\auth\AuthController;
 use App\Http\Controllers\Auth\AuthController as AuthAuthController;
@@ -23,10 +26,8 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
+    Toastr::success('Hotel added successfully!');
     return view('index');
-})->name('index');
-Route::get('test', function () {
-    return view('test');
 });
 Route::get('index.html', function () {
     return view('index');
@@ -42,7 +43,8 @@ Route::view('/about.html', 'about');
 Route::view('/blog.html', 'blog');
 Route::view('/blog-single.html', 'blog-single');
 Route::view('/contact.html', 'contact');
-
+Route::view('/sign-in', 'sign-in');
+Route::view('/sign-up', 'sign-up');
 
 // admin
 Route::group(['middleware' => 'checkadmin', 'prefix' => '/admin'], function () {
@@ -72,25 +74,6 @@ Route::group(['middleware' => 'checkadmin', 'prefix' => '/admin'], function () {
         return view('admin.virtual-reality');
     })->name('admin.vr');
 });
-
-// auth
-Route::get('/signin', [AuthController::class, 'showSigninForm'])->name('auth.signin');
-Route::post('/signin', [AuthController::class, 'signin']);
-
-Route::get('/signup', [AuthController::class, 'showSignupForm'])->name('auth.signup');
-Route::post('/signup', [AuthController::class, 'signup']);
-
-Route::get('/signout', [AuthController::class, 'signout'])->name('auth.signout');
-
-Route::get('/signin_admin', [DashboardController::class, 'showSigninAdminForm'])->name('admin.signinAdmin');
-Route::post('/signin_admin', [DashboardController::class, 'signinAdmin']);
-
-Route::get('/signout_admin', [DashboardController::class, 'signoutAdmin'])->name('admin.signoutAdmin');
-
-// verify
-Route::get('/email/verify', function () {
-    return view('auth.verify-email');
-})->middleware('auth')->name('verification.notice');
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
