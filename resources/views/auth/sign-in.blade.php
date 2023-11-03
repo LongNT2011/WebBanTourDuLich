@@ -30,9 +30,8 @@
                         <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
                             <div class="card card-plain">
                                 <div class="card-header pb-0 text-start">
-                                    <h4 class="font-weight-bolder">Sign In As Admin Account</h4>
-                                    <p class="mb-0">Enter an account as Admintrator roles to sign in to Admin Page
-                                    </p>
+                                    <h4 class="font-weight-bolder">Sign In</h4>
+                                    <p class="mb-0">Enter your email and password to sign in</p>
 
                                     @if ($message = Session::get('error'))
                                         <div class="alert alert-danger alert-block">
@@ -65,12 +64,19 @@
                                 </div>
                                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                     <p class="mb-4 text-sm mx-auto">
-                                        Sign in as User Account?
-                                        <a href="{{ route('auth.signin') }}"
+                                        Don't have an account?
+                                        <a href="{{ route('auth.signup') }}"
+                                            class="text-primary text-gradient font-weight-bold">Sign
+                                            up</a>
+                                    </p>
+                                    <p class="mb-4 text-sm mx-auto">
+                                        Sign in as Admin Account?
+                                        <a href="{{ route('admin.signinAdmin') }}"
                                             class="text-primary text-gradient font-weight-bold">Sign
                                             in</a>
                                     </p>
                                 </div>
+
                             </div>
                         </div>
                         <div
