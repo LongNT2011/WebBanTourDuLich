@@ -7,6 +7,7 @@ use App\Models\Location;
 use App\Models\Site;
 use App\Models\Tour;
 use App\Models\TourImage;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -35,6 +36,8 @@ class TourController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'tourName' => 'required',
+            'sites' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -43,6 +46,7 @@ class TourController extends Controller
         );
         $tour = Tour::create($request->except('image') + ['image' => $image]);
         $tour->site()->sync($request->sites);
+        Toastr::success('Thêm tour thành công!' );
         return redirect()->route('tours.index')->with([
             'message' => 'Success Created !',
             'alert-type' => 'success'
@@ -74,8 +78,9 @@ class TourController extends Controller
     public function update(Request $request, Tour $tour)
     {
         $request->validate([
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'tourName' => 'string|max:255',
+            'tourName' => 'required',
+            'sites' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($request->hasFile('image')) {
@@ -88,7 +93,7 @@ class TourController extends Controller
             $tour->site()->sync($request->sites);
 
         }
-
+        Toastr::success('Sửa tour thành công!' );
         return redirect()->route('tours.index')->with([
             'message' => 'Success Updated!',
             'alert-type' => 'info'
@@ -101,26 +106,28 @@ class TourController extends Controller
      */
     public function destroy(Tour $tour)
     {
+        if($tour->tourDetail->count() > 0){
+            Toastr::error('Không thể xóa tour này!' );
+            return redirect()->back();
+        }
         File::delete('storage/'. $tour->image);
         $tour->site()->detach();
         $tour->delete();
-
+        Toastr::success('Xóa tour thành công!' );
         return redirect()->back()->with([
             'message' => 'Success Deleted !',
             'alert-type' => 'danger'
         ]);
     }
 
-//    public function search(Request $request)
-//    {
-//        $query = $request->input('query');
-//
-//        $hotels = Hotel::where('hotelName', 'like', "%$query%")
-//            ->orWhere('description', 'like', "%$query%")
-//            ->orWhere('pricePerPerson', 'like', "%$query%")
-//            ->paginate(5);
-//
-//        return view('admin.hotel.index', compact('hotels'));
-//
-//    }
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        $tours = Tour::where('tourName', 'like', "%$query%")
+            ->paginate(5);
+
+        return view('admin.tour.index', compact('tours'));
+
+    }
 }

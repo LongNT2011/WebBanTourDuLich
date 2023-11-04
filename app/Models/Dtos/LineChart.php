@@ -1,4 +1,5 @@
 <?php
+namespace App\Models\Dtos;
     class LineChart {
         // array
         public $Series;

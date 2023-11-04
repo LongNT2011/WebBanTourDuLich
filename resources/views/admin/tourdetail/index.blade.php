@@ -1,5 +1,31 @@
 @extends('admin.layoutadmin.layoutadmin')
 
+@section('header')
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Admin</a></li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Chi tiết Tour</li>
+        </ol>
+        <h6 class="font-weight-bolder text-white mb-0">Chi tiết Tour</h6>
+    </nav>
+@endsection
+
+
+
+
+@section('search')
+    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+        <form action="{{route('tourdetails.search')}}" method="post">
+            @csrf
+            <div class="input-group">
+                <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" name="query" placeholder="Search for hotels">
+            </div>
+
+        </form>
+    </div>
+@endsection
+
 @section('content')
 
     <div class="content-header">
@@ -14,50 +40,31 @@
             </div>
         </div>
     </div>
-    @if(count($errors) > 0 )
-        <ul class="p-0 m-0" style="list-style: none;">
-            @foreach($errors->all() as $error)
-                <li>{{$error}}</li>
-            @endforeach
-        </ul>
-    @endif
-    @if(session()->has('message'))
-        <div class="content-header mb-0 pb-0">
-            <div class="container-fluid">
-                <div class="mb-0 alert alert-{{ session()->get('alert-type') }} alert-dismissible fade show" role="alert">
-                    <strong>{{ session()->get('message') }}</strong>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </div><!-- /.container-fluid -->
-        </div>
-    @endif
     <!-- End Navbar -->
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6>Authors table</h6>
+                        <h6>Danh sách chi tiết tour</h6>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
                                 <thead>
                                 <tr>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">id</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tour</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">CheckinDate</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">CheckoutDate</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Vehicle</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">MaxParticipantNumber</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ChildrenPrice</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">AdultPrice</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Discount</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">DepatureLocation</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">TripDescription</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ảnh</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày bắt đầu</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày kết thúc</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Phương tiện di chuển</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Số người tối đa</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Giá trẻ em</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Giá người lớn</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Giảm giá</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Địa điểm xuất phát</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Chương trình tour</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ảnh</th>
                                     <th class="text-secondary opacity-7"></th>
                                 </tr>
                                 </thead>
@@ -95,34 +102,19 @@
                                             <span class="text-secondary text-xs font-weight-bold">{{$tourdetail->depatureLocation}}</span>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">{{$tourdetail->tripDescription}}</span>
+
+                                        <span class="text-secondary text-xs font-weight-bold">
+                                            {!! substr($tourdetail->tripDescription, 0, 20) !!}
+                                        </span>
+
                                         </td>
                                         <td class="align-middle text-center">
-                                            <div id="imageCarousel" class="carousel slide" data-ride="carousel">
-                                                <ol class="carousel-indicators">
-                                                    <li data-target="#imageCarousel" data-slide-to="0" class="active"></li>
-                                                    <li data-target="#imageCarousel" data-slide-to="1"></li>
-                                                    <!-- Thêm các li với data-slide-to cho mỗi ảnh trong carousel -->
-                                                </ol>
-                                                <div class="carousel-inner">
-                                                    <div class="carousel-item active">
-                                                        @foreach($tourdetail->tourimage as $tourImage)
-                                                            <a href="{{ Storage::url($tourImage->imageUrl) }}" target="_blank">
-                                                                <img width="100" src="{{ Storage::url($tourImage->imageUrl) }}" alt="image">
-                                                            </a>
-                                                        @endforeach
-                                                    </div>
-
-                                                </div>
-                                                <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
-                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                    <span class="sr-only">Previous</span>
+                                        <td class="align-middle text-center">
+                                            @if(count($tourdetail->tourimage) > 0)
+                                                <a href="{{ Storage::url($tourdetail->tourimage[0]->imageUrl) }}" target="_blank">
+                                                    <img width="100" src="{{ Storage::url($tourdetail->tourimage[0]->imageUrl) }}" alt="image">
                                                 </a>
-                                                <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
-                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                    <span class="sr-only">Next</span>
-                                                </a>
-                                            </div>
+                                            @endif
                                         </td>
                                         <td class="align-middle">
                                             <a href="{{ route('tourdetails.edit', [$tourdetail]) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">

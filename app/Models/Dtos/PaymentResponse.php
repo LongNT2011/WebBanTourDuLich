@@ -1,4 +1,5 @@
 <?php
+namespace App\Models\Dtos;
 class PaymentResponse {
     public $StripeSessionId;
     public $PaymentIntentId;
