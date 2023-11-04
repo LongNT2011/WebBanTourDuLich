@@ -1,5 +1,30 @@
 @extends('admin.layoutadmin.layoutadmin')
 
+
+@section('header')
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Admin</a></li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Khách sạn</li>
+        </ol>
+        <h6 class="font-weight-bolder text-white mb-0">Khách sạn</h6>
+    </nav>
+@endsection
+
+@section('search')
+    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+        <form action="{{route('hotels.search')}}" method="post">
+            @csrf
+            <div class="input-group">
+                <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" name="query" placeholder="Search for hotels">
+            </div>
+
+        </form>
+    </div>
+@endsection
+
+
 @section('content')
 
     <div class="content-header">
@@ -7,46 +32,27 @@
         <div class="row mb-2">
           <div class="col-sm-11 justify-content-end d-flex">
               <a href="{{ route('hotels.create') }}" class="btn btn-light btn-sm">
-                  <i class="fa fa-plus"></i>Add
+                  <i class="fa fa-plus">Thêm</i>
               </a>
 
           </div>
         </div>
       </div>
     </div>
-    @if(count($errors) > 0 )
-        <ul class="p-0 m-0" style="list-style: none;">
-            @foreach($errors->all() as $error)
-                <li>{{$error}}</li>
-            @endforeach
-        </ul>
-    @endif
-    @if(session()->has('message'))
-        <div class="content-header mb-0 pb-0">
-            <div class="container-fluid">
-                <div class="mb-0 alert alert-{{ session()->get('alert-type') }} alert-dismissible fade show" role="alert">
-                    <strong>{{ session()->get('message') }}</strong>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </div><!-- /.container-fluid -->
-        </div>
-    @endif
     <!-- End Navbar -->
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">
           <div class="card mb-4">
             <div class="card-header pb-0">
-              <h6>Authors table</h6>
+              <h6>Danh sách khách sạn</h6>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
               <div class="table-responsive p-0">
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mã khách sạn</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tên khách sạn</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Địa chỉ</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Xếp hạng</th>

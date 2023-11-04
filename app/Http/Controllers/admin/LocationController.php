@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Location;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
 class LocationController extends Controller
@@ -30,11 +31,11 @@ class LocationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'locationName' => 'string',
+            'locationName' => 'required',
         ]);
         $attributes = $request->all();
         Location::create($attributes);
-
+        Toastr::success('Thêm vị trí thành công!' );
         return redirect()->route('locations.index')->with([
             'message' => 'Success Created !',
             'alert-type' => 'success'
@@ -66,12 +67,12 @@ class LocationController extends Controller
     public function update(Request $request, Location $location)
     {
         $request->validate([
-            'locationName' => 'string',
-
+            'locationName' => 'required',
         ]);
 
         $attributes = $request->all();
         $location->update($attributes);
+        Toastr::success('Sửa vị trí thành công!' );
         return redirect()->route('locations.index')->with([
             'message' => 'Success Updated!',
             'alert-type' => 'info'
@@ -85,23 +86,21 @@ class LocationController extends Controller
     public function destroy(Location $location)
     {
         $location->delete();
-
+        Toastr::success('Xóa vị trí thành công!' );
         return redirect()->back()->with([
             'message' => 'Success Deleted !',
             'alert-type' => 'danger'
         ]);
     }
 
-//    public function search(Request $request)
-//    {
-//        $query = $request->input('query');
-//
-//        $hotels = Hotel::where('hotelName', 'like', "%$query%")
-//            ->orWhere('description', 'like', "%$query%")
-//            ->orWhere('pricePerPerson', 'like', "%$query%")
-//            ->paginate(5);
-//
-//        return view('admin.hotel.index', compact('hotels'));
-//
-//    }
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        $locations = Location::where('locationName', 'like', "%$query%")
+            ->paginate(5);
+
+        return view('admin.location.index', compact('locations'));
+
+    }
 }

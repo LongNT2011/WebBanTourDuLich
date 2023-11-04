@@ -19,7 +19,6 @@ class HotelController extends Controller
      */
     public function index()
     {
-        Toastr::success('Hotel added successfully!' );
         $hotels = Hotel::paginate(5);
         return view('admin.hotel.index', compact('hotels'));
     }
@@ -28,10 +27,7 @@ class HotelController extends Controller
      * Show the form for creating a new resource.
      */
     public function create(){
-        $validator = JsValidator::make($this->validationRules);
-        return view('admin.hotel.create')->with([
-            'validator' => $validator
-        ]);
+        return view('admin.hotel.create');
     }
 
     /**
@@ -39,35 +35,24 @@ class HotelController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'imageUrl' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        // ]);
-        $validator = JsValidator::make($this->validationRules);
+         $request->validate([
+             'hotelName'=> 'required',
+             'address'=> 'required',
+             'pricePerPerson' => 'required|numeric',
+             'imageUrl' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+         ]);
         $image = $request->file('imageUrl')->store(
             'hotels/images', 'public'
         );
-       
+
         Hotel::create($request->except('imageUrl') + ['imageUrl' => $image]);
-        Toastr::success('Hotel added successfully!' );
+        Toastr::success('Thêm khách sạn thành công!' );
         return redirect()->route('hotels.index');
 
 
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Hotel $hotel)
     {
-
         return view('admin.hotel.edit',compact('hotel'));
     }
 
@@ -77,11 +62,10 @@ class HotelController extends Controller
     public function update(Request $request, Hotel $hotel)
     {
         $request->validate([
-            'imageUrl' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'name' => 'string|max:255',
-            'description' => 'string',
-            'price' => 'numeric',
-
+            'hotelName'=> 'required',
+            'address'=> 'required',
+            'pricePerPerson' => 'required|numeric',
+            'imageUrl' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($request->hasFile('imageUrl')) {
@@ -89,9 +73,9 @@ class HotelController extends Controller
             $image = $request->file('imageUrl')->store('hotels/images', 'public');
             $hotel->update($request->except('imageUrl') + ['imageUrl' => $image]);
         } else {
-            $hotel->update($request->validated());
+            $hotel->update($request);
         }
-
+        Toastr::success('Sửa khách sạn thành công!' );
         return redirect()->route('hotels.index')->with([
             'message' => 'Success Updated!',
             'alert-type' => 'info'
@@ -106,7 +90,7 @@ class HotelController extends Controller
     {
         File::delete('storage/'. $hotel->imageUrl);
         $hotel->delete();
-
+        Toastr::success('Xóa khách sạn thành công!' );
         return redirect()->back()->with([
             'message' => 'Success Deleted !',
             'alert-type' => 'danger'
