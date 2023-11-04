@@ -7,7 +7,7 @@ use App\Models\Hotel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Brian2694\Toastr\Facades\Toastr;
-use JsValidator;
+
 
 class HotelController extends Controller
 {

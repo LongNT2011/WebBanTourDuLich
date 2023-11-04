@@ -85,6 +85,11 @@ class LocationController extends Controller
      */
     public function destroy(Location $location)
     {
+        if($location->site->count() > 0){
+            Toastr::error('Không thể xóa vị trí này!');
+            return redirect()->back();
+        }
+
         $location->delete();
         Toastr::success('Xóa vị trí thành công!' );
         return redirect()->back()->with([

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('siteName');
             $table->string('image')->nullable();
             $table->string('description')->nullable();
-            $table->foreignId('location_id')->constrained('locations')->onDelete('cascade');
+            $table->foreignId('location_id')->constrained('locations');
             $table->timestamps();
         });
     }

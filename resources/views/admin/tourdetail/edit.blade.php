@@ -1,5 +1,13 @@
 @extends('admin.layoutadmin.layoutadmin')
-
+@section('header')
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Admin</a></li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Chi tiết Tour</li>
+        </ol>
+        <h6 class="font-weight-bolder text-white mb-0">Chi tiết Tour</h6>
+    </nav>
+@endsection
 @section('content')
 
     <div class="container-fluid">
@@ -10,82 +18,118 @@
                         @csrf
                         @method('put')
                         <div class="form-group row border-bottom pb-4">
-                            <label for="image" class="col-sm-2 col-form-label">image</label>
+                            <label for="image" class="col-sm-2 col-form-label">Ảnh</label>
                             <div class="col-sm-10">
                                 <input type="file" name="imageUrl[]" id="fileInput" class="form-control" multiple>
-
                             </div>
+                            @if ($errors->has('imageUrl'))
+                                <span class="text-danger">{{ $errors->first('imageUrl') }}</span>
+                            @endif
                         </div>
                         <div class="form-group row border-bottom pb-4">
-                            <label for="category_id" class="col-sm-2 col-form-label">site</label>
+                            <label for="category_id" class="col-sm-2 col-form-label">Tour</label>
                             <div class="col-sm-10">
                                 <select class="form-control" name="tour_id" >
                                     @foreach($tours as $tour)
-                                        <option value="{{ $tour->id }}">{{ $tour->tourName }}</option>
+                                        <option value="{{ $tour->id }}" @if(old('tour_id', $tourdetail->tour_id) == $tour->id) selected @endif>{{ $tour->tourName }}</option>
                                     @endforeach
                                 </select>
+                                @if ($errors->has('tour_id'))
+                                    <span class="text-danger">{{ $errors->first('tour_id') }}</span>
+                                @endif
                             </div>
                         </div>
                         <div class="form-group row border-bottom pb-4">
-                            <label for="title" class="col-sm-2 col-form-label">checkInDate</label>
+                            <label for="title" class="col-sm-2 col-form-label">Ngày bắt đầu</label>
                             <div class="col-sm-10">
-                                <input type="date" class="form-control" name="checkInDate" value="{{ old('checkInDate',$tourdetail->checkInDate) }}">
+                                <input type="date" class="form-control" name="checkInDate" value="{{ $tourdetail->checkInDate ? date('Y-m-d', strtotime($tourdetail->checkInDate)) : '' }}">
                             </div>
+                            @if ($errors->has('checkInDate'))
+                                <span class="text-danger">{{ $errors->first('checkInDate') }}</span>
+                            @endif
                         </div>
+
                         <div class="form-group row border-bottom pb-4">
-                            <label for="title" class="col-sm-2 col-form-label">checkOutDate</label>
+                            <label for "title" class="col-sm-2 col-form-label">Ngày kết thúc</label>
                             <div class="col-sm-10">
-                                <input type="date" class="form-control" name="checkOutDate" value="{{ old('checkOutDate',$tourdetail->checkOutDate) }}">
+                                <input type="date" class="form-control" name="checkOutDate" value="{{ $tourdetail->checkOutDate ? date('Y-m-d', strtotime($tourdetail->checkOutDate)) : '' }}">
                             </div>
+                            @if ($errors->has('checkOutDate'))
+                                <span class="text-danger">{{ $errors->first('checkOutDate') }}</span>
+                            @endif
                         </div>
+
+
                         <div class="form-group row border-bottom pb-4">
-                            <label for="title" class="col-sm-2 col-form-label">vehicle</label>
+                            <label for="title" class="col-sm-2 col-form-label">Phương tiện di chuyển</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="vehicle" value="{{ old('vehicle',$tourdetail->vehicle) }}" id="title"
                                        placeholder="example: Lake Side Hotel">
                             </div>
+                            @if ($errors->has('vehicle'))
+                                <span class="text-danger">{{ $errors->first('vehicle') }}</span>
+                            @endif
                         </div>
                         <div class="form-group row border-bottom pb-4">
-                            <label for="title" class="col-sm-2 col-form-label">maxParticipant</label>
+                            <label for="title" class="col-sm-2 col-form-label">Số người tối đa</label>
                             <div class="col-sm-10">
                                 <input type="number" class="form-control" name="maxParticipant" value="{{ old('maxParticipant',$tourdetail->maxParticipant) }}" id="title"
                                        placeholder="example: Lake Side Hotel">
                             </div>
+                            @if ($errors->has('maxParticipant'))
+                                <span class="text-danger">{{ $errors->first('maxParticipant') }}</span>
+                            @endif
                         </div>
                         <div class="form-group row border-bottom pb-4">
-                            <label for="title" class="col-sm-2 col-form-label">childrenPrice</label>
+                            <label for="title" class="col-sm-2 col-form-label">Giá trẻ em</label>
                             <div class="col-sm-10">
                                 <input type="number" class="form-control" name="childrenPrice" value="{{ old('childrenPrice',$tourdetail->childrenPrice) }}" id="title"
                                        placeholder="example: Lake Side Hotel">
                             </div>
+                            @if ($errors->has('childrenPrice'))
+                                <span class="text-danger">{{ $errors->first('childrenPrice') }}</span>
+                            @endif
                         </div>
                         <div class="form-group row border-bottom pb-4">
-                            <label for="title" class="col-sm-2 col-form-label">adultPrice</label>
+                            <label for="title" class="col-sm-2 col-form-label">Giá người lớn</label>
                             <div class="col-sm-10">
                                 <input type="number" class="form-control" name="adultPrice" value="{{ old('adultPrice',$tourdetail->adultPrice) }}" id="title"
                                        placeholder="example: Lake Side Hotel">
                             </div>
+                            @if ($errors->has('adultPrice'))
+                                <span class="text-danger">{{ $errors->first('adultPrice') }}</span>
+                            @endif
                         </div>
                         <div class="form-group row border-bottom pb-4">
-                            <label for="title" class="col-sm-2 col-form-label">discount(%)</label>
+                            <label for="title" class="col-sm-2 col-form-label">Giảm giá(%)</label>
                             <div class="col-sm-10">
                                 <input type="number" class="form-control" name="discount" value="{{ old('discount',$tourdetail->discount) }}" id="title"
                                        placeholder="example: Lake Side Hotel">
                             </div>
+                            @if ($errors->has('discount'))
+                                <span class="text-danger">{{ $errors->first('discount') }}</span>
+                            @endif
                         </div>
                         <div class="form-group row border-bottom pb-4">
-                            <label for="title" class="col-sm-2 col-form-label">depatureLocation</label>
+                            <label for="title" class="col-sm-2 col-form-label">Địa điểm xuất phát</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="depatureLocation" value="{{ old('depatureLocation',$tourdetail->depatureLocation) }}" id="title"
                                        placeholder="example: Lake Side Hotel">
                             </div>
+                            @if ($errors->has('depatureLocation'))
+                                <span class="text-danger">{{ $errors->first('depatureLocation') }}</span>
+                            @endif
                         </div>
                         <div class="form-group row border-bottom pb-4">
-                            <label for="title" class="col-sm-2 col-form-label">tripDescription</label>
+                            <label for="title" class="col-sm-2 col-form-label">Chương trình tour</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="tripDescription" value="{{ old('tripDescription',$tourdetail->tripDescription) }}" id=""/>
+                                <textarea class="form-control" name="tripDescription" id="description">{{ old('tripDescription', $tourdetail->tripDescription) }}</textarea>
                             </div>
+                            @if ($errors->has('tripDescription'))
+                                <span class="text-danger">{{ $errors->first('tripDescription') }}</span>
+                            @endif
                         </div>
+
                         <button type="submit" class="btn btn-success">Save</button>
                     </form>
                 </div>
@@ -105,7 +149,7 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
     <script>
         ClassicEditor
-            .create( document.querySelector( '#tripDescription' ) )
+            .create( document.querySelector( '#description' ) )
             .catch( error => {
                 console.error( error );
             } );

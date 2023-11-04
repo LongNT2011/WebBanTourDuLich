@@ -1,6 +1,7 @@
 <?php
+namespace App\Models\Dtos;
 class ChartData{
-    public string $Name;
+    public $Name;
     // int[]
     public $Data;
 

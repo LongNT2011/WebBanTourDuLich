@@ -1,5 +1,36 @@
 @extends('admin.layoutadmin.layoutadmin')
 
+@section('header')
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Admin</a></li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Địa danh</li>
+        </ol>
+        <h6 class="font-weight-bolder text-white mb-0">Địa danh</h6>
+    </nav>
+@endsection
+
+
+
+
+@section('search')
+    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+        <form action="{{route('sites.search')}}" method="post">
+            @csrf
+            <div class="input-group">
+                <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" name="query" placeholder="Search for hotels">
+            </div>
+
+        </form>
+    </div>
+@endsection
+
+
+
+
+
+
 @section('content')
 
     <div class="content-header">
@@ -14,32 +45,13 @@
         </div>
       </div>
     </div>
-    @if(count($errors) > 0 )
-        <ul class="p-0 m-0" style="list-style: none;">
-            @foreach($errors->all() as $error)
-                <li>{{$error}}</li>
-            @endforeach
-        </ul>
-    @endif
-    @if(session()->has('message'))
-        <div class="content-header mb-0 pb-0">
-            <div class="container-fluid">
-                <div class="mb-0 alert alert-{{ session()->get('alert-type') }} alert-dismissible fade show" role="alert">
-                    <strong>{{ session()->get('message') }}</strong>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </div><!-- /.container-fluid -->
-        </div>
-    @endif
     <!-- End Navbar -->
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">
           <div class="card mb-4">
             <div class="card-header pb-0">
-              <h6>Authors table</h6>
+              <h6>Danh sách địa danh</h6>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
               <div class="table-responsive p-0">
@@ -47,10 +59,10 @@
                   <thead>
                     <tr>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">siteName</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">description</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">location</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">image</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tên địa danh</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mô tả</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Vị trí</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ảnh</th>
                       <th class="text-secondary opacity-7"></th>
                     </tr>
                   </thead>

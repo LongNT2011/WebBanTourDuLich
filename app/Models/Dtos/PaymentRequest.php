@@ -1,4 +1,5 @@
 <?php
+namespace App\Models\Dtos;
 class PaymentRequest {
     // @var string
     public string $ApproveUrl;
