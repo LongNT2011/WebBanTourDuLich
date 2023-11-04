@@ -27,7 +27,7 @@ use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('index');
 Route::get('index.html', function () {
     return view('index');
 });
@@ -54,7 +54,7 @@ Route::prefix('admin/dashboard')->group(function () {
     Route::get('member-booking-line-chart', [DashboardController::class, 'GetMemberAndBookingLineChartDataDb']);
 });
 // admin
-Route::group(['prefix' => '/admin'], function () {
+Route::group(['middleware' => 'checkadmin' , 'prefix' => '/admin'], function () {
     // Các route trong thư mục admin
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('/hotels', HotelController::class);
@@ -72,3 +72,34 @@ Route::group(['prefix' => '/admin'], function () {
     Route::resource('/tourdetails.image', TourImageController::class)->except(['create', 'index', 'show']);
 
 });
+
+// auth
+Route::get('/signin', [AuthController::class, 'showSigninForm'])->name('auth.signin');
+Route::post('/signin', [AuthController::class, 'signin']);
+
+Route::get('/signup', [AuthController::class, 'showSignupForm'])->name('auth.signup');
+Route::post('/signup', [AuthController::class, 'signup']);
+
+Route::get('/signout', [AuthController::class, 'signout'])->name('auth.signout');
+
+Route::get('/signin_admin', [DashboardController::class, 'showSigninAdminForm'])->name('admin.signinAdmin');
+Route::post('/signin_admin', [DashboardController::class, 'signinAdmin']);
+
+Route::get('/signout_admin', [DashboardController::class, 'signoutAdmin'])->name('admin.signoutAdmin');
+
+// verify
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/index');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');

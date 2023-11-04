@@ -33,12 +33,12 @@
                                     <h4 class="font-weight-bolder">Sign In</h4>
                                     <p class="mb-0">Enter your email and password to sign in</p>
 
-                                    @if ($message = Session::get('error'))
-                                        <div class="alert alert-danger alert-block">
-                                            {{-- <button type="button" class="close" data-dismiss="alert">x</button> --}}
-                                            <strong>{{ $message }}</strong>
-                                        </div>
-                                    @endif
+{{--                                    @if ($message = Session::get('error'))--}}
+{{--                                        <div class="alert alert-danger alert-block">--}}
+{{--                                            --}}{{-- <button type="button" class="close" data-dismiss="alert">x</button> --}}
+{{--                                            <strong>{{ $message }}</strong>--}}
+{{--                                        </div>--}}
+{{--                                    @endif--}}
 
                                 </div>
                                 <div class="card-body">
@@ -47,10 +47,16 @@
                                         <div class="mb-3">
                                             <input type="email" class="form-control form-control-lg"
                                                 placeholder="Email" aria-label="Email" name="email">
+                                            @if ($errors->has('email'))
+                                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                                            @endif
                                         </div>
                                         <div class="mb-3">
                                             <input type="password" class="form-control form-control-lg"
                                                 placeholder="Password" aria-label="Password" name="password">
+                                            @if ($errors->has('password'))
+                                                <span class="text-danger">{{ $errors->first('password') }}</span>
+                                            @endif
                                         </div>
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" id="rememberMe">

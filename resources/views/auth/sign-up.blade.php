@@ -112,10 +112,16 @@
                                 <div class="mb-3">
                                     <input type="email" class="form-control" placeholder="Email" aria-label="Email"
                                         name="email">
+                                    @if ($errors->has('email'))
+                                        <span class="text-danger">{{ $errors->first('email') }}</span>
+                                    @endif
                                 </div>
                                 <div class="mb-3">
                                     <input type="password" class="form-control" placeholder="Password"
                                         aria-label="Password" name="password">
+                                    @if ($errors->has('password'))
+                                        <span class="text-danger">{{ $errors->first('password') }}</span>
+                                    @endif
                                 </div>
                                 <div class="form-check form-check-info text-start">
                                     <input class="form-check-input" type="checkbox" value=""
