@@ -11,6 +11,7 @@ use App\Models\Tour;
 use App\Models\TourDetail;
 use App\Models\TourImage;
 use App\Models\TravelPackage;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -39,6 +40,17 @@ class TourDetailController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'checkInDate' => 'required',
+            'checkOutDate' => 'required',
+            'vehicle' => 'required',
+            'maxParticipant' => 'required',
+            'childrenPrice' => 'required',
+            'adultPrice' => 'required',
+            'depatureLocation' => 'required',
+            'tripDescription' => 'required',
+            'imageUrl.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
         if ($request->hasFile('imageUrl')) {
             $imagePaths = [];
 
@@ -53,7 +65,7 @@ class TourDetailController extends Controller
         $tourDetailData = $request->except('imageUrl');
 
         $tourdetail = TourDetail::create($tourDetailData);
-
+        Toastr::success('Thêm chi tiết tour thành công!' );
         foreach ($imagePaths as $imagePath) {
             TourImage::create([
                 'imageUrl' => $imagePath,
@@ -91,50 +103,61 @@ class TourDetailController extends Controller
      */
     public function update(Request $request, TourDetail $tourdetail)
     {
+        $request->validate([
+            'checkInDate' => 'required',
+            'checkOutDate' => 'required',
+            'vehicle' => 'required',
+            'maxParticipant' => 'required',
+            'childrenPrice' => 'required',
+            'adultPrice' => 'required',
+            'depatureLocation' => 'required',
+            'tripDescription' => 'required',
+            'imageUrl.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+        $imagePaths = [];
+
         if ($request->hasFile('imageUrl')) {
-            $imagePaths = [];
+            foreach ($tourdetail->tourimage as $tourImage) {
+                $oldPath = $tourImage->imageUrl;
+                File::delete('storage/' . $oldPath);
+            }
+
             foreach ($request->file('imageUrl') as $image) {
                 $imagePath = $image->store('tourdetails/images', 'public');
                 $imagePaths[] = $imagePath;
             }
 
-        } else {
-
-            $imagePaths[] = [];
+            $tourdetail->tourimage()->delete();
+            foreach ($imagePaths as $imagePath) {
+                $tourdetail->tourimage()->create([
+                    'imageUrl' => $imagePath,
+                ]);
+            }
         }
 
         $tourdetail->update($request->except('imageUrl'));
-        foreach ($imagePaths as $imagePath) {
-            File::delete('storage/' . $imagePath);
-            foreach ($tourdetail->tourimage as $tourImage) {
-                $tourImage->update([
-                    'imageUrl' => $imagePath,
-                    'tour_detail_id' => $tourdetail->id
-                ]);
-            }
-
-        }
-
+        Toastr::success('Sửa chi tiết tour thành công!' );
         return redirect()->route('tourdetails.index')->with([
             'message' => 'Success Updated!',
             'alert-type' => 'info'
         ]);
-
     }
+
 
 
     /**
      * Remove the specified resource from storage.
      */
-//    public function destroy(TourDetail $tourDetail)
-//    {
-//        $tourDetail->delete();
-//
-//        return redirect()->back()->with([
-//            'message' => 'Success Deleted !',
-//            'alert-type' => 'danger'
-//        ]);
-//    }
+    public function destroy(TourDetail $tourdetail)
+    {
+
+        $tourdetail->delete();
+        Toastr::success('Xóa chi tiết tour thành công!' );
+        return redirect()->back()->with([
+            'message' => 'Success Deleted !',
+            'alert-type' => 'danger'
+        ]);
+    }
 
 //    public function search(Request $request)
 //    {

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('tourdetails', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('checkInDate');
-            $table->dateTime('checkOutDate');
+            $table->date('checkInDate');
+            $table->date('checkOutDate');
             $table->string('vehicle');
             $table->integer('maxParticipant');
             $table->decimal('childrenPrice');

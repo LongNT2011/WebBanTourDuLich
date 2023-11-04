@@ -40,6 +40,8 @@ Route::view('/blog-single.html', 'blog-single');
 Route::view('/contact.html', 'contact');
 Route::view('/sign-in', 'sign-in');
 Route::view('/sign-up', 'sign-up');
+Route::view('/abc', 'admin.tables');
+Route::view('/abc1', 'admin.dashboard    ');
 
 
 Route::prefix('admin/dashboard')->group(function () {
@@ -56,10 +58,15 @@ Route::group(['prefix' => '/admin'], function () {
     Route::resource('/hotels',HotelController::class);
     Route::post('/hotels/search', [HotelController::class,'search'])->name('hotels.search');
     Route::resource('/locations',LocationController::class);
+    Route::post('/locations/search', [LocationController::class,'search'])->name('locations.search');
     Route::resource('/sites',SiteController::class);
+    Route::post('/sites/search', [SiteController::class,'search'])->name('sites.search');
     Route::resource('/users',UserController::class);
+    Route::post('/users/search', [UserController::class,'search'])->name('users.search');
     Route::resource('/tours',TourController::class);
+    Route::post('/tours/search', [TourController::class,'search'])->name('tours.search');
     Route::resource('/tourdetails',TourDetailController::class);
+    Route::post('/tourdetails/search', [HotelController::class,'search'])->name('tourdetails.search');
     Route::resource('/tourdetails.image',TourImageController::class)->except(['create', 'index','show']);
 
 

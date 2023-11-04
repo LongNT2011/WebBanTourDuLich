@@ -1,5 +1,33 @@
 @extends('admin.layoutadmin.layoutadmin')
 
+
+@section('header')
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Admin</a></li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Tour</li>
+        </ol>
+        <h6 class="font-weight-bolder text-white mb-0">Tour</h6>
+    </nav>
+@endsection
+
+
+
+
+@section('search')
+    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+        <form action="{{route('tours.search')}}" method="post">
+            @csrf
+            <div class="input-group">
+                <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" name="query" placeholder="Search for hotels">
+            </div>
+
+        </form>
+    </div>
+@endsection
+
+
 @section('content')
 
     <div class="content-header">
@@ -14,25 +42,6 @@
         </div>
       </div>
     </div>
-    @if(count($errors) > 0 )
-        <ul class="p-0 m-0" style="list-style: none;">
-            @foreach($errors->all() as $error)
-                <li>{{$error}}</li>
-            @endforeach
-        </ul>
-    @endif
-    @if(session()->has('message'))
-        <div class="content-header mb-0 pb-0">
-            <div class="container-fluid">
-                <div class="mb-0 alert alert-{{ session()->get('alert-type') }} alert-dismissible fade show" role="alert">
-                    <strong>{{ session()->get('message') }}</strong>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </div><!-- /.container-fluid -->
-        </div>
-    @endif
     <!-- End Navbar -->
     <div class="container-fluid py-4">
       <div class="row">
@@ -47,9 +56,9 @@
                   <thead>
                     <tr>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">tourName</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">site</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">image</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tên tour</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Địa danh</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ảnh</th>
                       <th class="text-secondary opacity-7"></th>
                     </tr>
                   </thead>
