@@ -44,6 +44,9 @@ Route::view('/blog-single.html', 'blog-single');
 Route::view('/contact.html', 'contact');
 Route::view('/sign-in', 'sign-in');
 Route::view('/sign-up', 'sign-up');
+Route::view('/orderConfirm', 'orderConfirm');
+Route::view('/orderDetail', 'orderDetail');
+Route::view('/tour.html', 'tour');
 
 
 Route::prefix('admin/dashboard')->group(function () {
