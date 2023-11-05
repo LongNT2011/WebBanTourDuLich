@@ -2,16 +2,16 @@
 namespace App\Models\Dtos;
     class LineChart {
         // array
-        public $Series;
+        public $series;
         // string[]
-        public $Categories;
+        public $categories;
 
         /**
          * Get the value of Categories
          */ 
         public function getCategories()
         {
-                return $this->Categories;
+                return $this->categories;
         }
 
         /**
@@ -19,9 +19,9 @@ namespace App\Models\Dtos;
          *
          * @return  self
          */ 
-        public function setCategories($Categories)
+        public function setCategories($categories)
         {
-                $this->Categories = $Categories;
+                $this->categories = $categories;
 
                 return $this;
         }
@@ -31,7 +31,7 @@ namespace App\Models\Dtos;
          */ 
         public function getSeries()
         {
-                return $this->Series;
+                return $this->series;
         }
 
         /**
@@ -39,9 +39,9 @@ namespace App\Models\Dtos;
          *
          * @return  self
          */ 
-        public function setSeries($Series)
+        public function setSeries($series)
         {
-                $this->Series = $Series;
+                $this->series = $series;
 
                 return $this;
         }

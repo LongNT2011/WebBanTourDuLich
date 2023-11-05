@@ -1,6 +1,9 @@
 <?php
+namespace App\Services\Implementation;
+use App\Models\Dtos\PaymentRequest;
+use App\Models\Dtos\PaymentResponse;
 require __DIR__ . '/vendor/autoload.php';
-class PaymentService implements IPaymentService
+trait PaymentService 
 {
     private string $SecretKey = "sk_test_51MzQLDHpQ4WsUFgqryhEwh0SyVCD0donY4Zc1eM1ndFRpvmIQEP0wbx2UtwTC6rTls8u7fcImW9MplmoCCT9pUAT00tHCdUZho";
     private string $publicKey = "pk_test_51MzQLDHpQ4WsUFgq2NhyVIJOHg3hMNfAEUApRfXNxbvPKkrQo9Vw4bE4jyFqcp0JdLv3wG9YjfiVknhqxZdWAKqF00IpKHWrmo";    

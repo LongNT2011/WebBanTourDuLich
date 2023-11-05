@@ -13,7 +13,7 @@ function loadRadialBarChart(id, data) {
             },
             offsetY: -10,
         },
-        series: data.series,
+        series: data.Series,
         plotOptions: {
             radialBar: {
                 dataLabels: {
