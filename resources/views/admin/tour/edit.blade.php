@@ -36,10 +36,10 @@
                             <div class="col-sm-10">
                                 <select class="form-control" name="sites[]" multiple>
                                     @foreach($sites as $site)
-                                        <option value="{{ $site->id }}">{{ $site->siteName }}</option>
+                                        <option value="{{ $site->id }}" {{ $tour->site->contains($site) ? 'selected' : '' }}>{{ $site->siteName }}</option>
                                     @endforeach
                                 </select>
-                                @if ($errors->has('sites'))
+                            @if ($errors->has('sites'))
                                     <span class="text-danger">{{ $errors->first('sites') }}</span>
                                 @endif
                             </div>

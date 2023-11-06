@@ -40,8 +40,8 @@ Route::view('/blog-single.html', 'blog-single');
 Route::view('/contact.html', 'contact');
 Route::view('/sign-in', 'sign-in');
 Route::view('/sign-up', 'sign-up');
-Route::view('/abc', 'admin.tables');
-Route::view('/abc1', 'admin.dashboard    ');
+Route::view('/abc', 'tour');
+Route::view('/abc1', 'admin.dashboard');
 
 
 Route::prefix('admin/dashboard')->group(function () {
