@@ -39,7 +39,7 @@ trait ChartService {
             $bookingsByReturningCustomer = count($order) - $bookingsByNewCustomer;
 
             $pieChart = new PieChart;
-            $pieChart->setLabels(["New Customer Bookings", "Returning Customer Bookings"]);
+            $pieChart->setLabels(["Khách Hàng Mới", "Khách Hàng Cũ"]);
             $pieChart->setSeries([$bookingsByNewCustomer, $bookingsByReturningCustomer]);
             return $pieChart;
     }
@@ -132,10 +132,10 @@ trait ChartService {
 
             $chartDataList = [
                 (new ChartData())
-                    ->setName('New Bookings')
+                    ->setName('Đơn Đặt Mới')
                     ->setData($newBookingData),
                 (new ChartData())
-                    ->setName('New Members')
+                    ->setName('Khách Hàng Mới')
                     ->setData($newCustomerData)
             ];
             
