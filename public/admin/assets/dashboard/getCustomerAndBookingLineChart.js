@@ -59,7 +59,7 @@ function loadLineChart(id, data) {
         yaxis: {
             labels: {
                 formatter: function (val) {
-                    return val.toFixed(0);
+                    return val?.toFixed(0);
                 },
                 style: {
                     colors: "#fff",

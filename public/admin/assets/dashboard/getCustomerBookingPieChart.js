@@ -22,8 +22,8 @@ function loadPieChart(id, data) {
     var chartColors = getChartColorsArray(id);
     var options = {
         colors: chartColors,
-        series: data.series,
-        labels: data.labels,
+        series: data.Series,
+        labels: data.Labels,
         chart: {
             width: 380,
             type: 'pie',
