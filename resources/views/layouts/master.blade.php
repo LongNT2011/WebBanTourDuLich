@@ -48,8 +48,15 @@
           <!-- <li class="nav-item"><a href="hotel.html" class="nav-link">Hotels</a></li> -->
           <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
           <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-          <li class="nav-item cta"><a href="contact.html" class="nav-link"><span>Login</span></a></li>
-          <li style="margin-left: 3%;" class="nav-item cta"><a href="contact.html" class="nav-link"><span >Logout</span></a></li>
+          @if (Auth::check())
+                        <li class="nav-item cta"><a href="{{ route('account.detail') }}"
+                                class="nav-link"><span>Profile</span></a></li>
+                        <li style="margin-left: 3%;" class="nav-item cta"><a href="{{ route('auth.signout') }}"
+                                class="nav-link"><span>Logout</span></a></li>
+                    @else
+                        <li class="nav-item cta"><a href="{{ route('auth.signin') }}"
+                                class="nav-link"><span>Login</span></a></li>
+                    @endif
         </ul>
       </div>
     </div>
