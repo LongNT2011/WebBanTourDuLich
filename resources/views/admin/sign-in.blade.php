@@ -16,6 +16,7 @@
     <link href="../admin/assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     <link href="../admin/assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="../admin/assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
@@ -30,8 +31,8 @@
                     <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
                         <div class="card card-plain">
                             <div class="card-header pb-0 text-start">
-                                <h4 class="font-weight-bolder">Sign In As Admin Account</h4>
-                                <p class="mb-0">Enter an account as Admintrator to sign in to Admin Page
+                                <h4 class="font-weight-bolder">Đăng nhập với quyền Quản trị viên</h4>
+                                <p class="mb-0">Nhập Email và Mật khẩu của Tài khoản có quyền Quản trị viên
                                 </p>
 
 {{--                                @if ($message = Session::get('error'))--}}
@@ -54,27 +55,26 @@
                                     </div>
                                     <div class="mb-3">
                                         <input type="password" class="form-control form-control-lg"
-                                               placeholder="Password" aria-label="Password" name="password">
+                                               placeholder="Mật Khẩu" aria-label="Password" name="password">
                                         @if ($errors->has('password'))
                                             <span class="text-danger">{{ $errors->first('password') }}</span>
                                         @endif
                                     </div>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="rememberMe">
-                                        <label class="form-check-label" for="rememberMe">Remember me</label>
-                                    </div>
+{{--                                    <div class="form-check form-switch">--}}
+{{--                                        <input class="form-check-input" type="checkbox" id="rememberMe">--}}
+{{--                                        <label class="form-check-label" for="rememberMe">Remember me</label>--}}
+{{--                                    </div>--}}
                                     <div class="text-center">
                                         <button type="submit"
-                                                class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign in</button>
+                                                class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Đăng Nhập</button>
                                     </div>
                                 </form>
                             </div>
                             <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                 <p class="mb-4 text-sm mx-auto">
-                                    Sign in as User Account?
+                                    Đăng nhập với tài khoản Người dùng
                                     <a href="{{ route('auth.signin') }}"
-                                       class="text-primary text-gradient font-weight-bold">Sign
-                                        in</a>
+                                       class="text-primary text-gradient font-weight-bold">Đăng Nhập</a>
                                 </p>
                             </div>
                         </div>
@@ -85,10 +85,10 @@
                              style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signin-ill.jpg');
           background-size: cover;">
                             <span class="mask bg-gradient-primary opacity-6"></span>
-                            <h4 class="mt-5 text-white font-weight-bolder position-relative">"Attention is the new
-                                currency"</h4>
-                            <p class="text-white position-relative">The more effortless the writing looks, the more
-                                effort the writer actually put into the process.</p>
+{{--                            <h4 class="mt-5 text-white font-weight-bolder position-relative">"Attention is the new--}}
+{{--                                currency"</h4>--}}
+{{--                            <p class="text-white position-relative">The more effortless the writing looks, the more--}}
+{{--                                effort the writer actually put into the process.</p>--}}
                         </div>
                     </div>
                 </div>
@@ -114,8 +114,11 @@
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="../admin/assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+<script src="{{asset('js/jquery.min.js')}}"></script>
+
+<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+
 {!! Toastr::message() !!}
-@yield('scripts')
 </body>
 
 </html>
