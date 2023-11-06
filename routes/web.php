@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\HotelController;
 use App\Http\Controllers\admin\LocationController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\admin\TourImageController;
 use App\Http\Controllers\admin\userController;
 use App\Http\Controllers\auth\AuthController;
 use App\Http\Controllers\Auth\AuthController as AuthAuthController;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -106,3 +108,11 @@ Route::post('/email/verification-notification', function (Request $request) {
 
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+//profile
+Route::get('/profile/', [AccountController::class, 'showAccountDetail']) -> name('account.detail');
+Route::put('/profile/update/{user}', [AccountController::class, 'updateAccount']) -> name('account.update');
+//Order
+Route::get("/order", function(){
+    return view('hotel-single');
+});
