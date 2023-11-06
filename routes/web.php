@@ -29,7 +29,7 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/index.html', [HomeController::class, 'index']);
+Route::get('/index.html', [HomeController::class, 'index'])->name('index');
 Route::get('/hotel.html', function () {
     return view('hotel');
 });
