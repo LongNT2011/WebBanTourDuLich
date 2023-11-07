@@ -45,7 +45,7 @@ Route::view('/sign-in', 'sign-in');
 Route::view('/sign-up', 'sign-up');
 Route::view('/orderConfirm', 'orderConfirm');
 Route::view('/orderDetail', 'orderDetail');
-Route::view('/tour.html', 'tour');
+Route::get('/tour.html', [HomeController::class, 'tour'])->name('tour');
 
 
 Route::prefix('admin/dashboard')->group(function () {
