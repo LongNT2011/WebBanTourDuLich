@@ -1,16 +1,16 @@
 <?php
 namespace App\Models\Dtos;
 class ChartData{
-    public $Name;
+    public $name;
     // int[]
-    public $Data;
+    public $data;
 
     /**
      * Get the value of Name
      */ 
     public function getName()
     {
-        return $this->Name;
+        return $this->name;
     }
 
     /**
@@ -18,9 +18,9 @@ class ChartData{
      *
      * @return  self
      */ 
-    public function setName($Name)
+    public function setName($name)
     {
-        $this->Name = $Name;
+        $this->name = $name;
 
         return $this;
     }
@@ -30,7 +30,7 @@ class ChartData{
      */ 
     public function getData()
     {
-        return $this->Data;
+        return $this->data;
     }
 
     /**
@@ -38,9 +38,9 @@ class ChartData{
      *
      * @return  self
      */ 
-    public function setData($Data)
+    public function setData($data)
     {
-        $this->Data = $Data;
+        $this->data = $data;
 
         return $this;
     }

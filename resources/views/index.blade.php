@@ -25,14 +25,14 @@
                     </select>
                   </div>
                 </div>
-                <input type="submit" class="search-submit btn btn-primary" value="Search">  
+                <input type="submit" class="search-submit btn btn-primary" value="Search">
               </form>
             </div>
             <p>Or browse the highlights</p>
             <p class="browse d-md-flex">
             	<span class="d-flex justify-content-md-center align-items-md-center"><a href="#"><i class="flaticon-fork"></i>Restaurant</a></span>
-            	<span class="d-flex justify-content-md-center align-items-md-center"><a href="#"><i class="flaticon-hotel"></i>Hotel</a></span> 
-            	<span class="d-flex justify-content-md-center align-items-md-center"><a href="#"><i class="flaticon-meeting-point"></i>Places</a></span> 
+            	<span class="d-flex justify-content-md-center align-items-md-center"><a href="#"><i class="flaticon-hotel"></i>Hotel</a></span>
+            	<span class="d-flex justify-content-md-center align-items-md-center"><a href="#"><i class="flaticon-meeting-point"></i>Places</a></span>
             	<span class="d-flex justify-content-md-center align-items-md-	center"><a href="#"><i class="flaticon-shopping-bag"></i>Shopping</a></span>
             </p>
           </div>
@@ -50,7 +50,7 @@
                 <h3 class="heading mb-3">Best Price Guarantee</h3>
                 <p>A small river named Duden flows by their place and supplies.</p>
               </div>
-            </div>      
+            </div>
           </div>
           <div class="col-md-3 d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services d-block text-center">
@@ -59,7 +59,7 @@
                 <h3 class="heading mb-3">Travellers Love Us</h3>
                 <p>A small river named Duden flows by their place and supplies.</p>
               </div>
-            </div>    
+            </div>
           </div>
           <div class="col-md-3 d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services d-block text-center">
@@ -68,7 +68,7 @@
                 <h3 class="heading mb-3">Best Travel Agent</h3>
                 <p>A small river named Duden flows by their place and supplies.</p>
               </div>
-            </div>      
+            </div>
           </div>
           <div class="col-md-3 d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services d-block text-center">
@@ -77,12 +77,12 @@
                 <h3 class="heading mb-3">Our Dedicated Support</h3>
                 <p>A small river named Duden flows by their place and supplies.</p>
               </div>
-            </div>      
+            </div>
           </div>
         </div>
       </div>
     </section>
-    
+
     <section class="ftco-section ftco-destination">
     	<div class="container">
     		<div class="row justify-content-start mb-5 pb-3">
@@ -185,7 +185,7 @@
           	<span class="subheading">Special Offers</span>
             <h2 class="mb-4"><strong>Top</strong> Tour Packages</h2>
           </div>
-        </div>    		
+        </div>
     	</div>
     	<div class="container-fluid">
     		<div class="row">
@@ -217,7 +217,7 @@
     						<p class="days"><span>2 days 3 nights</span></p>
     						<hr>
     						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> San Franciso, CA</span> 
+    							<span><i class="icon-map-o"></i> San Franciso, CA</span>
     							<span class="ml-auto"><a href="#">Discover</a></span>
     						</p>
     					</div>
@@ -251,7 +251,7 @@
     						<p class="days"><span>2 days 3 nights</span></p>
     						<hr>
     						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> San Franciso, CA</span> 
+    							<span><i class="icon-map-o"></i> San Franciso, CA</span>
     							<span class="ml-auto"><a href="#">Discover</a></span>
     						</p>
     					</div>
@@ -285,7 +285,7 @@
     						<p class="days"><span>2 days 3 nights</span></p>
     						<hr>
     						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> San Franciso, CA</span> 
+    							<span><i class="icon-map-o"></i> San Franciso, CA</span>
     							<span class="ml-auto"><a href="#">Discover</a></span>
     						</p>
     					</div>
@@ -319,7 +319,7 @@
     						<p class="days"><span>2 days 3 nights</span></p>
     						<hr>
     						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> San Franciso, CA</span> 
+    							<span><i class="icon-map-o"></i> San Franciso, CA</span>
     							<span class="ml-auto"><a href="#">Discover</a></span>
     						</p>
     					</div>
@@ -353,7 +353,7 @@
     						<p class="days"><span>2 days 3 nights</span></p>
     						<hr>
     						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> San Franciso, CA</span> 
+    							<span><i class="icon-map-o"></i> San Franciso, CA</span>
     							<span class="ml-auto"><a href="#">Discover</a></span>
     						</p>
     					</div>
@@ -420,7 +420,7 @@
           	<span class="subheading">Special Offers</span>
             <h2 class="mb-4"><strong>Popular</strong> Hotels &amp; Rooms</h2>
           </div>
-        </div>    		
+        </div>
     	</div>
     	<div class="container-fluid">
     		<div class="row">
@@ -451,7 +451,7 @@
     						<p>Far far away, behind the word mountains, far from the countries</p>
     						<hr>
     						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
+    							<span><i class="icon-map-o"></i> Miami, Fl</span>
     							<span class="ml-auto"><a href="#">Book Now</a></span>
     						</p>
     					</div>
@@ -484,7 +484,7 @@
     						<p>Far far away, behind the word mountains, far from the countries</p>
     						<hr>
     						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
+    							<span><i class="icon-map-o"></i> Miami, Fl</span>
     							<span class="ml-auto"><a href="#">Book Now</a></span>
     						</p>
     					</div>
@@ -517,7 +517,7 @@
     						<p>Far far away, behind the word mountains, far from the countries</p>
     						<hr>
     						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
+    							<span><i class="icon-map-o"></i> Miami, Fl</span>
     							<span class="ml-auto"><a href="#">Book Now</a></span>
     						</p>
     					</div>
@@ -550,7 +550,7 @@
     						<p>Far far away, behind the word mountains, far from the countries</p>
     						<hr>
     						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
+    							<span><i class="icon-map-o"></i> Miami, Fl</span>
     							<span class="ml-auto"><a href="#">Book Now</a></span>
     						</p>
     					</div>
@@ -583,7 +583,7 @@
     						<p>Far far away, behind the word mountains, far from the countries</p>
     						<hr>
     						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> Miami, Fl</span> 
+    							<span><i class="icon-map-o"></i> Miami, Fl</span>
     							<span class="ml-auto"><a href="#">Book Now</a></span>
     						</p>
     					</div>
@@ -667,7 +667,7 @@
           	<span class="subheading">Special Offers</span>
             <h2 class="mb-4"><strong>Popular</strong> Restaurants</h2>
           </div>
-        </div>    		
+        </div>
     		<div class="row">
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="destination">
@@ -689,7 +689,7 @@
     						<p>Far far away, behind the word mountains, far from the countries</p>
     						<hr>
     						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> San Franciso, CA</span> 
+    							<span><i class="icon-map-o"></i> San Franciso, CA</span>
     							<span class="ml-auto"><a href="#">Discover</a></span>
     						</p>
     					</div>
@@ -715,7 +715,7 @@
     						<p>Far far away, behind the word mountains, far from the countries</p>
     						<hr>
     						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> San Franciso, CA</span> 
+    							<span><i class="icon-map-o"></i> San Franciso, CA</span>
     							<span class="ml-auto"><a href="#">Book Now</a></span>
     						</p>
     					</div>
@@ -741,7 +741,7 @@
     						<p>Far far away, behind the word mountains, far from the countries</p>
     						<hr>
     						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> San Franciso, CA</span> 
+    							<span><i class="icon-map-o"></i> San Franciso, CA</span>
     							<span class="ml-auto"><a href="#">Book Now</a></span>
     						</p>
     					</div>
@@ -767,7 +767,7 @@
     						<p>Far far away, behind the word mountains, far from the countries</p>
     						<hr>
     						<p class="bottom-area d-flex">
-    							<span><i class="icon-map-o"></i> San Franciso, CA</span> 
+    							<span><i class="icon-map-o"></i> San Franciso, CA</span>
     							<span class="ml-auto"><a href="#">Book Now</a></span>
     						</p>
     					</div>
@@ -849,7 +849,7 @@
         </div>
       </div>
     </section>
-		
+
 		<section class="ftco-section-parallax">
       <div class="parallax-img d-flex align-items-center">
         <div class="container">

@@ -48,53 +48,86 @@ trait ChartService {
             $startDate = Carbon::now()->subDays(30);
             $endDate = Carbon::now();
 
-            $orderData = DB::table('orders')
-                ->select(DB::raw('DATE(orderDate) as created_at'), DB::raw('COUNT(*) as NewBookingCount'))
-                ->where('orderDate', '>=', $startDate)
-                ->where('orderDate', '<=', $endDate)
-                ->groupBy(DB::raw('DATE(orderDate)'))
-                ->get();
 
-            $userList = User::all();
-            $customerData = collect($userList)
-                ->where('created_at', '>=', $startDate)
-                ->where('created_at', '<=', $endDate)
-                ->groupBy(function ($user) {
-                    return $user->created_at->format('Y-m-d');
-                })
-                ->map(function ($group) {
-                    return [
-                        'created_at' => $group->first()->created_at->toDateTimeString(),
-                        'NewCustomerCount' => $group->count()
-                    ];
-                });
+            $orderList = DB::table('orders')
+            ->select('orderDate')
+            ->where('orderDate', '>=', $startDate)
+            ->where('orderDate', '<=', $endDate)
+            ->get();
+        
+        $userList = DB::table('users')
+            ->select('created_at')
+            ->where('created_at', '>=', $startDate)
+            ->where('created_at', '<=', $endDate)
+            ->get();
+        
+        $orderData = collect($orderList)
+            ->groupBy(function ($order) {
+                return Carbon::parse($order->orderDate);
+            })
+            ->map(function ($group) {
+                return [
+                    'created_at' => Carbon::parse($group->first()->orderDate),
+                    'NewBookingCount' => $group->count()
+                ];
+            });
+        
+        $customerData = collect($userList)
+            ->groupBy(function ($user) {
+                return Carbon::parse($user->created_at);
+            })
+            ->map(function ($group) {
+                return [
+                    'created_at' => Carbon::parse($group->first()->created_at),
+                    'NewCustomerCount' => $group->count()
+                ];
+            });
+        
+        $leftJoin = $orderData->groupBy('created_at')
+            ->map(function ($bookingGroup) use ($customerData) {
+                $customer = $customerData->firstWhere('created_at', $bookingGroup->first()['created_at']);
+                return [
+                    'created_at' => $bookingGroup->first()['created_at'],
+                    'NewBookingCount' => $bookingGroup->first()['NewBookingCount'],
+                    'NewCustomerCount' => $customer ? $customer['NewCustomerCount'] : null
+                ];
+            });
+        
+        $rightJoin = $customerData->groupBy('created_at')
+            ->map(function ($customerGroup) use ($orderData) {
+                $booking = $orderData->firstWhere('created_at', $customerGroup->first()['created_at']);
+                return [
+                    'created_at' => $customerGroup->first()['created_at'],
+                    'NewBookingCount' => $booking ? $booking['NewBookingCount'] : null,
+                    'NewCustomerCount' => $customerGroup->first()['NewCustomerCount']
+                ];
+            });
+        
+        
 
-            $leftJoin = $orderData->groupBy('created_at')
-                ->map(function ($bookingGroup) use ($customerData) {
-                    $customer = $customerData->firstWhere('created_at', $bookingGroup->first()->created_at);
-                    return [
-                        'created_at' => $bookingGroup->first()->created_at,
-                        'NewBookingCount' => $bookingGroup->first()->NewBookingCount,
-                        'NewCustomerCount' => $customer ? $customer['NewCustomerCount'] : null
-                    ];
-                });
-
-            $rightJoin = $customerData->groupBy('created_at')
-                ->map(function ($customerGroup) use ($orderData) {
-                    $booking = $orderData->firstWhere('created_at', $customerGroup->first()->created_at);
-                    return [
-                        'created_at' => $customerGroup->first()->created_at,
-                        'NewBookingCount' => $booking ? $booking->NewBookingCount : null,
-                        'NewCustomerCount' => $customerGroup->first()->NewCustomerCount
-                    ];
-                });
-
-            $mergedData = $leftJoin->union($rightJoin)->sortBy('created_at')->values()->toArray();
+         //   $mergedData = $leftJoin->union($rightJoin)->sortBy('created_at')->values()->toArray();
+         $mergedData = $orderData->map(function ($order) use ($customerData) {
+            $customer = $customerData->firstWhere('created_at', $order['created_at']);
+            return [
+                'created_at' => $order['created_at'],
+                'NewBookingCount' => $order['NewBookingCount'],
+                'NewCustomerCount' => optional($customer)['NewCustomerCount'] ?? 0
+            ];
+        })->merge($customerData->map(function ($customer) use ($orderData) {
+            $order = $orderData->firstWhere('created_at', $customer['created_at']);
+            if (!$order) {
+                return [
+                    'created_at' => $customer['created_at'],
+                    'NewBookingCount' => 0,
+                    'NewCustomerCount' => $customer['NewCustomerCount']
+                ];
+            }
+        }))->sortBy('created_at')->values()->toArray();
 
             $newBookingData = collect($mergedData)->pluck('NewBookingCount')->toArray();
             $newCustomerData = collect($mergedData)->pluck('NewCustomerCount')->toArray();
             $categories = collect($mergedData)->pluck('created_at')->map(function ($datetime) {
-                return Carbon::parse($datetime)->format('m/d/Y');
+                return date_format($datetime,'m/d/Y');
             })->toArray();
 
             $chartDataList = [

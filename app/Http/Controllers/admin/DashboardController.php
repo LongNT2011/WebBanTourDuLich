@@ -4,11 +4,47 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Services\Implementation\ChartService;
+use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 class DashboardController extends Controller
 {
     use ChartService;
     public function index(){
         return view('admin.dashboard');
+    }
+
+    public function showSigninAdminForm()
+    {
+        return view('admin.sign-in');
+    }
+
+    public function signinAdmin(Request $request)
+    {
+        $request->validate([
+            'email'=> 'required|email',
+            'password'=>'required',
+        ]);
+
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'isAdmin' => 1])) {
+            Toastr::success('Đăng nhập thành công!' );
+            return redirect()->route('dashboard');
+        } else  if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'isAdmin' => 0])){
+            Toastr::error('Tài khoản không hợp lệ' );
+            return redirect()->back();
+        } else{
+            Toastr::error('Email hoặc Mật khẩu không đúng!' );
+            return redirect()->back();
+        }
+    }
+
+    public function signoutAdmin()
+    {
+        Auth::logout();
+        Toastr::success('Đăng xuất thành công!' );
+        return redirect()->route('admin.signinAdmin');
     }
 
     public function GetBookingPieChartDataDb(){
