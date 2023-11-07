@@ -140,8 +140,15 @@
     					<div class="text p-3">
     						<div class="d-flex">
     							<div class="one">
-		    						<h3><a href="#">{{$tour->tourName}}</a></h3>
-		    						
+		    						<h3><a href="{{route('tour.detail', ['detail'=>$detail])}}">{{$tour->tourName}}</a></h3>
+		    						<p class="rate">
+				    							<i class="icon-star"></i>
+				    							<i class="icon-star"></i>
+				    							<i class="icon-star"></i>
+				    							<i class="icon-star"></i>
+				    							<i class="icon-star-o"></i>
+				    							<span>8 Rating</span>
+				    						</p>
 	    						</div>
 							
 	    						
@@ -149,12 +156,12 @@
 						
 							
     						<p>Far far away, behind the word mountains, far from the countries</p>
-    						<p class="days"><span>{{$detail->checkInDate}} - {{$detail->checkOutDate}}</span> <span style="float: right;" class="price">{{$detail->childrenPrice}} - {{$detail->adultPrice}} VNĐ</span></p>
+    						<p class="days"><span>{{ date('d/m/Y', strtotime($detail->checkInDate)) }} - {{ date('d/m/Y', strtotime($detail->checkOutDate)) }}</span> <span style="float: right; color:red; font-size:16px;" class="price">{{$detail->childrenPrice}} - {{$detail->adultPrice}} VNĐ</span></p>
 							
     						<hr>
     						<p class="bottom-area d-flex">
     							<span><i class="icon-map-o"></i> {{$detail->depatureLocation}}</span> 
-    							<span class="ml-auto"><a href="#">Đặt Tour Ngay</a></span>
+    							<span class="ml-auto"><a href="{{route('tour.detail', ['detail'=>$detail])}}">Đặt Tour Ngay</a></span>
     						</p>
 							
     					</div>

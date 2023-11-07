@@ -21,4 +21,19 @@ class HomeController extends Controller
       //  dd($detail);
         return view('hotel-single', compact('detail'));
     }
+
+    public function searchTour(){
+      $tours = DB::table('tours')
+    ->join('tour_site', 'tours.id', '=', 'tour_site.tour_id')
+    ->join('sites', 'tour_site.site_id', '=', 'sites.id')
+    ->join('locations', 'sites.location_id', '=', 'locations.id')
+    ->where('locations.id', '=', $location)
+    ->get();
+    return view('index', compact('tours'));
+    }
+
+    public function tour(){
+      $tours = Tour::with('tourDetail')->paginate(9);
+      return view('tour', compact('tours')); 
+    }
 }
