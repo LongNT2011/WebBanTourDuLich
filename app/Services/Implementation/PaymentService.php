@@ -2,7 +2,7 @@
 namespace App\Services\Implementation;
 use App\Models\Dtos\PaymentRequest;
 use App\Models\Dtos\PaymentResponse;
-require __DIR__ . '/vendor/autoload.php';
+
 trait PaymentService 
 {
     private string $SecretKey = "sk_test_51MzQLDHpQ4WsUFgqryhEwh0SyVCD0donY4Zc1eM1ndFRpvmIQEP0wbx2UtwTC6rTls8u7fcImW9MplmoCCT9pUAT00tHCdUZho";
@@ -10,7 +10,7 @@ trait PaymentService
     public function __construct() {
         \Stripe\Stripe::setApiKey($this->SecretKey);
     }
-    public function CheckOut(PaymentRequest $request)
+    public function CheckOut(PaymentRequest $request) : PaymentResponse
     {
         $Checkout_Session = \Stripe\CheckOut\Session::Create([
             'success_url' => $request->getApproveUrl(),
@@ -20,8 +20,8 @@ trait PaymentService
                 [
                     'quantity' => 1,
                     'price_data' => [
-                        'currency' => 'usd',
-                        'unit_amount' =>  $request->getPrice() * 100,
+                        'currency' => 'VND',
+                        'unit_amount' =>  intval($request->getPrice()),
                         'product_data' => [
                             'name' => $request->getName()
                         ]
@@ -30,18 +30,26 @@ trait PaymentService
                 ]
             ]
         ]);
+        $response = new PaymentResponse();
+        $response->setUrl($Checkout_Session->url);
+        $response->setStripeSessionId($Checkout_Session->id);
+        return $response;
     }
     // http_response_code(303);
     //header("Location: " . $checkout_session->url);
     public function ValidatePayment(string $sessionId) : PaymentResponse{
-        $service = new SessionService();
-        $session = $service->Get($sessionId);
+        $stripe = new \Stripe\StripeClient('sk_test_51MzQLDHpQ4WsUFgqryhEwh0SyVCD0donY4Zc1eM1ndFRpvmIQEP0wbx2UtwTC6rTls8u7fcImW9MplmoCCT9pUAT00tHCdUZho');
+        $session = $stripe->checkout->sessions->retrieve(
+            $sessionId,
+            []
+          );
+          $paymentResponse = new PaymentResponse();
         if ($session->PaymentStatus == "paid") {
-            $paymentResponse = new PaymentResponse();
+          
             $paymentResponse->StripeSessionId = $session->Id;
-            $paymentResponse->PaymentIntentId = $session->PaymentIntentId;
-            return $paymentResponse;
+            $paymentResponse->PaymentIntentId = $session->PaymentIntentId;           
         }
+        return $paymentResponse;
     }
 }
 ?>

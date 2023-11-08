@@ -8,6 +8,7 @@ use App\Models\Tour;
 use App\Models\Location;
 use App\Models\TourDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -29,18 +30,15 @@ class HomeController extends Controller
       return view('hotel-single', compact('detail', 'hotels'));
     }
 
-    // public function bookingTour(){
-
-    // }
-
-    public function searchTour(){
+    public function searchTour(Request $request){
+      $locationId = $request->input('location_id');
       $tours = DB::table('tours')
     ->join('tour_site', 'tours.id', '=', 'tour_site.tour_id')
     ->join('sites', 'tour_site.site_id', '=', 'sites.id')
     ->join('locations', 'sites.location_id', '=', 'locations.id')
-    ->where('locations.id', '=', $location)
+    ->where('locations.id', '=', $locationid)
     ->get();
-    return view('index', compact('tours'));
+    return view('tour', compact('tours', 'locationId'));
     }
 
     public function tour(){

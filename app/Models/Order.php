@@ -9,6 +9,12 @@ class Order extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    public $timestamps = false;
+    const created_at = null;
+    const updated_at = null;
+    protected $fillable = [
+        'participantNumber'
+    ];
     public function tour(){
         return $this->belongsTo(Tour::class);
     }
