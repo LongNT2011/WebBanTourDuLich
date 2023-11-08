@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Hotel;
 use App\Models\Site;
 use App\Models\Tour;
 use App\Models\Location;
@@ -17,10 +19,19 @@ class HomeController extends Controller
     return view('index', compact('sites', 'tours', 'locations'));
     }
 
-    public function detail(TourDetail $detail){
-      //  dd($detail);
-        return view('hotel-single', compact('detail'));
+    public function detail(TourDetail $detail){      
+      $hotels = Hotel::join('sites', 'hotels.site_id','=', 'sites.id' ) 
+      ->join('tour_site', 'sites.id','=','tour_site.site_id')
+      ->join('tours', 'tour_site.tour_id','=','tours.id')
+      ->join('tourdetails', 'tours.id','=','tourdetails.tour_id')
+      -> where('tourdetails.id', $detail -> id)
+      -> get(['hotels.id', 'hotels.hotelName', 'hotels.pricePerPerson']);
+      return view('hotel-single', compact('detail', 'hotels'));
     }
+
+    // public function bookingTour(){
+
+    // }
 
     public function searchTour(){
       $tours = DB::table('tours')

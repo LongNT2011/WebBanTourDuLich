@@ -15,4 +15,8 @@ class Site extends Model
     public function tour(){
         return $this->belongsToMany(Tour::class,'tour_site','site_id','tour_id');
     }
+
+    public function hotel(){
+        return $this->hasMany(Hotel::class);
+    }
 }

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\account;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -15,13 +16,13 @@ class AccountController extends Controller
     }
 
     public function updateAccount(Request $request, User $user) {
-
+        $message = ['required' => 'Không được để trống'];
         $request->validate([
             'fullName'=> 'required',
             'email'=> 'required',
             'phoneNumber' => 'required|numeric',
             'address' => 'required'
-        ]);
+        ], $message);
         $user->update([
             'fullName' => $request->fullName,
             'email' => $request->email,
