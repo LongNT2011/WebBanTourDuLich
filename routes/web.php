@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AccountController;
+use App\Http\Controllers\account\AccountController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\HotelController;
 use App\Http\Controllers\admin\LocationController;
@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\order\OrderController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,19 +30,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->name('index');
-Route::get('index.html', function () {
-    return view('index');
-});
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/index.html', [HomeController::class, 'index'])->name('index');
 Route::get('/hotel.html', function () {
     return view('hotel');
 });
 Route::get('/hotel.html', function () {
     return view('hotel');
 });
-Route::view('/hotel-single.html', 'hotel-single');
+Route::get('/tourdetail/{detail}', [HomeController::class, 'detail'])->name('tour.detail');
 Route::view('/about.html', 'about');
 Route::view('/blog.html', 'blog');
 Route::view('/blog-single.html', 'blog-single');
@@ -48,7 +47,7 @@ Route::view('/sign-in', 'sign-in');
 Route::view('/sign-up', 'sign-up');
 Route::view('/orderConfirm', 'orderConfirm');
 Route::view('/orderDetail', 'orderDetail');
-Route::view('/tour.html', 'tour');
+Route::get('/tour.html', [HomeController::class, 'tour'])->name('tour');
 
 
 Route::prefix('admin/dashboard')->group(function () {
@@ -113,6 +112,4 @@ Route::post('/email/verification-notification', function (Request $request) {
 Route::get('/profile/', [AccountController::class, 'showAccountDetail']) -> name('account.detail');
 Route::put('/profile/update/{user}', [AccountController::class, 'updateAccount']) -> name('account.update');
 //Order
-Route::get("/order", function(){
-    return view('hotel-single');
-});
+Route::get("/order/{tourDetail}", [OrderController::class, 'showOrderView']) -> name('order.bookingtour');

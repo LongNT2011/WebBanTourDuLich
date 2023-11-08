@@ -23,7 +23,7 @@ function loadTotalBookingRadialChart() {
             }
 
             document.querySelector("#sectionBookingCount").append(sectionCurrentCount);
-            document.querySelector("#sectionBookingCount").append("since last month");
+            document.querySelector("#sectionBookingCount").append("trong tháng trước");
 
             loadRadialBarChart("totalBookingsRadialChart", data);
 
