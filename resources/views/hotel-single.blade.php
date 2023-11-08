@@ -141,51 +141,91 @@
                             </p>
                             {!! $detail->tripDescription !!}
                         </div>
-                        <div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
+                        <form method="POST" action="{{ route('order.bookingtour', ['tourDetail' => $detail]) }}"
+                            class="col-md-12 hotel-single ftco-animate mb-5 mt-4" enctype="multipart/form-data">
+                            @csrf
+                            @method('get')
                             <h4 class="mb-5">Đặt tour</h4>
                             <div class="fields">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Name">
+                                            <input type="text" class="form-control" placeholder="Họ và tên"
+                                                name="fullName">
+                                            @error('fullName')
+                                                <span class="text-danger">{{ $errors->first('fullName') }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Email">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-										<div class="form-group">
-                                            <input type="number" class="form-control" placeholder="Số người">
+                                            <input type="text" class="form-control" placeholder="Số điện thoại"
+                                                name="phone">
+                                            @error('phone')
+                                                <span class="text-danger">{{ $errors->first('phone') }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="number" class="form-control" placeholder="Trẻ em">
+                                            <input type="email" class="form-control" placeholder="Email"
+                                                name="email">
+                                            @error('email')
+                                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Địa chỉ"
+                                                name="address">
+                                            @error('address')
+                                                <span class="text-danger">{{ $errors->first('address') }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" placeholder="Số người tham gia"
+                                                name="participantNumber">
+                                            @error('participantNumber')
+                                                <span class="text-danger">{{ $errors->first('participantNumber') }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" name="participantChildrenNumber"
+                                                placeholder="Trẻ em(nếu không có thì điền là 0)">
+                                            @error('participantChildrenNumber')
+                                                <span
+                                                    class="text-danger">{{ $errors->first('participantChildrenNumber') }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="select-wrap one-third">
+                                            <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                            <select name="hotelId" id="" class="form-control"
+                                                placeholder="Chọn khách sạn">
+                                                @foreach ($hotels as $hotel)
+                                                    <option value="{{ $hotel->id }}">{{ $hotel->hotelName }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('hotelId')
+                                                <span class="text-danger">{{ $errors->first('hotelId') }}</span>
+                                            @enderror
                                         </div>
                                     </div>
 
-									<div class="col-md-6">
-										<div class="select-wrap one-third">
-											<div class="icon"><span class="ion-ios-arrow-down"></span></div>
-											<select name="" id="" class="form-control"
-												placeholder="Khách sạn">
-												@foreach ($hotels as $hotel)
-													<option value="{{ $hotel->id }}">{{ $hotel->tourName }}</option>
-												@endforeach
-											</select>
-										</div>
-									</div>
-
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 mt-3">
                                         <div class="form-group">
                                             <input type="submit" value="Đặt Tour" class="btn btn-primary py-3">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div> {{-- .col-md-8 --}}
             </div>
