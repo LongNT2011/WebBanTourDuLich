@@ -23,7 +23,7 @@ function loadUserRadialChart() {
             }
 
             document.querySelector("#sectionUserCount").append(sectionCurrentCount);
-            document.querySelector("#sectionUserCount").append("since last month");
+            document.querySelector("#sectionUserCount").append("trong tháng trước");
 
             loadRadialBarChart("totalUserRadialChart", data);
 

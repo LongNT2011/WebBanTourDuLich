@@ -16,13 +16,14 @@
                   </div>
                   <div class="select-wrap one-third">
                     <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                    <select name="" id="" class="form-control" placeholder="Keyword search">
-                      <option value="">Where</option>
-                      <option value="">San Francisco USA</option>
-                      <option value="">Berlin Germany</option>
-                      <option value="">Lodon United Kingdom</option>
-                      <option value="">Paris Italy</option>
+					
+					<select name="" id="" class="form-control" placeholder="Keyword search">
+					<option disabled selected>Chọn Vị Trí</option>
+					@foreach($locations as $location)
+                      <option value="{{$location->id}}">{{$location->locationName}}</option>
+					  @endforeach
                     </select>
+                  	
                   </div>
                 </div>
                 <input type="submit" class="search-submit btn btn-primary" value="Search">
@@ -87,91 +88,29 @@
     	<div class="container">
     		<div class="row justify-content-start mb-5 pb-3">
           <div class="col-md-7 heading-section ftco-animate">
-          	<span class="subheading">Featured</span>
-            <h2 class="mb-4"><strong>Featured</strong> Destination</h2>
+          	<span class="subheading">Địa Danh</span>
+            <h2 class="mb-4"><strong>Địa Điểm Du Lịch</strong></h2>
           </div>
         </div>
     		<div class="row">
     			<div class="col-md-12">
     				<div class="destination-slider owl-carousel ftco-animate">
-    					<div class="item">
+    					@foreach($sites as $site)
+						<div class="item">
 		    				<div class="destination">
-		    					<a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/destination-1.jpg);">
+							
+		    					<a href="{{ Storage::url($site->image) }}" class="img d-flex justify-content-center align-items-center" style="background-image: url({{ Storage::url($site->image) }});">
 		    						<div class="icon d-flex justify-content-center align-items-center">
 		    							<span class="icon-search2"></span>
 		    						</div>
 		    					</a>
 		    					<div class="text p-3">
-		    						<h3><a href="#">Paris, Italy</a></h3>
-		    						<span class="listing">15 Listing</span>
+		    						<h3><a href="#">{{$site->siteName}}</a></h3>
+		    						<span class="listing">{{$site->tour->count()}} Tour Tất Cả</span>
 		    					</div>
 		    				</div>
 	    				</div>
-	    				<div class="item">
-		    				<div class="destination">
-		    					<a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/destination-2.jpg);">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3">
-		    						<h3><a href="#">San Francisco, USA</a></h3>
-		    						<span class="listing">20 Listing</span>
-		    					</div>
-		    				</div>
-	    				</div>
-	    				<div class="item">
-		    				<div class="destination">
-		    					<a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/destination-3.jpg);">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3">
-		    						<h3><a href="#">Lodon, UK</a></h3>
-		    						<span class="listing">10 Listing</span>
-		    					</div>
-		    				</div>
-	    				</div>
-	    				<div class="item">
-		    				<div class="destination">
-		    					<a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/destination-4.jpg);">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3">
-		    						<h3><a href="#">Lion, Singapore</a></h3>
-		    						<span class="listing">3 Listing</span>
-		    					</div>
-		    				</div>
-	    				</div>
-	    				<div class="item">
-		    				<div class="destination">
-		    					<a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/destination-5.jpg);">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3">
-		    						<h3><a href="#">Australia</a></h3>
-		    						<span class="listing">3 Listing</span>
-		    					</div>
-		    				</div>
-	    				</div>
-	    				<div class="item">
-		    				<div class="destination">
-		    					<a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/destination-6.jpg);">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3">
-		    						<h3><a href="#">Paris, Italy</a></h3>
-		    						<span class="listing">3 Listing</span>
-		    					</div>
-		    				</div>
-	    				</div>
+						@endforeach
     				</div>
     			</div>
     		</div>
@@ -182,16 +121,18 @@
     	<div class="container">
 				<div class="row justify-content-start mb-5 pb-3">
           <div class="col-md-7 heading-section ftco-animate">
-          	<span class="subheading">Special Offers</span>
-            <h2 class="mb-4"><strong>Top</strong> Tour Packages</h2>
+          	<span class="subheading">Danh Sách Tour</span>
+            <h2 class="mb-4"><strong>Danh Sách Tour Mới</strong> </h2>
           </div>
         </div>
     	</div>
     	<div class="container-fluid">
-    		<div class="row">
+    		<div class="row" >
+				@foreach($tours as $tour)
+				@foreach($tour->tourDetail as $detail)
     			<div class="col-sm col-md-6 col-lg ftco-animate">
     				<div class="destination">
-    					<a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/destination-1.jpg);">
+    					<a href="{{route('tour.detail', ['detail'=>$detail])}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{ Storage::url($tour->image) }});">
     						<div class="icon d-flex justify-content-center align-items-center">
     							<span class="icon-search2"></span>
     						</div>
@@ -199,24 +140,20 @@
     					<div class="text p-3">
     						<div class="d-flex">
     							<div class="one">
-		    						<h3><a href="#">Paris, Italy</a></h3>
-		    						<p class="rate">
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star"></i>
-		    							<i class="icon-star-o"></i>
-		    							<span>8 Rating</span>
-		    						</p>
+		    						<h3><a href="#">{{$tour->tourName}}</a></h3>
+		    						
 	    						</div>
-	    						<div class="two">
-	    							<span class="price">$200</span>
-    							</div>
+							
+	    						
     						</div>
+						
+							
     						<p>Far far away, behind the word mountains, far from the countries</p>
-    						<p class="days"><span>2 days 3 nights</span></p>
+    						<p class="days"><span>{{$detail->checkInDate}} - {{$detail->checkOutDate}}</span> <span style="float: right;" class="price">{{$detail->childrenPrice}} - {{$detail->adultPrice}} VNĐ</span></p>
+							
     						<hr>
     						<p class="bottom-area d-flex">
+<<<<<<< HEAD
     							<span><i class="icon-map-o"></i> San Franciso, CA</span>
     							<span class="ml-auto"><a href="#">Discover</a></span>
     						</p>
@@ -355,10 +292,17 @@
     						<p class="bottom-area d-flex">
     							<span><i class="icon-map-o"></i> San Franciso, CA</span>
     							<span class="ml-auto"><a href="#">Discover</a></span>
+=======
+    							<span><i class="icon-map-o"></i> {{$detail->depatureLocation}}</span> 
+    							<span class="ml-auto"><a href="#">Đặt Tour Ngay</a></span>
+>>>>>>> 54741cc9a1945298764e9afbe8e3ae4a7091f0fe
     						</p>
+							
     					</div>
     				</div>
     			</div>
+				@endforeach
+				@endforeach
     		</div>
     	</div>
     </section>

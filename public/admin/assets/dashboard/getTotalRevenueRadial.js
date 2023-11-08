@@ -23,7 +23,7 @@ function loadRevenueRadialChart() {
             }
 
             document.querySelector("#sectionRevenueCount").append(sectionCurrentCount);
-            document.querySelector("#sectionRevenueCount").append("since last month");
+            document.querySelector("#sectionRevenueCount").append("trong tháng trước");
 
             loadRadialBarChart("totalRevenueRadialChart", data);
 

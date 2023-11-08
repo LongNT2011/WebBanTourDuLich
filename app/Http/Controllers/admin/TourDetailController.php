@@ -159,16 +159,17 @@ class TourDetailController extends Controller
         ]);
     }
 
-//    public function search(Request $request)
-//    {
-//        $query = $request->input('query');
-//
-//        $hotels = Hotel::where('hotelName', 'like', "%$query%")
-//            ->orWhere('description', 'like', "%$query%")
-//            ->orWhere('pricePerPerson', 'like', "%$query%")
-//            ->paginate(5);
-//
-//        return view('admin.hotel.index', compact('hotels'));
-//
-//    }
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        $tourdetails = TourDetail::join('tours', 'tourdetails.tour_id', '=', 'tours.id')
+            ->where('checkInDate', 'like', "%$query%")
+            ->orWhere('depatureLocation', 'like', "%$query%")
+            ->orWhere('tours.tourName', 'like', "%$query%")
+            ->select('tourdetails.*')
+            ->paginate(5);
+        return view('admin.tourdetail.index', compact('tourdetails'));
+
+    }
 }

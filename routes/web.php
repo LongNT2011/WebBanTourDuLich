@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,19 +28,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->name('index');
-Route::get('index.html', function () {
-    return view('index');
-});
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/index.html', [HomeController::class, 'index'])->name('index');
 Route::get('/hotel.html', function () {
     return view('hotel');
 });
 Route::get('/hotel.html', function () {
     return view('hotel');
 });
-Route::view('/hotel-single.html', 'hotel-single');
+Route::get('/tourdetail/{detail}', [HomeController::class, 'detail'])->name('tour.detail');
 Route::view('/about.html', 'about');
 Route::view('/blog.html', 'blog');
 Route::view('/blog-single.html', 'blog-single');
@@ -77,7 +74,7 @@ Route::group(['middleware' => 'checkadmin' , 'prefix' => '/admin'], function () 
     Route::resource('/tours', TourController::class);
     Route::post('/tours/search', [TourController::class, 'search'])->name('tours.search');
     Route::resource('/tourdetails', TourDetailController::class);
-    Route::post('/tourdetails/search', [HotelController::class, 'search'])->name('tourdetails.search');
+    Route::post('/tourdetails/search', [TourDetailController::class, 'search'])->name('tourdetails.search');
     Route::resource('/tourdetails.image', TourImageController::class)->except(['create', 'index', 'show']);
 
 });
