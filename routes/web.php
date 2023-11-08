@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AccountController;
+use App\Http\Controllers\account\AccountController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\HotelController;
 use App\Http\Controllers\admin\LocationController;
@@ -111,5 +111,5 @@ Route::get('/profile/', [AccountController::class, 'showAccountDetail']) -> name
 Route::put('/profile/update/{user}', [AccountController::class, 'updateAccount']) -> name('account.update');
 //Order
 Route::get("/order", function(){
-    return view('hotel-single');
-});
+    return view('order.orderDetail');
+}) -> name('order.bookingtour');
