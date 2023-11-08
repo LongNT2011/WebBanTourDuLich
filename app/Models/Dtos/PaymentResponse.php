@@ -3,6 +3,7 @@ namespace App\Models\Dtos;
 class PaymentResponse {
     public $StripeSessionId;
     public $PaymentIntentId;
+    public $Url;
 
     /**
      * Get the value of StripeSessionId
@@ -40,6 +41,28 @@ class PaymentResponse {
     public function setPaymentIntentId($PaymentIntentId)
     {
         $this->PaymentIntentId = $PaymentIntentId;
+
+        return $this;
+    }
+
+    
+
+    /**
+     * Get the value of Url
+     */ 
+    public function getUrl()
+    {
+        return $this->Url;
+    }
+
+    /**
+     * Set the value of Url
+     *
+     * @return  self
+     */ 
+    public function setUrl($Url)
+    {
+        $this->Url = $Url;
 
         return $this;
     }
