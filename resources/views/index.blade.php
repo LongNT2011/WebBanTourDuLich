@@ -13,7 +13,7 @@
 				@csrf
                 <div class="fields d-block d-flex">
                   <div class="textfield-search one-third">
-                  	<input type="text" class="form-control" placeholder="Ex: food, service, hotel">
+                  	<input name="keyword" type="text" class="form-control" placeholder="Ex: food, service, hotel">
                   </div>
                   <div class="select-wrap one-third">
                     <div class="icon"><span class="ion-ios-arrow-down"></span></div>
