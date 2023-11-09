@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="../admin/assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../admin/assets/img/favicon.png">
@@ -10,16 +10,18 @@
         Argon Dashboard 2 by Creative Tim
     </title>
     <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
     <!-- Nucleo Icons -->
-    <link href="../admin/assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="../admin/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="{{asset('admin/assets/css/nucleo-icons.css')}}" rel="stylesheet"/>
+    <link href="{{asset('admin/assets/css/nucleo-svg.css')}}" rel="stylesheet"/>
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
-    <link href="../admin/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="{{asset('admin/assets/css/nucleo-svg.css')}}" rel="stylesheet"/>
     <!-- CSS Files -->
-    <link id="pagestyle" href="../admin/assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
+    <link id="pagestyle" href="{{asset('admin/assets/css/argon-dashboard.css?v=2.0.4')}}" rel="stylesheet"/>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+    <link rel="stylesheet" href="{{asset('admin/assets/dashboard/apexcharts.css')}}"/>
+
 </head>
 
 <body class="">
@@ -34,14 +36,6 @@
                                 <h4 class="font-weight-bolder">Đăng nhập với quyền Quản trị viên</h4>
                                 <p class="mb-0">Nhập Email và Mật khẩu của Tài khoản có quyền Quản trị viên
                                 </p>
-
-{{--                                @if ($message = Session::get('error'))--}}
-{{--                                    <div class="alert alert-danger alert-block">--}}
-{{--                                        --}}{{-- <button type="button" class="close" data-dismiss="alert">x</button> --}}
-{{--                                        <strong>{{ $message }}</strong>--}}
-{{--                                    </div>--}}
-{{--                                @endif--}}
-
                             </div>
                             <div class="card-body">
                                 <form method="POST" action="" role="form">
@@ -60,19 +54,19 @@
                                             <span class="text-danger">{{ $errors->first('password') }}</span>
                                         @endif
                                     </div>
-{{--                                    <div class="form-check form-switch">--}}
-{{--                                        <input class="form-check-input" type="checkbox" id="rememberMe">--}}
-{{--                                        <label class="form-check-label" for="rememberMe">Remember me</label>--}}
-{{--                                    </div>--}}
                                     <div class="text-center">
                                         <button type="submit"
-                                                class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Đăng Nhập</button>
+                                                class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Đăng Nhập
+                                        </button>
                                     </div>
                                 </form>
                             </div>
                             <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                 <p class="mb-4 text-sm mx-auto">
-                                    Đăng nhập với tài khoản Người dùng
+                                    <a href="{{ route('auth.forgot') }}"
+                                       class="text-primary text-gradient font-weight-bold">Quên mật khẩu?</a>
+                                </p>
+                                <p class="mb-4 text-sm mx-auto">Bạn là Người Dùng?
                                     <a href="{{ route('auth.signin') }}"
                                        class="text-primary text-gradient font-weight-bold">Đăng Nhập</a>
                                 </p>
@@ -81,14 +75,11 @@
                     </div>
                     <div
                         class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
-                        <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
-                             style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signin-ill.jpg');
+                        <div
+                            class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
+                            style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signin-ill.jpg');
           background-size: cover;">
                             <span class="mask bg-gradient-primary opacity-6"></span>
-{{--                            <h4 class="mt-5 text-white font-weight-bolder position-relative">"Attention is the new--}}
-{{--                                currency"</h4>--}}
-{{--                            <p class="text-white position-relative">The more effortless the writing looks, the more--}}
-{{--                                effort the writer actually put into the process.</p>--}}
                         </div>
                     </div>
                 </div>
@@ -113,11 +104,10 @@
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="../admin/assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+<script src="{{asset('admin/assets/js/argon-dashboard.min.js?v=2.0.4')}}"></script>
 <script src="{{asset('js/jquery.min.js')}}"></script>
-
 <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 {!! Toastr::message() !!}
 </body>
 

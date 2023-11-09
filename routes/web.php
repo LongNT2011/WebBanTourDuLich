@@ -93,21 +93,18 @@ Route::post('/signin_admin', [DashboardController::class, 'signinAdmin']);
 Route::get('/signout_admin', [DashboardController::class, 'signoutAdmin'])->name('admin.signoutAdmin');
 
 // verify
-Route::get('/email/verify', function () {
-    return view('auth.verify-email');
-})->middleware('auth')->name('verification.notice');
+Route::get('/verify', [AuthController::class, 'verifyNotification'])->name('auth.verify');
+Route::post('/verify',[AuthController::class, 'resendVerifyEmail'])->name('auth.resend');
+Route::get('/verify/{token}', [AuthController::class, 'verify']);
 
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
+// forgot password
+Route::get('/forgot', [AuthController::class, 'showForgotForm'])->name('auth.forgot');
+Route::post('/forgot', [AuthController::class, 'forgot']);
 
-    return redirect('/index');
-})->middleware(['auth', 'signed'])->name('verification.verify');
+Route::get('/reset/{token}', [AuthController::class, 'reset']);
+Route::post('/reset/{token}', [AuthController::class, 'resetPassword']);
 
-Route::post('/email/verification-notification', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
 
-    return back()->with('message', 'Verification link sent!');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 //profile
 Route::get('/profile/', [AccountController::class, 'showAccountDetail']) -> name('account.detail');

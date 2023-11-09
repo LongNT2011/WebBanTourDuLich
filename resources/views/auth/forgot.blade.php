@@ -7,7 +7,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="../admin/assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../admin/assets/img/favicon.png">
     <title>
-        Đăng Ký
+        Quên Mật Khẩu
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
@@ -21,7 +21,6 @@
     <link id="pagestyle" href="{{asset('admin/assets/css/argon-dashboard.css?v=2.0.4')}}" rel="stylesheet"/>
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     <link rel="stylesheet" href="{{asset('admin/assets/dashboard/apexcharts.css')}}"/>
-
 </head>
 
 <body class="">
@@ -33,6 +32,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-5 text-center mx-auto">
                     <h1 class="text-white mb-2 mt-5">Xin Chào!</h1>
+
                 </div>
             </div>
         </div>
@@ -42,15 +42,14 @@
             <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
                 <div class="card z-index-0">
                     <div class="card-header text-center pt-4">
-                        <h5>Đăng Ký</h5>
+                        <h5>Quên Mật Khẩu</h5>
+                        <p class="text-sm font-weight-bold mb-2 text-secondary text-border d-inline z-index-2 bg-white px-3">
+                            Nhập Email của bạn để đặt lại mật khẩu
+                        </p>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="" role="form">
                             @csrf
-                            <div class="mb-3">
-                                <input type="text" class="form-control" placeholder="Tên" aria-label="Name"
-                                       name="fullName">
-                            </div>
                             <div class="mb-3">
                                 <input type="email" class="form-control" placeholder="Email" aria-label="Email"
                                        name="email">
@@ -58,19 +57,22 @@
                                     <span class="text-danger">{{ $errors->first('email') }}</span>
                                 @endif
                             </div>
-                            <div class="mb-3">
-                                <input type="password" class="form-control" placeholder="Mật khẩu"
-                                       aria-label="Password" name="password">
-                                @if ($errors->has('password'))
-                                    <span class="text-danger">{{ $errors->first('password') }}</span>
-                                @endif
-                            </div>
                             <div class="text-center">
-                                <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Đăng Ký</button>
+                                <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Quên mật khẩu
+                                </button>
                             </div>
-                            <p class="text-sm mt-3 mb-0">Đã có tài khoản? <a
-                                    href="{{ route('auth.signin') }}" class="text-dark font-weight-bolder">Đăng Nhập</a>
-                            </p>
+                            <div>
+                                <p class="text-sm mt-3 mb-0">Đã có tài khoản?
+                                    <a href="{{ route('auth.signin') }}" class="text-dark font-weight-bolder">Đăng
+                                        Nhập</a>
+                                </p>
+                                <p class="text-sm mt-3 mb-0">Chưa có tài khoản?
+                                    <a href="{{ route('auth.signup') }}" class="text-dark font-weight-bolder">Tạo tài
+                                        khoản
+                                    </a>
+                                </p>
+                            </div>
+
                         </form>
                     </div>
                 </div>

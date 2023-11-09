@@ -75,16 +75,16 @@
                             Tổng Tiền :
                             <span style="border-bottom:1px solid #ff6a00">
                                 @php
-                                   
+
                                     $adultPrice = ($orderPreview->participantNumber - $orderPreview ->participantChildrenNumber) * $tourDetail->adultPrice;
                                     $hotelPrice = ($hotel->pricePerPerson * $orderPreview->participantNumber);
                                     $childrenPrice = $orderPreview ->participantChildrenNumber * $tourDetail->childrenPrice;
-                                    $discount = ($adultPrice + $childrenPrice + $hotelPrice) * ($tourDetail->discount/100); 
+                                    $discount = ($adultPrice + $childrenPrice + $hotelPrice) * ($tourDetail->discount/100);
                                     $total = ($adultPrice + $childrenPrice + $hotelPrice) - $discount;
                                     $participantNumber = $orderPreview->participantNumber;
                                 @endphp
                                 {{ $total }}
-                              
+
                             </span>
                         </h4>
                     </div>
@@ -101,7 +101,7 @@
                     <input name="Name" type="hidden" value="{{ $orderPreview->fullName }}"/>
                     <input name="Phone" type="hidden" value="{{ $orderPreview->phone }}"/>
                     <input name="Email" type="hidden" value="{{ $orderPreview->email }}"/>
-                  
+
                     <div class="row pt-1 mb-3 " style="border-radius:20px; ">
                         <div class="col-12">
                             <h3 class="text-success">Xác nhận thông tin</h3>
