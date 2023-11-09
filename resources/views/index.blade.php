@@ -9,21 +9,21 @@
             <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong>Explore <br></strong> your amazing city</h1>
             <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Find great places to stay, eat, shop, or visit from local experts</p>
             <div class="block-17 my-4">
-              <form action="" method="post" class="d-block d-flex">
+              <form action="{{route('searchTour')}}" method="get" class="d-block d-flex">
+				@csrf
                 <div class="fields d-block d-flex">
                   <div class="textfield-search one-third">
-                  	<input type="text" class="form-control" placeholder="Ex: food, service, hotel">
+                  	<input name="keyword" type="text" class="form-control" placeholder="Ex: food, service, hotel">
                   </div>
                   <div class="select-wrap one-third">
                     <div class="icon"><span class="ion-ios-arrow-down"></span></div>
 					
-					<select name="" id="" class="form-control" placeholder="Keyword search">
+					<select name="location_id" id="" class="form-control" placeholder="Keyword search">
 					<option disabled selected>Chọn Vị Trí</option>
 					@foreach($locations as $location)
                       <option value="{{$location->id}}">{{$location->locationName}}</option>
 					  @endforeach
-                    </select>
-                  	
+                    </select>                	
                   </div>
                 </div>
                 <input type="submit" class="search-submit btn btn-primary" value="Search">  

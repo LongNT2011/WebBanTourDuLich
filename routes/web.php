@@ -48,6 +48,7 @@ Route::view('/sign-up', 'sign-up');
 Route::view('/orderConfirm', 'orderConfirm');
 Route::view('/orderDetail', 'orderDetail');
 Route::get('/tour.html', [HomeController::class, 'tour'])->name('tour');
+Route::get('/searchtour', [HomeController::class, 'searchTour'])->name('searchTour');
 
 
 Route::prefix('admin/dashboard')->group(function () {
@@ -113,3 +114,4 @@ Route::get('/profile/', [AccountController::class, 'showAccountDetail']) -> name
 Route::put('/profile/update/{user}', [AccountController::class, 'updateAccount']) -> name('account.update');
 //Order
 Route::get("/order/{tourDetail}", [OrderController::class, 'showOrderView']) -> name('order.bookingtour');
+Route::post('/checkout', [OrderController::class, 'CheckoutOrder'])->name('CheckoutOrder');
