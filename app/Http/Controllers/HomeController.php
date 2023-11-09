@@ -32,13 +32,22 @@ class HomeController extends Controller
 
     public function searchTour(Request $request){
       $locationId = $request->input('location_id');
-      $tours = DB::table('tours')
-    ->join('tour_site', 'tours.id', '=', 'tour_site.tour_id')
-    ->join('sites', 'tour_site.site_id', '=', 'sites.id')
-    ->join('locations', 'sites.location_id', '=', 'locations.id')
-    ->where('locations.id', '=', $locationid)
-    ->get();
-    return view('tour', compact('tours', 'locationId'));
+      if (isset($locationId)) {
+        // Tìm kiếm theo location_id
+        $tours = Tour::where('tourName', 'like', '%' . $request->input('keyword') . '%')
+            ->join('tour_site', 'tours.id', '=', 'tour_site.tour_id')
+            ->join('sites', 'tour_site.site_id', '=', 'sites.id')
+            ->join('locations', 'sites.location_id', '=', 'locations.id')
+            ->where('locations.id', '=', $locationId)
+            ->with('tourDetail')->paginate(9);
+    } else {
+        // Tìm kiếm theo từ khóa
+        $tours = Tour::with('tourDetail')->where('tourName', 'like', '%' . $request->input('keyword') . '%')->paginate(9);
+        // $tours = DB::table('tours')
+        //     ->where('tourName', 'like', '%' . $request->input('keyword') . '%')->with('tourDetail')
+        //     ->get();
+    }
+    return view('tour', compact('tours'));
     }
 
     public function tour(){

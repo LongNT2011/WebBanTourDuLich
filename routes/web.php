@@ -48,7 +48,7 @@ Route::view('/sign-up', 'sign-up');
 Route::view('/orderConfirm', 'orderConfirm');
 Route::view('/orderDetail', 'orderDetail');
 Route::get('/tour.html', [HomeController::class, 'tour'])->name('tour');
-Route::post('/searchtour', [HomeController::class, 'searchTour'])->name('searchTour');
+Route::get('/searchtour', [HomeController::class, 'searchTour'])->name('searchTour');
 
 
 Route::prefix('admin/dashboard')->group(function () {
