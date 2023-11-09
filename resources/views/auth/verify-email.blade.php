@@ -7,21 +7,18 @@
     <link rel="apple-touch-icon" sizes="76x76" href="../admin/assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../admin/assets/img/favicon.png">
     <title>
-        Đăng Ký
+        Xác Minh Tài Khoản
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
     <!-- Nucleo Icons -->
-    <link href="{{asset('admin/assets/css/nucleo-icons.css')}}" rel="stylesheet"/>
-    <link href="{{asset('admin/assets/css/nucleo-svg.css')}}" rel="stylesheet"/>
+    <link href="../admin/assets/css/nucleo-icons.css" rel="stylesheet"/>
+    <link href="../admin/assets/css/nucleo-svg.css" rel="stylesheet"/>
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="{{asset('admin/assets/css/nucleo-svg.css')}}" rel="stylesheet"/>
+    <link href="../admin/assets/css/nucleo-svg.css" rel="stylesheet"/>
     <!-- CSS Files -->
-    <link id="pagestyle" href="{{asset('admin/assets/css/argon-dashboard.css?v=2.0.4')}}" rel="stylesheet"/>
-    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
-    <link rel="stylesheet" href="{{asset('admin/assets/dashboard/apexcharts.css')}}"/>
-
+    <link id="pagestyle" href="../admin/assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet"/>
 </head>
 
 <body class="">
@@ -32,7 +29,9 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-5 text-center mx-auto">
-                    <h1 class="text-white mb-2 mt-5">Xin Chào!</h1>
+                    {{--                    <h1 class="text-white mb-2 mt-5">Welcome!</h1>--}}
+                    {{--                    <p class="text-lead text-white">Use these awesome forms to login or create new account in your--}}
+                    {{--                        project for free.</p>--}}
                 </div>
             </div>
         </div>
@@ -42,35 +41,24 @@
             <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
                 <div class="card z-index-0">
                     <div class="card-header text-center pt-4">
-                        <h5>Đăng Ký</h5>
+                        <h5>Một liên kết xác minh mới đã được gửi đến địa chỉ email của bạn. Trước khi tiếp tục, vui
+                            lòng kiểm tra email của bạn để tìm liên kết xác minh. Nếu bạn không nhận được email</h5>
                     </div>
+
+                    @if ($message = Session::get('message'))
+                        <div class="alert alert-danger alert-block">
+                            <button type="button" class="close" data-dismiss="alert">x</button>
+                            <strong>{{ $message }}</strong>
+                        </div>
+                    @endif
+
                     <div class="card-body">
-                        <form method="POST" action="" role="form">
+                        <form class="d-inline" method="POST" action="{{ route('auth.resend')}}">
                             @csrf
-                            <div class="mb-3">
-                                <input type="text" class="form-control" placeholder="Tên" aria-label="Name"
-                                       name="fullName">
-                            </div>
-                            <div class="mb-3">
-                                <input type="email" class="form-control" placeholder="Email" aria-label="Email"
-                                       name="email">
-                                @if ($errors->has('email'))
-                                    <span class="text-danger">{{ $errors->first('email') }}</span>
-                                @endif
-                            </div>
-                            <div class="mb-3">
-                                <input type="password" class="form-control" placeholder="Mật khẩu"
-                                       aria-label="Password" name="password">
-                                @if ($errors->has('password'))
-                                    <span class="text-danger">{{ $errors->first('password') }}</span>
-                                @endif
-                            </div>
                             <div class="text-center">
-                                <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Đăng Ký</button>
+                                <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Gửi lại Email xác minh
+                                </button>
                             </div>
-                            <p class="text-sm mt-3 mb-0">Đã có tài khoản? <a
-                                    href="{{ route('auth.signin') }}" class="text-dark font-weight-bolder">Đăng Nhập</a>
-                            </p>
                         </form>
                     </div>
                 </div>
@@ -151,11 +139,7 @@
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="{{asset('admin/assets/js/argon-dashboard.min.js?v=2.0.4')}}"></script>
-<script src="{{asset('js/jquery.min.js')}}"></script>
-<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-{!! Toastr::message() !!}
+<script src="../admin/assets/js/argon-dashboard.min.js?v=2.0.4"></script>
 </body>
 
 </html>

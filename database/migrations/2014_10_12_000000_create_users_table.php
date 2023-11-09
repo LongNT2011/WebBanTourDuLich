@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('fullName')->nullable();
             $table->string('phoneNumber')->nullable();
+            $table->rememberToken();
             $table->timestamp('email_verified_at')->nullable();
             $table->boolean('isAdmin')->default(false);
             $table->timestamps();
