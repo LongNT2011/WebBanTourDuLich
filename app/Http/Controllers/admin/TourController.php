@@ -35,11 +35,14 @@ class TourController extends Controller
      */
     public function store(Request $request)
     {
+        $message = ['required' => 'Không được để trống!',
+            'image' => 'Phải là hình ảnh!'
+        ];
         $request->validate([
             'tourName' => 'required',
             'sites' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+        ],$message);
 
         $image = $request->file('image')->store(
             'tours/images', 'public'
@@ -47,10 +50,7 @@ class TourController extends Controller
         $tour = Tour::create($request->except('image') + ['image' => $image]);
         $tour->site()->sync($request->sites);
         Toastr::success('Thêm tour thành công!' );
-        return redirect()->route('tours.index')->with([
-            'message' => 'Success Created !',
-            'alert-type' => 'success'
-        ]);
+        return redirect()->route('tours.index');
 
 
     }
@@ -77,11 +77,14 @@ class TourController extends Controller
      */
     public function update(Request $request, Tour $tour)
     {
+        $message = ['required' => 'Không được để trống!',
+            'image' => 'Phải là hình ảnh!'
+        ];
         $request->validate([
             'tourName' => 'required',
             'sites' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ],$message);
 
         if ($request->hasFile('image')) {
             File::delete('storage/' . $tour->image);
@@ -89,15 +92,12 @@ class TourController extends Controller
             $tour->update($request->except('image') + ['image' => $image]);
             $tour->site()->sync($request->sites);
         } else {
-            $tour->update($request);
+            $tour->update($request->except('image'));
             $tour->site()->sync($request->sites);
 
         }
         Toastr::success('Sửa tour thành công!' );
-        return redirect()->route('tours.index')->with([
-            'message' => 'Success Updated!',
-            'alert-type' => 'info'
-        ]);
+        return redirect()->route('tours.index');
     }
 
 
@@ -114,10 +114,7 @@ class TourController extends Controller
         $tour->site()->detach();
         $tour->delete();
         Toastr::success('Xóa tour thành công!' );
-        return redirect()->back()->with([
-            'message' => 'Success Deleted !',
-            'alert-type' => 'danger'
-        ]);
+        return redirect()->back();
     }
 
     public function search(Request $request)

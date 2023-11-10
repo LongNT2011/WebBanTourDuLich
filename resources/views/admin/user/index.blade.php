@@ -53,11 +53,11 @@
                     <tr>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Email</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Mật khẩu</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tên</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Số điện thoại</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Địa chỉ</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Vai trò</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Xác minh lúc</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Là quản trị viên</th>
                       <th class="text-secondary opacity-7"></th>
                     </tr>
                   </thead>
@@ -71,20 +71,28 @@
                         <p class="text-xs font-weight-bold mb-0">{{$user->email}}</p>
                         </td>
                         <td class="align-middle text-center text-sm">
-                              <p class="text-xs font-weight-bold mb-0">{{$user->password}}</p>
-                        </td>
-                        <td class="align-middle text-center text-sm">
                               <p class="text-xs font-weight-bold mb-0">{{$user->fullName}}</p>
                         </td>
                         <td class="align-middle text-center text-sm">
                               <p class="text-xs font-weight-bold mb-0">{{$user->phoneNumber}}</p>
                         </td>
                         <td class="align-middle text-center text-sm">
-                              <p class="text-xs font-weight-bold mb-0">{{$user->email_verified_at}}</p>
+                              <p class="text-xs font-weight-bold mb-0">{{$user->address}}</p>
                         </td>
                         <td class="align-middle text-center text-sm">
-                              <p class="text-xs font-weight-bold mb-0">{{$user->isAdmin}}</p>
+                              <p class="text-xs font-weight-bold mb-0">
+                                  @if($user->isAdmin == 1)
+                                      Quản trị viên
+                                  @else
+                                      Người dùng
+                                  @endif
+
+                              </p>
                         </td>
+                        <td class="align-middle text-center text-sm">
+                              <p class="text-xs font-weight-bold mb-0">{{$user->email_verified_at}}</p>
+                        </td>
+
                         <td class="align-middle">
                               <a href="{{ route('users.edit', [$user]) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                                   Edit

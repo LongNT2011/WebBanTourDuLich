@@ -33,7 +33,7 @@
             <div class="row mb-2">
                 <div class="col-sm-11 justify-content-end d-flex">
                     <a href="{{ route('tourdetails.create') }}" class="btn btn-light btn-sm">
-                        <i class="fa fa-plus"></i>Add
+                        <i class="fa fa-plus"></i>Thêm
                     </a>
 
                 </div>
@@ -46,7 +46,7 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6>Danh sách chi tiết tour</h6>
+                        <h6>Danh sách chi tiết Tour</h6>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
@@ -63,7 +63,7 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Giá người lớn</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Giảm giá</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Địa điểm xuất phát</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Chương trình tour</th>
+{{--                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Chương trình tour</th>--}}
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ảnh</th>
                                     <th class="text-secondary opacity-7"></th>
                                 </tr>
@@ -101,14 +101,13 @@
                                         <td class="align-middle text-center">
                                             <span class="text-secondary text-xs font-weight-bold">{{$tourdetail->depatureLocation}}</span>
                                         </td>
-                                        <td class="align-middle text-center">
+{{--                                        <td class="align-middle text-center">--}}
 
-                                        <span class="text-secondary text-xs font-weight-bold">
-                                            {!! substr($tourdetail->tripDescription, 0, 20) !!}
-                                        </span>
+{{--                                        <span class="text-secondary text-xs font-weight-bold">--}}
+{{--                                            {!! substr($tourdetail->tripDescription, 0, 20) !!}--}}
+{{--                                        </span>--}}
 
-                                        </td>
-                                        <td class="align-middle text-center">
+{{--                                        </td>--}}
                                         <td class="align-middle text-center">
                                             @if(count($tourdetail->tourimage) > 0)
                                                 <a href="{{ Storage::url($tourdetail->tourimage[0]->imageUrl) }}" target="_blank">

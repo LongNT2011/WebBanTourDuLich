@@ -16,14 +16,14 @@
                   </div>
                   <div class="select-wrap one-third">
                     <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-					
+
 					<select name="" id="" class="form-control" placeholder="Keyword search">
 					<option disabled selected>Chọn Vị Trí</option>
 					@foreach($locations as $location)
                       <option value="{{$location->id}}">{{$location->locationName}}</option>
 					  @endforeach
                     </select>
-                  	
+
                   </div>
                 </div>
                 <input type="submit" class="search-submit btn btn-primary" value="Search">
@@ -98,7 +98,7 @@
     					@foreach($sites as $site)
 						<div class="item">
 		    				<div class="destination">
-							
+
 		    					<a href="{{ Storage::url($site->image) }}" class="img d-flex justify-content-center align-items-center" style="background-image: url({{ Storage::url($site->image) }});">
 		    						<div class="icon d-flex justify-content-center align-items-center">
 		    							<span class="icon-search2"></span>
@@ -140,20 +140,26 @@
     					<div class="text p-3">
     						<div class="d-flex">
     							<div class="one">
-		    						<h3><a href="#">{{$tour->tourName}}</a></h3>
-		    						
+		    						<h3><a href="{{route('tour.detail', ['detail'=>$detail])}}">{{$tour->tourName}}</a></h3>
+		    						<p class="rate">
+				    							<i class="icon-star"></i>
+				    							<i class="icon-star"></i>
+				    							<i class="icon-star"></i>
+				    							<i class="icon-star"></i>
+				    							<i class="icon-star-o"></i>
+				    							<span>8 Rating</span>
+				    						</p>
 	    						</div>
-							
-	    						
+
+
     						</div>
-						
-							
+
+
     						<p>Far far away, behind the word mountains, far from the countries</p>
-    						<p class="days"><span>{{$detail->checkInDate}} - {{$detail->checkOutDate}}</span> <span style="float: right;" class="price">{{$detail->childrenPrice}} - {{$detail->adultPrice}} VNĐ</span></p>
-							
+    						<p class="days"><span>{{ date('d/m/Y', strtotime($detail->checkInDate)) }} - {{ date('d/m/Y', strtotime($detail->checkOutDate)) }}</span> <span style="float: right; color:red; font-size:16px;" class="price">{{$detail->childrenPrice}} - {{$detail->adultPrice}} VNĐ</span></p>
+
     						<hr>
     						<p class="bottom-area d-flex">
-<<<<<<< HEAD
     							<span><i class="icon-map-o"></i> San Franciso, CA</span>
     							<span class="ml-auto"><a href="#">Discover</a></span>
     						</p>
@@ -292,12 +298,10 @@
     						<p class="bottom-area d-flex">
     							<span><i class="icon-map-o"></i> San Franciso, CA</span>
     							<span class="ml-auto"><a href="#">Discover</a></span>
-=======
-    							<span><i class="icon-map-o"></i> {{$detail->depatureLocation}}</span> 
+						<span><i class="icon-map-o"></i> {{$detail->depatureLocation}}</span>
     							<span class="ml-auto"><a href="#">Đặt Tour Ngay</a></span>
->>>>>>> 54741cc9a1945298764e9afbe8e3ae4a7091f0fe
+    							<span class="ml-auto"><a href="{{route('tour.detail', ['detail'=>$detail])}}">Đặt Tour Ngay</a></span>
     						</p>
-							
     					</div>
     				</div>
     			</div>

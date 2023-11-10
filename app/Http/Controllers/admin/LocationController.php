@@ -30,16 +30,15 @@ class LocationController extends Controller
      */
     public function store(Request $request)
     {
+        $message = ['required' => 'Không được để trống!',
+        ];
         $request->validate([
             'locationName' => 'required',
-        ]);
+        ],$message);
         $attributes = $request->all();
         Location::create($attributes);
         Toastr::success('Thêm vị trí thành công!' );
-        return redirect()->route('locations.index')->with([
-            'message' => 'Success Created !',
-            'alert-type' => 'success'
-        ]);
+        return redirect()->route('locations.index');
 
 
     }
@@ -66,9 +65,11 @@ class LocationController extends Controller
      */
     public function update(Request $request, Location $location)
     {
+        $message = ['required' => 'Không được để trống!',
+        ];
         $request->validate([
             'locationName' => 'required',
-        ]);
+        ],$message);
 
         $attributes = $request->all();
         $location->update($attributes);

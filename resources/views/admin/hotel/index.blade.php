@@ -54,8 +54,9 @@
                     <tr>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tên khách sạn</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Địa danh</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Địa chỉ</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Xếp hạng</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Đánh giá</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mô tả</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Giá/Người</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hình ảnh</th>
@@ -72,8 +73,12 @@
                         <p class="text-xs font-weight-bold mb-0">{{$hotel->hotelName}}</p>
                         </td>
                         <td class="align-middle text-center text-sm">
-                        <p class="text-xs font-weight-bold mb-0">{{$hotel->address}}</p>
+                          <p class="text-xs font-weight-bold mb-0">{{$hotel->site->siteName}}</p>
                         </td>
+                        <td class="align-middle text-center text-sm">
+                            <p class="text-xs font-weight-bold mb-0">{{$hotel->address}}</p>
+                        </td>
+
                         <td class="align-middle text-center text-sm">
                           <span class="badge badge-sm bg-gradient-success">{{$hotel->rating}}</span>
                         </td>

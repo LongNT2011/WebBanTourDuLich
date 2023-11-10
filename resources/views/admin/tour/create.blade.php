@@ -44,7 +44,8 @@
                       <div class="form-group row border-bottom pb-4">
                           <label for="image" class="col-sm-2 col-form-label">Ảnh</label>
                           <div class="col-sm-10">
-                              <input type="file" name="image" class="form-control" id="imageUrl">
+                              <img id="imagePreview" src="" alt="Ảnh được chọn" style="max-width: 100px; max-height: 100px; display: none;">
+                              <input type="file" name="image" class="form-control" id="imageUrl" onchange="previewImage(this)">
                           </div>
                           @if ($errors->has('image'))
                               <span class="text-danger">{{ $errors->first('image') }}</span>
@@ -56,4 +57,21 @@
           </div>
       </div>
   </div>
+  <script>
+      function previewImage(input) {
+          var imagePreview = document.getElementById('imagePreview');
+          if (input.files && input.files[0]) {
+              var reader = new FileReader();
+
+              reader.onload = function(e) {
+                  imagePreview.src = e.target.result;
+                  imagePreview.style.display = 'block';
+              };
+
+              reader.readAsDataURL(input.files[0]);
+          } else {
+              imagePreview.style.display = 'none';
+          }
+      }
+  </script>
 @endsection

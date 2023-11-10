@@ -38,7 +38,7 @@
         <div class="row mb-2">
           <div class="col-sm-11 justify-content-end d-flex">
               <a href="{{ route('sites.create') }}" class="btn btn-light btn-sm">
-                  <i class="fa fa-plus"></i>Add
+                  <i class="fa fa-plus"></i>Thêm
               </a>
 
           </div>

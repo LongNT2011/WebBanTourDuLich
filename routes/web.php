@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AccountController;
+use App\Http\Controllers\account\AccountController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\HotelController;
 use App\Http\Controllers\admin\LocationController;
@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\order\OrderController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,7 +50,7 @@ Route::view('/abc', 'tour');
 Route::view('/abc1', 'admin.dashboard');
 Route::view('/orderConfirm', 'orderConfirm');
 Route::view('/orderDetail', 'orderDetail');
-Route::view('/tour.html', 'tour');
+Route::get('/tour.html', [HomeController::class, 'tour'])->name('tour');
 
 
 
@@ -114,6 +116,4 @@ Route::post('/email/verification-notification', function (Request $request) {
 Route::get('/profile/', [AccountController::class, 'showAccountDetail']) -> name('account.detail');
 Route::put('/profile/update/{user}', [AccountController::class, 'updateAccount']) -> name('account.update');
 //Order
-Route::get("/order", function(){
-    return view('hotel-single');
-});
+Route::get("/order/{tourDetail}", [OrderController::class, 'showOrderView']) -> name('order.bookingtour');

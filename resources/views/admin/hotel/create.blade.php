@@ -33,11 +33,24 @@
                           @endif
                       </div>
                       <div class="form-group row border-bottom pb-4">
+                          <label for="category_id" class="col-sm-2 col-form-label">Địa danh</label>
+                          <div class="col-sm-10">
+                              <select class="form-control" name="site_id" id="site_id">
+                                  @foreach($sites as $site)
+                                      <option {{ (old('site_id') == $site->id) ? 'selected' : '' }} value="{{ $site->id }}">{{ $site->siteName }}</option>
+                                  @endforeach
+                              </select>
+                          </div>
+                          @if ($errors->has('site_id'))
+                              <span class="text-danger">{{ $errors->first('site_id') }}</span>
+                          @endif
+                      </div>
+                      <div class="form-group row border-bottom pb-4">
                           <label for="category_id" class="col-sm-2 col-form-label">Địa chỉ</label>
                           <div class="col-sm-10">
                               <input type="text" class="form-control" name="address" value="{{ old('address') }}" id="address"
-                                     placeholder="Ví dụ: 32 Vương Thừa Vũ ">
-                          </div>
+                          placeholder="Ví dụ: 32 Vương Thừa Vũ ">
+                      </div>
                           @if ($errors->has('address'))
                               <span class="text-danger">{{ $errors->first('address') }}</span>
                           @endif
@@ -45,7 +58,8 @@
                       <div class="form-group row border-bottom pb-4">
                           <label for="excerpt" class="col-sm-2 col-form-label">Đánh giá</label>
                           <div class="col-sm-10">
-                              <input type="number" class="form-control" name="rating" id="excerpt" placeholder="Ví dụ: 4">{{ old('rating')}}</input>
+                              <input type="number" class="form-control" name="rating" value="{{ old('rating') }}" id="title"
+                                     placeholder="Ví dụ: 4">
                           </div>
                           @if ($errors->has('rating'))
                               <span class="text-danger">{{ $errors->first('rating') }}</span>
@@ -60,7 +74,8 @@
                       <div class="form-group row border-bottom pb-4">
                           <label for="description" class="col-sm-2 col-form-label">Giá/Người</label>
                           <div class="col-sm-10">
-                              <input type="number" class="form-control" name="pricePerPerson" placeholder="Ví dụ: 200000">{{ old('pricePerPerson') }}</input>
+                              <input type="number" class="form-control" name="pricePerPerson" value="{{ old('pricePerPerson') }}" id="title"
+                                     placeholder="Ví dụ: 200000">
                           </div>
                           @if ($errors->has('pricePerPerson'))
                               <span class="text-danger">{{ $errors->first('pricePerPerson') }}</span>
@@ -69,16 +84,36 @@
                       <div class="form-group row border-bottom pb-4">
                           <label for="image" class="col-sm-2 col-form-label">Ảnh</label>
                           <div class="col-sm-10">
-                              <input type="file" name="imageUrl" class="form-control" id="imageUrl">
+                              <img id="imagePreview" src="" alt="Ảnh được chọn" style="max-width: 100px; max-height: 100px; display: none;">
+                              <input type="file" name="imageUrl" class="form-control" id="imageUrl" onchange="previewImage(this)">
                           </div>
                           @if ($errors->has('imageUrl'))
                               <span class="text-danger">{{ $errors->first('imageUrl') }}</span>
                           @endif
                       </div>
+
                       <button type="submit" class="btn btn-success">Lưu</button>
                   </form>
               </div>
           </div>
       </div>
   </div>
+  <script>
+      function previewImage(input) {
+          var imagePreview = document.getElementById('imagePreview');
+          if (input.files && input.files[0]) {
+              var reader = new FileReader();
+
+              reader.onload = function(e) {
+                  imagePreview.src = e.target.result;
+                  imagePreview.style.display = 'block';
+              };
+
+              reader.readAsDataURL(input.files[0]);
+          } else {
+              imagePreview.style.display = 'none';
+          }
+      }
+  </script>
+
 @endsection
