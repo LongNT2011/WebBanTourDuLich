@@ -45,24 +45,21 @@
                                 <span class="text-end p-0 pt-3 m-0">
                                     <span class="float-right">Số Người:
                                         {{ $orderPreview->participantNumber }}</span><br />
-                                    <span class="float-right pt-1">Khuyến Mãi: {{ $tourDetail->discount }}%</span><br/>
+                                    <span class="float-right pt-1">Khuyến Mãi: {{ $tourDetail->discount?? 0 }} %</span><br/>
                                     <span class="float-right pt-1">Khách sạn: {{ $hotel->hotelName}}</span><br />
                                     <p class="text-danger font-weight-bold pt-1">
-                                        VNĐ:
                                         <span style=" #ff6a00">
-                                            Giá / Người lớn: {{ $tourDetail->adultPrice }}
+                                            Giá / Người lớn: {{ number_format($tourDetail->adultPrice, 0, ',', '.')}} VNĐ
                                         </span>
                                     </p>
                                     <p class="text-danger font-weight-bold pt-1">
-                                        VNĐ:
                                         <span style=" #ff6a00">
-                                            Giá / Trẻ em: {{ $tourDetail->childrenPrice }}
+                                            Giá / Trẻ em: {{ number_format($tourDetail->childrenPrice, 0, ',', '.') }} VNĐ
                                         </span>
                                     </p>
                                     <p class="text-danger font-weight-bold pt-1">
-                                        VNĐ:
                                         <span style=" #ff6a00">
-                                            Giá khách sạn: {{ $hotel->pricePerPerson }}
+                                            Giá khách sạn: {{ number_format($hotel->pricePerPerson, 0, ',', '.') }} VNĐ
                                         </span>
                                     </p>
                                 </span>
@@ -81,10 +78,11 @@
                                     $childrenPrice = $orderPreview ->participantChildrenNumber * $tourDetail->childrenPrice;
                                     $discount = ($adultPrice + $childrenPrice + $hotelPrice) * ($tourDetail->discount/100);
                                     $total = ($adultPrice + $childrenPrice + $hotelPrice) - $discount;
+                                    $formattedTotal = number_format($total, 0, ',', '.');
                                     $participantNumber = $orderPreview->participantNumber;
                                 @endphp
-                                {{ $total }}
-
+                                {{ $formattedTotal }}
+                                 VNĐ
                             </span>
                         </h4>
                     </div>
