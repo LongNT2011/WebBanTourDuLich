@@ -12,9 +12,8 @@ class Order extends Model
     public $timestamps = false;
     const created_at = null;
     const updated_at = null;
-    protected $fillable = [
-        'participantNumber'
-    ];
+    protected $fillable = ['orderDate', 'totalAmount', 'participantNumber', 'name', 'phone', 'email', 'paymentStatus', 'tour_id', 'user_id'];
+
     public function tour(){
         return $this->belongsTo(Tour::class);
     }

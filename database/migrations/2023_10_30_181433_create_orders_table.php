@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->dateTime('orderDate');
-            $table->decimal('totalAmount');
+            $table->double('totalAmount');
             $table->integer('participantNumber');
             $table->string('paymentStatus')->nullable();
             $table->string('sessionId')->nullable();

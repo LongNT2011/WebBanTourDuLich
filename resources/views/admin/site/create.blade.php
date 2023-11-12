@@ -50,34 +50,36 @@
                       <div class="form-group row border-bottom pb-4">
                           <label for="image" class="col-sm-2 col-form-label">Ảnh</label>
                           <div class="col-sm-10">
-                              <input type="file" name="image" class="form-control" id="imageUrl">
+                              <img id="imagePreview" src="" alt="Ảnh được chọn" style="max-width: 100px; max-height: 100px; display: none;">
+                              <input type="file" name="image" class="form-control" id="imageUrl" onchange="previewImage(this)">
                           </div>
                           @if ($errors->has('image'))
                               <span class="text-danger">{{ $errors->first('image') }}</span>
                           @endif
                       </div>
-                      <button type="submit" class="btn btn-success">Save</button>
+                      <button type="submit" class="btn btn-success">Lưu</button>
                   </form>
               </div>
           </div>
       </div>
   </div>
-@endsection
-{{--@section('styles')--}}
-{{--    <style>--}}
-{{--        .ck-editor__editable_inline {--}}
-{{--            min-height: 200px;--}}
-{{--        }--}}
-{{--    </style>--}}
-{{--@endsection--}}
+  <script>
+      function previewImage(input) {
+          var imagePreview = document.getElementById('imagePreview');
+          if (input.files && input.files[0]) {
+              var reader = new FileReader();
 
-{{--@section('scripts')--}}
-{{--    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>--}}
-{{--    <script>--}}
-{{--        ClassicEditor--}}
-{{--            .create( document.querySelector( '#description' ) )--}}
-{{--            .catch( error => {--}}
-{{--                console.error( error );--}}
-{{--            } );--}}
-{{--    </script>--}}
-{{--@endsection--}}
+              reader.onload = function(e) {
+                  imagePreview.src = e.target.result;
+                  imagePreview.style.display = 'block';
+              };
+
+              reader.readAsDataURL(input.files[0]);
+          } else {
+              imagePreview.style.display = 'none';
+          }
+      }
+  </script>
+
+@endsection
+

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->date('checkOutDate');
             $table->string('vehicle');
             $table->integer('maxParticipant');
-            $table->decimal('childrenPrice');
-            $table->decimal('adultPrice');
+            $table->integer('childrenPrice');
+            $table->integer('adultPrice');
             $table->integer('discount')->nullable();
             $table->string('depatureLocation');
             $table->text('tripDescription')->nullable();

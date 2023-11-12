@@ -1,24 +1,26 @@
 @extends('admin.layoutadmin.layoutadmin')
 
-
 @section('header')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Quản trị viên</a>
             </li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Khách sạn</li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Đơn đặt</li>
         </ol>
-        <h6 class="font-weight-bolder text-white mb-0">Khách sạn</h6>
+        <h6 class="font-weight-bolder text-white mb-0">Đơn đặt</h6>
     </nav>
 @endsection
 
+
+
+
 @section('search')
     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-        <form action="{{route('hotels.search')}}" method="post">
+        <form action="{{route('orders.search')}}" method="post">
             @csrf
             <div class="input-group">
                 <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                <input type="text" class="form-control" name="query" placeholder="Tìm theo tên, giá tiền..">
+                <input type="text" class="form-control" name="query" placeholder="Tìm kiếm theo tên người đặt, ngày đặt">
             </div>
 
         </form>
@@ -26,18 +28,31 @@
 @endsection
 
 
+
+
+
+
 @section('content')
 
+    {{--    <div class="content-header">--}}
+    {{--      <div class="container-fluid">--}}
+    {{--        <div class="row mb-2">--}}
+    {{--          <div class="col-sm-11 justify-content-end d-flex">--}}
+    {{--              <a href="{{ route('orders.create') }}" class="btn btn-light btn-sm">--}}
+    {{--                  <i class="fa fa-plus"></i>Thêm--}}
+    {{--              </a>--}}
+
+    {{--          </div>--}}
+    {{--        </div>--}}
+    {{--      </div>--}}
+    {{--    </div>--}}
     <!-- End Navbar -->
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">
-                    <div class="card-header pb-0 d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0">Danh sách khách sạn</h6>
-                        <a href="{{ route('hotels.create') }}" class="btn btn-primary btn-sm">
-                            Thêm khách sạn
-                        </a>
+                    <div class="card-header pb-0">
+                        <h6>Danh sách đơn đặt</h6>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
@@ -47,76 +62,88 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         ID
                                     </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Tour
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Ngày đặt tour
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Số lượng người
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Tổng tiền
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Tình trạng thanh toán
+                                    </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Tên khách sạn
+                                        Tên
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Địa danh
+                                        Số điện thoại
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Địa chỉ
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Đánh giá
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Mô tả
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Giá/Người
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Hình ảnh
+                                        Email
                                     </th>
                                     <th class="text-secondary opacity-7"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($hotels as $hotel)
+                                @foreach($orders as $order)
                                     <tr>
                                         <td class="align-middle text-center">
-                                            <p class="text-xs font-weight-bold mb-0">{{$hotel->id}}</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{$order->id}}</p>
                                         </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <p class="text-xs font-weight-bold mb-0">{{$hotel->hotelName}}</p>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <p class="text-xs font-weight-bold mb-0">{{$hotel->site->siteName}}</p>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <p class="text-xs font-weight-bold mb-0">{{$hotel->address}}</p>
-                                        </td>
-
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-success">{{$hotel->rating}}</span>
+                                        <td class="align-middle text-center">
+                                            <p class="text-xs font-weight-bold mb-0">{{$order->tour->tourName}}</p>
                                         </td>
                                         <td class="align-middle text-center">
                                             <span
-                                                class="text-secondary text-xs font-weight-bold">{{$hotel->description}}</span>
+                                                class="text-secondary text-xs font-weight-bold">{{$order->orderDate}}</span>
                                         </td>
                                         <td class="align-middle text-center">
                                             <span
-                                                class="text-secondary text-xs font-weight-bold">{{$hotel->pricePerPerson}}</span>
+                                                class="text-secondary text-xs font-weight-bold">{{$order->participantNumber}}</span>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <a href="{{ Storage::url($hotel->imageUrl) }}" target="_blank">
-                                                <img width="100" src="{{ Storage::url($hotel->imageUrl) }}"
-                                                     alt="{{ $hotel->hotelName }}">
-                                            </a>
+                                            <span
+                                                class="text-secondary text-xs font-weight-bold">{{$order->totalAmount}}</span>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <span
+                                                class="badge badge-sm {{($order->paymentStatus == 'Pending') ? 'bg-gradient-danger' : 'bg-gradient-success'}} ">{{($order->paymentStatus == 'Pending') ? 'Đang xử lý' : 'Thành công'}}</span>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <span
+                                                class="text-secondary text-xs font-weight-bold">{{$order->name}}</span>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <span
+                                                class="text-secondary text-xs font-weight-bold">{{$order->phone}}</span>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <span
+                                                class="text-secondary text-xs font-weight-bold">{{$order->email}}</span>
                                         </td>
                                         <td class="align-middle">
-                                            <a href="{{ route('hotels.edit', [$hotel]) }}" class="text-primary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit hotel">
+                                            <a href="{{ route('orders.edit', [$order]) }}"
+                                               class="text-primary font-weight-bold text-xs" data-toggle="tooltip"
+                                               data-original-title="Edit hotel">
                                                 Sửa
                                             </a>
-                                            <form onclick="return confirm('Bạn có chắc chắn muốn xóa khách sạn này không?');" class="d-inline-block" action="{{ route('hotels.destroy', [$hotel]) }}" method="post">
+                                            <form onclick="return confirm('Bạn có chắc chắn muốn xóa đơn đặt này không?');"
+                                                  class="d-inline-block" action="{{ route('orders.destroy', [$order]) }}"
+                                                  method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <a href="#" class="text-danger font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete hotel" onclick="event.preventDefault(); this.closest('form').submit();">
+                                                <a href="#" class="text-danger font-weight-bold text-xs"
+                                                   data-toggle="tooltip" data-original-title="Delete hotel"
+                                                   onclick="event.preventDefault(); this.closest('form').submit();">
                                                     Xóa
                                                 </a>
                                             </form>
                                         </td>
-
 
 
                                     </tr>
@@ -127,27 +154,27 @@
                     </div>
                     <div class="card-footer clearfix">
                         <ul class="pagination justify-content-center">
-                            @if ($hotels->onFirstPage())
+                            @if ($orders->onFirstPage())
                                 <li class="page-item disabled">
                                     <span class="page-link">&laquo;</span>
                                 </li>
                             @else
                                 <li class="page-item">
-                                    <a class="page-link" href="{{ $hotels->previousPageUrl() }}" aria-label="Previous">
+                                    <a class="page-link" href="{{ $orders->previousPageUrl() }}" aria-label="Previous">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
                             @endif
 
-                            @foreach ($hotels->getUrlRange(1, $hotels->lastPage()) as $page => $url)
-                                <li class="page-item {{ $page == $hotels->currentPage() ? 'active' : '' }}">
+                            @foreach ($orders->getUrlRange(1, $orders->lastPage()) as $page => $url)
+                                <li class="page-item {{ $page == $orders->currentPage() ? 'active' : '' }}">
                                     <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                                 </li>
                             @endforeach
 
-                            @if ($hotels->hasMorePages())
+                            @if ($orders->hasMorePages())
                                 <li class="page-item">
-                                    <a class="page-link" href="{{ $hotels->nextPageUrl() }}" aria-label="Next">
+                                    <a class="page-link" href="{{ $orders->nextPageUrl() }}" aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>
