@@ -36,33 +36,27 @@
                                 <div class="col-12">
                                     <p class="card-title text-danger" style="font-size:xx-large">Tên tour:
                                         {{ $tour->tourName }}</p>
-                                    <p class="card-text" style="font-size:large">
-                                        Mô tả: {{ $tourDetail->tripDescription }}
-                                    </p>
                                 </div>
                             </div>
                             <div class="row col-12">
                                 <span class="text-end p-0 pt-3 m-0">
                                     <span class="float-right">Số Người:
                                         {{ $orderPreview->participantNumber }}</span><br />
-                                    <span class="float-right pt-1">Khuyến Mãi: {{ $tourDetail->discount }}%</span><br/>
+                                    <span class="float-right pt-1">Khuyến Mãi: {{ $tourDetail->discount?? 0 }} %</span><br/>
                                     <span class="float-right pt-1">Khách sạn: {{ $hotel->hotelName}}</span><br />
                                     <p class="text-danger font-weight-bold pt-1">
-                                        VNĐ:
                                         <span style=" #ff6a00">
-                                            Giá / Người lớn: {{ $tourDetail->adultPrice }}
+                                            Giá / Người lớn: {{ number_format($tourDetail->adultPrice, 0, ',', '.')}} VNĐ
                                         </span>
                                     </p>
                                     <p class="text-danger font-weight-bold pt-1">
-                                        VNĐ:
                                         <span style=" #ff6a00">
-                                            Giá / Trẻ em: {{ $tourDetail->childrenPrice }}
+                                            Giá / Trẻ em: {{ number_format($tourDetail->childrenPrice, 0, ',', '.') }} VNĐ
                                         </span>
                                     </p>
                                     <p class="text-danger font-weight-bold pt-1">
-                                        VNĐ:
                                         <span style=" #ff6a00">
-                                            Giá khách sạn: {{ $hotel->pricePerPerson }}
+                                            Giá khách sạn: {{ number_format($hotel->pricePerPerson, 0, ',', '.') }} VNĐ
                                         </span>
                                     </p>
                                 </span>
@@ -81,10 +75,11 @@
                                     $childrenPrice = $orderPreview ->participantChildrenNumber * $tourDetail->childrenPrice;
                                     $discount = ($adultPrice + $childrenPrice + $hotelPrice) * ($tourDetail->discount/100);
                                     $total = ($adultPrice + $childrenPrice + $hotelPrice) - $discount;
+                                    $formattedTotal = number_format($total, 0, ',', '.');
                                     $participantNumber = $orderPreview->participantNumber;
                                 @endphp
-                                {{ $total }}
-
+                                {{ $formattedTotal }}
+                                 VNĐ
                             </span>
                         </h4>
                     </div>
@@ -124,12 +119,12 @@
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                     <div class="form-group pt-2">
-                        <label asp-for="CheckInDate" class="text-danger">Check in Date</label>
+                        <label asp-for="CheckInDate" class="text-danger">Ngày checkin</label>
                         <input asp-for="CheckInDate" disabled class="form-control"
                             value="{{ $tourDetail->checkInDate }}" />
                     </div>
                     <div class="form-group pt-2">
-                        <label asp-for="CheckOutDate" class="text-danger">Check Out Date</label>
+                        <label asp-for="CheckOutDate" class="text-danger">Ngày checkout</label>
                         <input asp-for="CheckOutDate" disabled class="form-control"
                             value="{{ $tourDetail->checkOutDate }}" />
                     </div>

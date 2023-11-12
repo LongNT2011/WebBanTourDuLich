@@ -16,7 +16,7 @@ class AccountController extends Controller
     }
 
     public function updateAccount(Request $request, User $user) {
-        $message = ['required' => 'Không được để trống'];
+        $message = ['required' => 'Không được để trống', 'numeric' => 'Chỉ được nhập số'];
         $request->validate([
             'fullName'=> 'required',
             'email'=> 'required',
