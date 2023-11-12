@@ -1,8 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
-    
-    <div class="hero-wrap js-fullheight" style="background-image: url('images/bg_3.jpg');">
+
+    <div class="hero-wrap js-fullheight" style="background-image: url({{ asset('images/bg_3.jpg') }});">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
@@ -43,11 +43,12 @@
 				    							<span>8 Rating</span>
 				    						</p> -->
 			    						</div>
-										
-			    						
+
+
 		    						</div>
-								
+
 									<p><span style="color: red; font-size: 16px;" class="price">{{$detail->childrenPrice}} - {{$detail->adultPrice}} VNĐ</span></p>
+
 <!-- 		    						
 		    						<p>Far far away, behind the word mountains, far from the countries</p> -->
 		    						<p class="days"><span>{{ date('d/m/Y', strtotime($detail->checkInDate)) }} - {{ date('d/m/Y', strtotime($detail->checkOutDate)) }}</span></p>
@@ -83,7 +84,7 @@
 
                 @if ($tours->hasMorePages())
 				<li><a href="{{ $tours->nextPageUrl() }}" aria-label="Next">&gt;</a></li>
-                 
+
                 @else
 				<li><a href="#">&gt;</a></li>
                 @endif
