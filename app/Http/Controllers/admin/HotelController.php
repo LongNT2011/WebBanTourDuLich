@@ -107,7 +107,6 @@ class HotelController extends Controller
         $query = $request->input('query');
 
         $hotels = Hotel::where('hotelName', 'like', "%$query%")
-            ->orWhere('description', 'like', "%$query%")
             ->orWhere('pricePerPerson', 'like', "%$query%")
             ->paginate(5);
 

@@ -75,25 +75,33 @@
                             Tổng Tiền :
                             <span style="border-bottom:1px solid #ff6a00">
                                 @php
+
                                     $adultPrice = ($orderPreview->participantNumber - $orderPreview ->participantChildrenNumber) * $tourDetail->adultPrice;
                                     $hotelPrice = ($hotel->pricePerPerson * $orderPreview->participantNumber);
                                     $childrenPrice = $orderPreview ->participantChildrenNumber * $tourDetail->childrenPrice;
-                                    $discount = ($adultPrice + $childrenPrice + $hotelPrice) * ($tourDetail->discount/100); 
+                                    $discount = ($adultPrice + $childrenPrice + $hotelPrice) * ($tourDetail->discount/100);
                                     $total = ($adultPrice + $childrenPrice + $hotelPrice) - $discount;
+                                    $participantNumber = $orderPreview->participantNumber;
                                 @endphp
                                 {{ $total }}
+
                             </span>
                         </h4>
                     </div>
                 </div>
             </div>
             <div class="col-12 col-lg-5 p-4 2 mt-4 mt-md-0" style="border-left:1px solid #aaa">
-                <form method="post">
-                    <input asp-for="VillaId" hidden />
-                    <input asp-for="UserId" hidden />
-                    <input asp-for="CheckInDate" hidden />
-                    <input asp-for="CheckOutDate" hidden />
-                    <input asp-for="Nights" hidden />
+                <form action="{{ route('CheckoutOrder') }}" method="post">
+                    @csrf
+                    <input name="total" type="hidden" value="{{ $total }}"/>
+                    <input name="participantNumber" type="hidden" value="{{ $participantNumber }}"/>
+                    <input name="tourid" type="hidden" value="{{ $tourDetail->tour_id }}"/>
+                    <input name="tourName" type="hidden" value="{{ $tour->tourName }} "/>
+                    <input name="hotelName" type="hidden" value="{{ $hotel->hotelName}}"/>
+                    <input name="Name" type="hidden" value="{{ $orderPreview->fullName }}"/>
+                    <input name="Phone" type="hidden" value="{{ $orderPreview->phone }}"/>
+                    <input name="Email" type="hidden" value="{{ $orderPreview->email }}"/>
+
                     <div class="row pt-1 mb-3 " style="border-radius:20px; ">
                         <div class="col-12">
                             <h3 class="text-success">Xác nhận thông tin</h3>
@@ -102,17 +110,17 @@
 
                     <div class="form-group pt-0">
                         <label asp-for="Name" class="text-danger">Tên</label>
-                        <input asp-for="Name" disabled class="form-control" value="{{ $orderPreview->fullName }}" />
+                        <input name="Name" disabled class="form-control" value="{{ $orderPreview->fullName }}" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="form-group pt-2">
                         <label asp-for="Phone" class="text-danger">Số điện thoại</label>
-                        <input asp-for="Phone" disabled class="form-control" value="{{ $orderPreview->phone }}" />
+                        <input name="Phone" disabled class="form-control" value="{{ $orderPreview->phone }}" />
                         <span asp-validation-for="Phone" class="text-danger"></span>
                     </div>
                     <div class="form-group pt-2">
                         <label asp-for="Email" class="text-danger">Email</label>
-                        <input asp-for="Email" disabled class="form-control" value="{{ $orderPreview->email }}" />
+                        <input name="Email" disabled class="form-control" value="{{ $orderPreview->email }}" />
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                     <div class="form-group pt-2">

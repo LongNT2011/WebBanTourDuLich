@@ -3,7 +3,7 @@
 @section('header')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Admin</a></li>
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Quản trị viên</a></li>
             <li class="breadcrumb-item text-sm text-white active" aria-current="page">Vị trí</li>
         </ol>
         <h6 class="font-weight-bolder text-white mb-0">Ví trí</h6>
@@ -19,7 +19,7 @@
             @csrf
             <div class="input-group">
                 <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                <input type="text" class="form-control" name="query" placeholder="Search for hotels">
+                <input type="text" class="form-control" name="query" placeholder="Tìm theo tên">
             </div>
 
         </form>
@@ -27,26 +27,17 @@
 @endsection
 @section('content')
 
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-11 justify-content-end d-flex">
-              <a href="{{ route('locations.create') }}" class="btn btn-light btn-sm">
-                  <i class="fa fa-plus"></i>Add
-              </a>
-
-          </div>
-        </div>
-      </div>
-    </div>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">
           <div class="card mb-4">
-            <div class="card-header pb-0">
-              <h6>Danh sách vị trí</h6>
-            </div>
+              <div class="card-header pb-0 d-flex justify-content-between align-items-center">
+                  <h6 class="mb-0">Danh sách vị trí</h6>
+                  <a href="{{ route('locations.create') }}" class="btn btn-primary btn-sm">
+                      Thêm vị trí
+                  </a>
+              </div>
             <div class="card-body px-0 pt-0 pb-2">
               <div class="table-responsive p-0">
                 <table class="table align-items-center mb-0">
@@ -67,18 +58,17 @@
                         <p class="text-xs font-weight-bold mb-0">{{$location->locationName}}</p>
                         </td>
                           <td class="align-middle">
-                              <a href="{{ route('locations.edit', [$location]) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                                  Edit
+                              <a href="{{ route('locations.edit', [$location]) }}" class="text-primary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit hotel">
+                                  Sửa
                               </a>
-                              <form onclick="return confirm('Are you sure?');" class="d-inline-block" action="{{ route('locations.destroy', [$location]) }}" method="post">
+                              <form onclick="return confirm('Bạn có chắc chắn muốn xóa vị trí này không?');" class="d-inline-block" action="{{ route('locations.destroy', [$location]) }}" method="post">
                                   @csrf
                                   @method('delete')
-                                  <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete user" onclick="event.preventDefault(); this.closest('form').submit();">
-                                      Delete
+                                  <a href="#" class="text-danger font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete hotel" onclick="event.preventDefault(); this.closest('form').submit();">
+                                      Xóa
                                   </a>
                               </form>
                           </td>
-
 
                       </tr>
                     @endforeach

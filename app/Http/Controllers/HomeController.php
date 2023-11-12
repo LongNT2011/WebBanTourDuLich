@@ -13,10 +13,10 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $sites = Site::all();
-        $tours = Tour::with('tourDetail')->latest()->take(5)->get();
-        $locations = Location::all();
-        return view('index', compact('sites', 'tours', 'locations'));
+    $sites = Site::all();
+    $tours = Tour::with('tourDetail')->latest()->take(5)->get();
+    $locations = Location::all();
+    return view('index', compact('sites', 'tours', 'locations'));
     }
 
     public function detail(TourDetail $detail){
@@ -29,23 +29,28 @@ class HomeController extends Controller
       return view('hotel-single', compact('detail', 'hotels'));
     }
 
-    // public function bookingTour(){
-
-    // }
-
-    public function searchTour(){
-      $tours = DB::table('tours')
-    ->join('tour_site', 'tours.id', '=', 'tour_site.tour_id')
-    ->join('sites', 'tour_site.site_id', '=', 'sites.id')
-    ->join('locations', 'sites.location_id', '=', 'locations.id')
-//    ->where('locations.id', '=', $location)
-    ->get();
-    return view('index', compact('tours'));
+    public function searchTour(Request $request){
+      $locationId = $request->input('location_id');
+      if (isset($locationId)) {
+        // Tìm kiếm theo location_id
+        $tours = Tour::where('tourName', 'like', '%' . $request->input('keyword') . '%')
+            ->join('tour_site', 'tours.id', '=', 'tour_site.tour_id')
+            ->join('sites', 'tour_site.site_id', '=', 'sites.id')
+            ->join('locations', 'sites.location_id', '=', 'locations.id')
+            ->where('locations.id', '=', $locationId)
+            ->with('tourDetail')->paginate(9);
+    } else {
+        // Tìm kiếm theo từ khóa
+        $tours = Tour::with('tourDetail')->where('tourName', 'like', '%' . $request->input('keyword') . '%')->paginate(9);
+        // $tours = DB::table('tours')
+        //     ->where('tourName', 'like', '%' . $request->input('keyword') . '%')->with('tourDetail')
+        //     ->get();
+    }
+    return view('tour', compact('tours'));
     }
 
     public function tour(){
       $tours = Tour::with('tourDetail')->paginate(9);
       return view('tour', compact('tours'));
     }
-
 }

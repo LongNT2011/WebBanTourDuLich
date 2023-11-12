@@ -23,8 +23,8 @@ class TourDetailController extends Controller
      */
     public function index()
     {
-        $tourdetails = TourDetail::paginate(5);
-        return view('admin.tourdetail.index', compact('tourdetails'));
+//        $tourdetails = TourDetail::paginate(5);
+//        return view('admin.tourdetail.index', compact('tourdetails'));
     }
 
     /**
@@ -40,6 +40,9 @@ class TourDetailController extends Controller
      */
     public function store(Request $request)
     {
+        $message = ['required' => 'Không được để trống!',
+            'image' => 'Phải là hình ảnh!'
+        ];
         $request->validate([
             'checkInDate' => 'required',
             'checkOutDate' => 'required',
@@ -49,8 +52,9 @@ class TourDetailController extends Controller
             'adultPrice' => 'required',
             'depatureLocation' => 'required',
             'tripDescription' => 'required',
-            'imageUrl.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+            'imageUrl' => 'required|array|min:1',
+            'imageUrl.*' => 'required|file|mimes:jpeg,png,jpg,gif|max:2048',
+        ],$message);
         if ($request->hasFile('imageUrl')) {
             $imagePaths = [];
 
@@ -73,10 +77,7 @@ class TourDetailController extends Controller
             ]);
         }
 
-        return redirect()->route('tourdetails.index')->with([
-            'message' => 'Success Created!',
-            'alert-type' => 'success'
-        ]);
+        return redirect()->route('tours.show', ['tour' => $tourdetail->tour]);
     }
 
 
@@ -103,6 +104,9 @@ class TourDetailController extends Controller
      */
     public function update(Request $request, TourDetail $tourdetail)
     {
+        $message = ['required' => 'Không được để trống!',
+            'image' => 'Phải là hình ảnh!'
+        ];
         $request->validate([
             'checkInDate' => 'required',
             'checkOutDate' => 'required',
@@ -112,8 +116,8 @@ class TourDetailController extends Controller
             'adultPrice' => 'required',
             'depatureLocation' => 'required',
             'tripDescription' => 'required',
-            'imageUrl.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+            'imageUrl.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ],$message);
         $imagePaths = [];
 
         if ($request->hasFile('imageUrl')) {
@@ -137,10 +141,8 @@ class TourDetailController extends Controller
 
         $tourdetail->update($request->except('imageUrl'));
         Toastr::success('Sửa chi tiết tour thành công!' );
-        return redirect()->route('tourdetails.index')->with([
-            'message' => 'Success Updated!',
-            'alert-type' => 'info'
-        ]);
+        return redirect()->route('tours.show', ['tour' => $tourdetail->tour]);
+
     }
 
 
@@ -159,17 +161,16 @@ class TourDetailController extends Controller
         ]);
     }
 
-    public function search(Request $request)
-    {
-        $query = $request->input('query');
-
-        $tourdetails = TourDetail::join('tours', 'tourdetails.tour_id', '=', 'tours.id')
-            ->where('checkInDate', 'like', "%$query%")
-            ->orWhere('depatureLocation', 'like', "%$query%")
-            ->orWhere('tours.tourName', 'like', "%$query%")
-            ->select('tourdetails.*')
-            ->paginate(5);
-        return view('admin.tourdetail.index', compact('tourdetails'));
-
-    }
+//    public function search(Request $request, Tour $tour)
+//    {
+//        $query = $request->input('query');
+//
+//        $tourdetails = TourDetail::where('tour_id', '=', "%$tour->id%")
+//            ->orWhere('depatureLocation', 'like', "%$query%")
+//            ->orWhere('checkInDate', 'like', "%$query%")
+//            ->paginate(5);
+//
+//        return view('admin.tourdetail.index', compact('tourdetails'));
+//
+//    }
 }

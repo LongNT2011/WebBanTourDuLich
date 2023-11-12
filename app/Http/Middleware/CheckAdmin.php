@@ -19,6 +19,6 @@ class CheckAdmin
         if (Auth::check() && Auth::user()->isAdmin == true) {
             return $next($request);
         }
-        return redirect()->route('admin.signinAdmin');
+        return redirect()->back();
     }
 }

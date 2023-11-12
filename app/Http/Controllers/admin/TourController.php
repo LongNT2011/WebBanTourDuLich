@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Location;
 use App\Models\Site;
 use App\Models\Tour;
+use App\Models\TourDetail;
 use App\Models\TourImage;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -58,9 +59,11 @@ class TourController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Tour $tour)
     {
-        //
+        $tourdetails = $tour->tourdetail()->paginate(5);
+
+        return view('admin.tourdetail.index', compact('tourdetails'));
     }
 
     /**

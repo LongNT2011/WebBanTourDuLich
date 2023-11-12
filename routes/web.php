@@ -51,6 +51,7 @@ Route::view('/abc1', 'admin.dashboard');
 Route::view('/orderConfirm', 'orderConfirm');
 Route::view('/orderDetail', 'orderDetail');
 Route::get('/tour.html', [HomeController::class, 'tour'])->name('tour');
+Route::get('/searchtour', [HomeController::class, 'searchTour'])->name('searchTour');
 
 
 
@@ -78,6 +79,11 @@ Route::group(['middleware' => 'checkadmin' , 'prefix' => '/admin'], function () 
     Route::resource('/tourdetails', TourDetailController::class);
     Route::post('/tourdetails/search', [TourDetailController::class, 'search'])->name('tourdetails.search');
     Route::resource('/tourdetails.image', TourImageController::class)->except(['create', 'index', 'show']);
+    Route::resource('/orders', \App\Http\Controllers\admin\OrderController::class);
+    Route::post('/orders/search', [\App\Http\Controllers\admin\OrderController::class, 'search'])->name('orders.search');
+
+
+
 
 });
 
@@ -96,24 +102,22 @@ Route::post('/signin_admin', [DashboardController::class, 'signinAdmin']);
 Route::get('/signout_admin', [DashboardController::class, 'signoutAdmin'])->name('admin.signoutAdmin');
 
 // verify
-Route::get('/email/verify', function () {
-    return view('auth.verify-email');
-})->middleware('auth')->name('verification.notice');
+Route::get('/verify', [AuthController::class, 'verifyNotification'])->name('auth.verify');
+Route::post('/verify',[AuthController::class, 'resendVerifyEmail'])->name('auth.resend');
+Route::get('/verify/{token}', [AuthController::class, 'verify']);
 
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
+// forgot password
+Route::get('/forgot', [AuthController::class, 'showForgotForm'])->name('auth.forgot');
+Route::post('/forgot', [AuthController::class, 'forgot']);
 
-    return redirect('/index');
-})->middleware(['auth', 'signed'])->name('verification.verify');
+Route::get('/reset/{token}', [AuthController::class, 'reset']);
+Route::post('/reset/{token}', [AuthController::class, 'resetPassword']);
 
-Route::post('/email/verification-notification', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
 
-    return back()->with('message', 'Verification link sent!');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 //profile
 Route::get('/profile/', [AccountController::class, 'showAccountDetail']) -> name('account.detail');
 Route::put('/profile/update/{user}', [AccountController::class, 'updateAccount']) -> name('account.update');
 //Order
 Route::get("/order/{tourDetail}", [OrderController::class, 'showOrderView']) -> name('order.bookingtour');
+Route::post('/checkout', [OrderController::class, 'CheckoutOrder'])->name('CheckoutOrder');

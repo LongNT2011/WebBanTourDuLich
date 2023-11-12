@@ -20,7 +20,14 @@
                         <div class="form-group row border-bottom pb-4">
                             <label for="image" class="col-sm-2 col-form-label">Ảnh</label>
                             <div class="col-sm-10">
-                                <input type="file" name="imageUrl[]" id="fileInput" class="form-control" multiple>
+                                <div id="imagePreviewContainer" class="mt-2">
+                                @if(count($tourdetail->tourimage) > 0)
+                                    @foreach($tourdetail->tourimage as $image)
+                                        <img src="{{ Storage::url($image->imageUrl) }}" alt="Ảnh hiện tại" style="max-width: 100px; max-height: 100px; margin-right: 10px;">
+                                    @endforeach
+                                @endif
+                                </div>
+                                <input type="file" name="imageUrl[]" id="fileInput" class="form-control" multiple onchange="previewImages(this)">
                             </div>
                             @if ($errors->has('imageUrl'))
                                 <span class="text-danger">{{ $errors->first('imageUrl') }}</span>
@@ -50,7 +57,7 @@
                         </div>
 
                         <div class="form-group row border-bottom pb-4">
-                            <label for "title" class="col-sm-2 col-form-label">Ngày kết thúc</label>
+                            <label for = "title" class="col-sm-2 col-form-label">Ngày kết thúc</label>
                             <div class="col-sm-10">
                                 <input type="date" class="form-control" name="checkOutDate" value="{{ $tourdetail->checkOutDate ? date('Y-m-d', strtotime($tourdetail->checkOutDate)) : '' }}">
                             </div>
@@ -63,8 +70,7 @@
                         <div class="form-group row border-bottom pb-4">
                             <label for="title" class="col-sm-2 col-form-label">Phương tiện di chuyển</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="vehicle" value="{{ old('vehicle',$tourdetail->vehicle) }}" id="title"
-                                       placeholder="example: Lake Side Hotel">
+                                <input type="text" class="form-control" name="vehicle" value="{{ old('vehicle',$tourdetail->vehicle) }}" id="title">
                             </div>
                             @if ($errors->has('vehicle'))
                                 <span class="text-danger">{{ $errors->first('vehicle') }}</span>
@@ -73,8 +79,7 @@
                         <div class="form-group row border-bottom pb-4">
                             <label for="title" class="col-sm-2 col-form-label">Số người tối đa</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" name="maxParticipant" value="{{ old('maxParticipant',$tourdetail->maxParticipant) }}" id="title"
-                                       placeholder="example: Lake Side Hotel">
+                                <input type="number" class="form-control" name="maxParticipant" value="{{ old('maxParticipant',$tourdetail->maxParticipant) }}" id="title">
                             </div>
                             @if ($errors->has('maxParticipant'))
                                 <span class="text-danger">{{ $errors->first('maxParticipant') }}</span>
@@ -83,8 +88,7 @@
                         <div class="form-group row border-bottom pb-4">
                             <label for="title" class="col-sm-2 col-form-label">Giá trẻ em</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" name="childrenPrice" value="{{ old('childrenPrice',$tourdetail->childrenPrice) }}" id="title"
-                                       placeholder="example: Lake Side Hotel">
+                                <input type="number" class="form-control" name="childrenPrice" value="{{ old('childrenPrice',$tourdetail->childrenPrice) }}" id="title">
                             </div>
                             @if ($errors->has('childrenPrice'))
                                 <span class="text-danger">{{ $errors->first('childrenPrice') }}</span>
@@ -93,8 +97,7 @@
                         <div class="form-group row border-bottom pb-4">
                             <label for="title" class="col-sm-2 col-form-label">Giá người lớn</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" name="adultPrice" value="{{ old('adultPrice',$tourdetail->adultPrice) }}" id="title"
-                                       placeholder="example: Lake Side Hotel">
+                                <input type="number" class="form-control" name="adultPrice" value="{{ old('adultPrice',$tourdetail->adultPrice) }}" id="title">
                             </div>
                             @if ($errors->has('adultPrice'))
                                 <span class="text-danger">{{ $errors->first('adultPrice') }}</span>
@@ -103,8 +106,7 @@
                         <div class="form-group row border-bottom pb-4">
                             <label for="title" class="col-sm-2 col-form-label">Giảm giá(%)</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" name="discount" value="{{ old('discount',$tourdetail->discount) }}" id="title"
-                                       placeholder="example: Lake Side Hotel">
+                                <input type="number" class="form-control" name="discount" value="{{ old('discount',$tourdetail->discount) }}" id="title">
                             </div>
                             @if ($errors->has('discount'))
                                 <span class="text-danger">{{ $errors->first('discount') }}</span>
@@ -113,8 +115,7 @@
                         <div class="form-group row border-bottom pb-4">
                             <label for="title" class="col-sm-2 col-form-label">Địa điểm xuất phát</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="depatureLocation" value="{{ old('depatureLocation',$tourdetail->depatureLocation) }}" id="title"
-                                       placeholder="example: Lake Side Hotel">
+                                <input type="text" class="form-control" name="depatureLocation" value="{{ old('depatureLocation',$tourdetail->depatureLocation) }}" id="title">
                             </div>
                             @if ($errors->has('depatureLocation'))
                                 <span class="text-danger">{{ $errors->first('depatureLocation') }}</span>
@@ -130,7 +131,7 @@
                             @endif
                         </div>
 
-                        <button type="submit" class="btn btn-success">Save</button>
+                        <button type="submit" class="btn btn-success">Lưu</button>
                     </form>
                 </div>
             </div>
@@ -153,5 +154,26 @@
             .catch( error => {
                 console.error( error );
             } );
+    </script>
+    <script>
+        function previewImages(input) {
+            var imagePreviewContainer = document.getElementById('imagePreviewContainer');
+            imagePreviewContainer.innerHTML = '';
+
+            if (input.files && input.files.length > 0) {
+                for (var i = 0; i < input.files.length; i++) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.style.maxWidth = '100px';
+                        img.style.maxHeight = '100px';
+                        img.style.marginRight = '10px';
+                        imagePreviewContainer.appendChild(img);
+                    };
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+        }
     </script>
 @endsection
