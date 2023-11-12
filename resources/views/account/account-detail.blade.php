@@ -169,7 +169,7 @@
     </div>
     <script>
         document.getElementById("cancel-button").addEventListener("click", function() {
-            window.location.href = "{{ route('index') }}";
+            window.location.href = "{{ route('auth.signin') }}";
         });
     </script>
     <script src="{{asset('js/jquery.min.js')}}"></script>

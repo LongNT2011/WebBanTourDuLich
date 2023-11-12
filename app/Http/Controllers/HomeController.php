@@ -8,20 +8,19 @@ use App\Models\Tour;
 use App\Models\Location;
 use App\Models\TourDetail;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
     public function index()
-    {      
+    {
     $sites = Site::all();
     $tours = Tour::with('tourDetail')->latest()->take(5)->get();
     $locations = Location::all();
     return view('index', compact('sites', 'tours', 'locations'));
     }
 
-    public function detail(TourDetail $detail){      
-      $hotels = Hotel::join('sites', 'hotels.site_id','=', 'sites.id' ) 
+    public function detail(TourDetail $detail){
+      $hotels = Hotel::join('sites', 'hotels.site_id','=', 'sites.id' )
       ->join('tour_site', 'sites.id','=','tour_site.site_id')
       ->join('tours', 'tour_site.tour_id','=','tours.id')
       ->join('tourdetails', 'tours.id','=','tourdetails.tour_id')
@@ -52,6 +51,6 @@ class HomeController extends Controller
 
     public function tour(){
       $tours = Tour::with('tourDetail')->paginate(9);
-      return view('tour', compact('tours')); 
+      return view('tour', compact('tours'));
     }
 }

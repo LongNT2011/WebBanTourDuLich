@@ -24,8 +24,7 @@
                         <div class="form-group row border-bottom pb-4">
                             <label for="title" class="col-sm-2 col-form-label">Tên địa danh</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="siteName" value="{{ old('siteName',$site->siteName) }}" id="title"
-                                       placeholder="example: Lake Side Hotel">
+                                <input type="text" class="form-control" name="siteName" value="{{ old('siteName',$site->siteName) }}" id="title">
                             </div>
                             @if ($errors->has('siteName'))
                                 <span class="text-danger">{{ $errors->first('siteName') }}</span>
@@ -56,34 +55,33 @@
                         <div class="form-group row border-bottom pb-4">
                             <label for="image" class="col-sm-2 col-form-label">Ảnh</label>
                             <div class="col-sm-10">
-                                <input type="file" name="image" class="form-control" id="imageUrl">
+                                <img id="imagePreview" src="{{ Storage::url($site->image) }}" alt="Ảnh hiện tại" style="max-width: 100px; max-height: 100px;">
+                                <input type="file" name="image" class="form-control" id="imageUrl" onchange="previewImage(this)">
                             </div>
                             @if ($errors->has('image'))
                                 <span class="text-danger">{{ $errors->first('image') }}</span>
                             @endif
                         </div>
-                        <button type="submit" class="btn btn-success">Save</button>
+                        <button type="submit" class="btn btn-success">Lưu</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-@endsection
-{{--@section('styles')--}}
-{{--    <style>--}}
-{{--        .ck-editor__editable_inline {--}}
-{{--            min-height: 200px;--}}
-{{--        }--}}
-{{--    </style>--}}
-{{--@endsection--}}
 
-{{--@section('scripts')--}}
-{{--    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>--}}
-{{--    <script>--}}
-{{--        ClassicEditor--}}
-{{--            .create( document.querySelector( '#description' ) )--}}
-{{--            .catch( error => {--}}
-{{--                console.error( error );--}}
-{{--            } );--}}
-{{--    </script>--}}
-{{--@endsection--}}
+    <script>
+        function previewImage(input) {
+            var imagePreview = document.getElementById('imagePreview');
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+@endsection
+

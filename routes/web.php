@@ -45,10 +45,14 @@ Route::view('/blog-single.html', 'blog-single');
 Route::view('/contact.html', 'contact');
 Route::view('/sign-in', 'sign-in');
 Route::view('/sign-up', 'sign-up');
+
+Route::view('/abc', 'tour');
+Route::view('/abc1', 'admin.dashboard');
 Route::view('/orderConfirm', 'orderConfirm');
 Route::view('/orderDetail', 'orderDetail');
 Route::get('/tour.html', [HomeController::class, 'tour'])->name('tour');
 Route::get('/searchtour', [HomeController::class, 'searchTour'])->name('searchTour');
+
 
 
 Route::prefix('admin/dashboard')->group(function () {
@@ -73,8 +77,13 @@ Route::group(['middleware' => 'checkadmin' , 'prefix' => '/admin'], function () 
     Route::resource('/tours', TourController::class);
     Route::post('/tours/search', [TourController::class, 'search'])->name('tours.search');
     Route::resource('/tourdetails', TourDetailController::class);
-    Route::post('/tourdetails/search', [HotelController::class, 'search'])->name('tourdetails.search');
+    Route::post('/tourdetails/search', [TourDetailController::class, 'search'])->name('tourdetails.search');
     Route::resource('/tourdetails.image', TourImageController::class)->except(['create', 'index', 'show']);
+    Route::resource('/orders', \App\Http\Controllers\admin\OrderController::class);
+    Route::post('/orders/search', [\App\Http\Controllers\admin\OrderController::class, 'search'])->name('orders.search');
+
+
+
 
 });
 

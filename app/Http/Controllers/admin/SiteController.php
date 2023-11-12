@@ -33,15 +33,18 @@ class SiteController extends Controller
      */
     public function store(Request $request)
     {
+        $message = ['required' => 'Không được để trống!',
+            'image' => 'Phải là hình ảnh!'
+        ];
         $request->validate([
             'siteName'=> 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+        ],$message);
         $image = $request->file('image')->store(
             'sites/images', 'public'
         );
         Site::create($request->except('image') + ['image' => $image]);
-        Toastr::success('Thêm vị trí thành công!' );
+        Toastr::success('Thêm địa danh thành công!' );
         return redirect()->route('sites.index')->with([
             'message' => 'Success Created !',
             'alert-type' => 'success'
@@ -72,19 +75,22 @@ class SiteController extends Controller
      */
     public function update(Request $request, Site $site)
     {
+        $message = ['required' => 'Không được để trống!',
+            'image' => 'Phải là hình ảnh!'
+        ];
         $request->validate([
             'siteName'=> 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ],$message);
 
         if ($request->hasFile('image')) {
             File::delete('storage/' . $site->image);
             $image = $request->file('image')->store('sites/images', 'public');
             $site->update($request->except('image') + ['image' => $image]);
         } else {
-            $site->update($request->validated());
+            $site->update($request->except('image'));
         }
-        Toastr::success('Sửa vị trí thành công!' );
+        Toastr::success('Sửa địa danh thành công!' );
 
         return redirect()->route('sites.index')->with([
             'message' => 'Success Updated!',
@@ -99,14 +105,14 @@ class SiteController extends Controller
     public function destroy(Site $site)
     {
         if($site->tour->count() > 0){
-            Toastr::error('Không thể xóa vị trí này!' );
+            Toastr::error('Không thể xóa địa danh này!' );
 
             return redirect()->back();
         }
 
         File::delete('storage/'. $site->image);
         $site->delete();
-        Toastr::success('Xóa vị trí thành công!' );
+        Toastr::success('Xóa địa danh thành công!' );
         return redirect()->back()->with([
             'message' => 'Success Deleted !',
             'alert-type' => 'danger'

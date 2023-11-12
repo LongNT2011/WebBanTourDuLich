@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Hotel;
+use App\Models\Site;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Brian2694\Toastr\Facades\Toastr;
@@ -11,9 +12,6 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class HotelController extends Controller
 {
-    public $validationRules = [
-        'rating' => 'required'
-    ];
     /**
      * Display a listing of the resource.
      */
@@ -27,7 +25,8 @@ class HotelController extends Controller
      * Show the form for creating a new resource.
      */
     public function create(){
-        return view('admin.hotel.create');
+        $sites = Site::get(['id','siteName']);
+        return view('admin.hotel.create',compact('sites'));
     }
 
     /**
@@ -35,12 +34,16 @@ class HotelController extends Controller
      */
     public function store(Request $request)
     {
+        $message = ['required' => 'Không được để trống!',
+                    'image' => 'Phải là hình ảnh!'
+            ];
          $request->validate([
              'hotelName'=> 'required',
              'address'=> 'required',
              'pricePerPerson' => 'required|numeric',
              'imageUrl' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-         ]);
+             'site_id' => 'required',
+         ],$message);
         $image = $request->file('imageUrl')->store(
             'hotels/images', 'public'
         );
@@ -53,7 +56,8 @@ class HotelController extends Controller
     }
     public function edit(Hotel $hotel)
     {
-        return view('admin.hotel.edit',compact('hotel'));
+        $sites = Site::get(['id','siteName']);
+        return view('admin.hotel.edit',compact('hotel','sites'));
     }
 
     /**
@@ -65,7 +69,8 @@ class HotelController extends Controller
             'hotelName'=> 'required',
             'address'=> 'required',
             'pricePerPerson' => 'required|numeric',
-            'imageUrl' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'imageUrl' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'site_id' => 'required',
         ]);
 
         if ($request->hasFile('imageUrl')) {
@@ -73,7 +78,7 @@ class HotelController extends Controller
             $image = $request->file('imageUrl')->store('hotels/images', 'public');
             $hotel->update($request->except('imageUrl') + ['imageUrl' => $image]);
         } else {
-            $hotel->update($request);
+            $hotel->update($request->except('imageUrl'));
         }
         Toastr::success('Sửa khách sạn thành công!' );
         return redirect()->route('hotels.index')->with([
@@ -102,7 +107,6 @@ class HotelController extends Controller
         $query = $request->input('query');
 
         $hotels = Hotel::where('hotelName', 'like', "%$query%")
-            ->orWhere('description', 'like', "%$query%")
             ->orWhere('pricePerPerson', 'like', "%$query%")
             ->paginate(5);
 
