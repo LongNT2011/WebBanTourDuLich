@@ -53,4 +53,14 @@ class HomeController extends Controller
       $tours = Tour::with('tourDetail')->paginate(9);
       return view('tour', compact('tours'));
     }
+
+    public function tourSite(Request $request,){
+      $siteId = $request->input('toursite');
+      $tours = Tour::where('tourName', 'like', '%' . $request->input('keyword') . '%')
+      ->join('tour_site', 'tours.id', '=', 'tour_site.tour_id')
+      ->join('sites', 'tour_site.site_id', '=', 'sites.id')
+      ->join('locations', 'sites.location_id', '=', 'locations.id')
+      ->where('locations.id', '=', $locationId)
+      ->with('tourDetail')->paginate(9);
+    }
 }

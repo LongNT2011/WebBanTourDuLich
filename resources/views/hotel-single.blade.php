@@ -22,7 +22,7 @@
     <section class="ftco-section ftco-degree-bg">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 sidebar">
+                <!-- <div class="col-lg-3 sidebar">
                     <div class="sidebar-wrap bg-light ftco-animate">
                         <h3 class="heading mb-4">Find City</h3>
                         <form action="#">
@@ -110,8 +110,8 @@
                             </div>
                         </form>
                     </div>
-                </div>
-                <div class="col-lg-9">
+                </div> -->
+                <div class="col-lg-12">
                     <div class="row">
 
                         <div class="col-md-12 ftco-animate">
@@ -131,13 +131,13 @@
                             <p class="rate mb-5">
                                 <span class="loc"><a href="#"><i class="icon-map"></i>
                                         {{ $detail->depatureLocation }}</a></span>
-                                <span class="star">
+                                <!-- <span class="star">
                                     <i class="icon-star"></i>
                                     <i class="icon-star"></i>
                                     <i class="icon-star"></i>
                                     <i class="icon-star"></i>
                                     <i class="icon-star-o"></i>
-                                    8 Rating</span>
+                                    8 Rating</span> -->
                             </p>
                             {!! $detail->tripDescription !!}
                         </div>

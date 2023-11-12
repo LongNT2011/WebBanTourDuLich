@@ -53,7 +53,7 @@ class OrderController extends Controller
     }
     public function CheckoutOrder(Request $request){
         if (!Auth::check()) {
-            return redirect()->route('signin');
+            return redirect()->route('auth.signin');
         } 
         else {
         $order = new Order();
@@ -75,7 +75,7 @@ class OrderController extends Controller
         $domain = $request->getHost();
         $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https://' : 'http://';
         $paymentRequest = new PaymentRequest;
-        $paymentRequest->setApproveUrl($protocol . $domain . ':8000/orderConfirm?');
+        $paymentRequest->setApproveUrl($protocol . $domain . ':8000/orderConfirm');
         $paymentRequest->setCancelUrl($protocol . $domain);
 
         $nameOrder = $request->input('tourName') . ' & ' . $request->input('hotelName');
