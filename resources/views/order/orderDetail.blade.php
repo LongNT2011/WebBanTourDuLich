@@ -36,9 +36,6 @@
                                 <div class="col-12">
                                     <p class="card-title text-danger" style="font-size:xx-large">Tên tour:
                                         {{ $tour->tourName }}</p>
-                                    <p class="card-text" style="font-size:large">
-                                        Mô tả: {{ $tourDetail->tripDescription }}
-                                    </p>
                                 </div>
                             </div>
                             <div class="row col-12">
@@ -122,12 +119,12 @@
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                     <div class="form-group pt-2">
-                        <label asp-for="CheckInDate" class="text-danger">Check in Date</label>
+                        <label asp-for="CheckInDate" class="text-danger">Ngày checkin</label>
                         <input asp-for="CheckInDate" disabled class="form-control"
                             value="{{ $tourDetail->checkInDate }}" />
                     </div>
                     <div class="form-group pt-2">
-                        <label asp-for="CheckOutDate" class="text-danger">Check Out Date</label>
+                        <label asp-for="CheckOutDate" class="text-danger">Ngày checkout</label>
                         <input asp-for="CheckOutDate" disabled class="form-control"
                             value="{{ $tourDetail->checkOutDate }}" />
                     </div>
