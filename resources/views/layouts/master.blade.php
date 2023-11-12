@@ -35,7 +35,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" style="position:fixed;"
      id="ftco-navbar">
     <div class="container">
-        <a class="navbar-brand" href="index.html">dirEngine.</a>
+        <a class="navbar-brand" href="index.html">Nhóm 8</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="oi oi-menu"></span> Menu
@@ -43,22 +43,22 @@
 
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-                <li class="nav-item active"><a href="about.html" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="tour.html" class="nav-link">Tour</a></li>
+                <li class="nav-item"><a href="{{ route('index') }}" class="nav-link">Trang Chủ</a></li>
+                <li class="nav-item "><a href="about.html" class="nav-link">Thông Tin</a></li>
+                <li class="nav-item"><a href="{{ route('tour') }}" class="nav-link">Tour</a></li>
                 <!-- <li class="nav-item"><a href="hotel.html" class="nav-link">Hotels</a></li> -->
                 <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Liên Hệ</a></li>
                 @if (Auth::check())
                     <li class="nav-item cta">
-                        <a href="{{ route('account.detail') }}" class="nav-link"><span>Profile</span></a>
+                        <a href="{{ route('account.detail') }}" class="nav-link"><span>Hồ Sơ</span></a>
                     </li>
-                    <li style="margin-left: 3%;" class="nav-item cta">
-                        <a href="{{ route('auth.signout') }}" class="nav-link"><span>Logout</span></a>
+                    <li style="margin-left: 5px;" class="nav-item cta">
+                        <a href="{{ route('auth.signout') }}" class="nav-link"><span>Đăng Xuất</span></a>
                     </li>
                 @else
                     <li class="nav-item cta">
-                        <a href="{{ route('auth.signin') }}" class="nav-link"><span>Login</span></a>
+                        <a href="{{ route('auth.signin') }}" class="nav-link"><span>Đăng Nhập</span></a>
                     </li>
                 @endif
             </ul>
@@ -74,7 +74,7 @@
         <div class="row mb-5">
             <div class="col-md">
                 <div class="ftco-footer-widget mb-4">
-                    <h2 class="ftco-heading-2">dirEngine</h2>
+                    <h2 class="ftco-heading-2">Nhóm 8</h2>
                     <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there
                         live the blind texts.</p>
                     <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">

@@ -107,13 +107,13 @@
                     <div class="card-body">
                         <div class="row gutters">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <h6 class="mb-2 text-primary">Personal Details</h6>
+                                <h6 class="mb-2 text-primary">Thông tin cá nhân</h6>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="fullName">Họ và tên</label>
                                     <input type="text" class="form-control" id="fullName" name="fullName"
-                                        value="{{ $user->fullName }}" placeholder="{{ $user->fullName }}">
+                                        value="{{ $user->fullName }}" placeholder="Nhập họ tên">
                                     @error('fullName')
                                         <span class="text-danger">{{ $errors->first('fullName') }}</span>
                                     @enderror
@@ -123,7 +123,7 @@
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input type="email" class="form-control" id="email" name="email"
-                                        value="{{ $user->email }}" placeholder="{{ $user->email }}">
+                                        value="{{ $user->email }}" placeholder="Nhập email">
                                     @error('email')
                                         <span class="text-danger">{{ $errors->first('email') }}</span>
                                     @enderror
@@ -134,7 +134,7 @@
                                     <label for="phone">Số điện thoại</label>
                                     <input type="text" class="form-control" id="phone" name="phoneNumber"
                                         value="{{ $user->phoneNumber  }}"
-                                        placeholder="{{ $user->phoneNumber ?? 'Enter your phone number' }}">
+                                        placeholder="Nhập số điện thoại">
                                     @error('phone')
                                         <span class="text-danger">{{ $errors->first('phone') }}</span>
                                     @enderror
@@ -145,7 +145,7 @@
                                     <label for="Street">Địa chỉ</label>
                                     <input type="name" class="form-control" id="Street" name="address"
                                         value="{{ $user->address }}"
-                                        placeholder="{{ $user->address ?? 'Enter your address' }}">
+                                        placeholder="Nhập địa chỉ của bạn">
                                     @error('address')
                                         <span class="text-danger">{{ $errors->first('address') }}</span>
                                     @enderror
@@ -156,9 +156,9 @@
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="text-right">
                                     <button type="button" id="cancel-button" name="submit"
-                                        class="btn btn-secondary">Cancel</button>
+                                        class="btn btn-secondary">Trở về</button>
                                     <button type="submit" id="submit" name="submit"
-                                        class="btn btn-primary">Update</button>
+                                        class="btn btn-primary">Cập nhật</button>
                                 </div>
                             </div>
                         </div>
@@ -169,7 +169,7 @@
     </div>
     <script>
         document.getElementById("cancel-button").addEventListener("click", function() {
-            window.location.href = "{{ route('auth.signin') }}";
+            window.history.back();
         });
     </script>
     <script src="{{asset('js/jquery.min.js')}}"></script>

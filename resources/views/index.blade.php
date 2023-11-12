@@ -6,14 +6,14 @@
         <div class="container">
             <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
                 <div class="col-md-9 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-                    <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong>Explore <br></strong> your amazing city</h1>
-                    <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Find great places to stay, eat, shop, or visit from local experts</p>
+                    <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong>Khám Phá <br></strong> Các Tour Du Lịch Tuyệt Vời</h1>
+                    <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Những địa điểm tuyệt vời để lưu trú, ăn uống, mua sắm tốt nhất</p>
                     <div class="block-17 my-4">
                         <form action="{{route('searchTour')}}" method="get" class="d-block d-flex">
                             @csrf
                             <div class="fields d-block d-flex">
                                 <div class="textfield-search one-third">
-                                    <input name="keyword" type="text" class="form-control" placeholder="Ex: food, service, hotel">
+                                    <input name="keyword" type="text" class="form-control" placeholder="Nhập Tour">
                                 </div>
                                 <div class="select-wrap one-third">
                                     <div class="icon"><span class="ion-ios-arrow-down"></span></div>
@@ -26,16 +26,16 @@
                                     </select>
                                 </div>
                             </div>
-                            <input type="submit" class="search-submit btn btn-primary" value="Search">
+                            <input type="submit" class="search-submit btn btn-primary" value="Tìm Kiếm">
                         </form>
                     </div>
-                    <p>Or browse the highlights</p>
+                    <!-- <p>Or browse the highlights</p>
                     <p class="browse d-md-flex">
                         <span class="d-flex justify-content-md-center align-items-md-center"><a href="#"><i class="flaticon-fork"></i>Restaurant</a></span>
                         <span class="d-flex justify-content-md-center align-items-md-center"><a href="#"><i class="flaticon-hotel"></i>Hotel</a></span>
                         <span class="d-flex justify-content-md-center align-items-md-center"><a href="#"><i class="flaticon-meeting-point"></i>Places</a></span>
                         <span class="d-flex justify-content-md-center align-items-md-	center"><a href="#"><i class="flaticon-shopping-bag"></i>Shopping</a></span>
-                    </p>
+                    </p> -->
                 </div>
             </div>
         </div>
@@ -48,8 +48,8 @@
                     <div class="media block-6 services d-block text-center">
                         <div class="d-flex justify-content-center"><div class="icon"><span class="flaticon-guarantee"></span></div></div>
                         <div class="media-body p-2 mt-2">
-                            <h3 class="heading mb-3">Best Price Guarantee</h3>
-                            <p>A small river named Duden flows by their place and supplies.</p>
+                            <h3 class="heading mb-3">Giá Cả Hợp Lý</h3>
+                            <p>Mức giá phù hợp với nhiều đối tượng khách hàng</p>
                         </div>
                     </div>
                 </div>
@@ -57,8 +57,8 @@
                     <div class="media block-6 services d-block text-center">
                         <div class="d-flex justify-content-center"><div class="icon"><span class="flaticon-like"></span></div></div>
                         <div class="media-body p-2 mt-2">
-                            <h3 class="heading mb-3">Travellers Love Us</h3>
-                            <p>A small river named Duden flows by their place and supplies.</p>
+                            <h3 class="heading mb-3">Đội ngũ nhân viên</h3>
+                            <p>Đội ngũ nhân viên chuyên nghiệp đáp ứng đầy đủ yêu cầu của khách hàng</p>
                         </div>
                     </div>
                 </div>
@@ -66,8 +66,8 @@
                     <div class="media block-6 services d-block text-center">
                         <div class="d-flex justify-content-center"><div class="icon"><span class="flaticon-detective"></span></div></div>
                         <div class="media-body p-2 mt-2">
-                            <h3 class="heading mb-3">Best Travel Agent</h3>
-                            <p>A small river named Duden flows by their place and supplies.</p>
+                            <h3 class="heading mb-3">Dịch Vụ Đa Dạng</h3>
+                            <p>Dịch vụ đa dạng cung cấp trải nghiệm tuyệt vời</p>
                         </div>
                     </div>
                 </div>
@@ -75,8 +75,8 @@
                     <div class="media block-6 services d-block text-center">
                         <div class="d-flex justify-content-center"><div class="icon"><span class="flaticon-support"></span></div></div>
                         <div class="media-body p-2 mt-2">
-                            <h3 class="heading mb-3">Our Dedicated Support</h3>
-                            <p>A small river named Duden flows by their place and supplies.</p>
+                            <h3 class="heading mb-3">Hỗ Trợ Khách Hàng</h3>
+                            <p>Hỗ trợ khách hàng 24/7 mọi lúc mọi nơi</p>
                         </div>
                     </div>
                 </div>
@@ -141,27 +141,27 @@
                                     <div class="d-flex">
                                         <div class="one">
                                             <h3><a href="{{route('tour.detail', ['detail'=>$detail])}}">{{$tour->tourName}}</a></h3>
-                                            <p class="rate">
+                                             <!-- <p class="rate">
                                                 <i class="icon-star"></i>
                                                 <i class="icon-star"></i>
                                                 <i class="icon-star"></i>
                                                 <i class="icon-star"></i>
                                                 <i class="icon-star-o"></i>
                                                 <span>8 Rating</span>
-                                            </p>
-                                        </div>
+                                            </p> -->
+                                        </div> 
 
 
                                     </div>
 
 
-                                    <p>Far far away, behind the word mountains, far from the countries</p>
-                                    <p class="days"><span>{{ date('d/m/Y', strtotime($detail->checkInDate)) }} - {{ date('d/m/Y', strtotime($detail->checkOutDate)) }}</span> <span style="float: right; color:red; font-size:16px;" class="price">{{$detail->childrenPrice}} - {{$detail->adultPrice}} VNĐ</span></p>
-
+                                    <span style="color:red; font-size:20px;" class="price">{{$detail->childrenPrice}} - {{$detail->adultPrice}} VNĐ</span>
+                                    <p class="days"><span>{{ date('d/m/Y', strtotime($detail->checkInDate)) }} - {{ date('d/m/Y', strtotime($detail->checkOutDate)) }}</span> </p>
+                                    
                                     <hr>
                                     <p class="bottom-area d-flex">
                                         <span><i class="icon-map-o"></i> {{$detail->depatureLocation}}</span>
-                                        <span class="ml-auto"><a href="{{route('tour.detail', ['detail'=>$detail])}}">Đặt Tour Ngay</a></span>
+                                        <span class="ml-auto"><a href="{{route('tour.detail', ['detail'=>$detail])}}">Đặt Ngay</a></span>
                                     </p>
 
                                 </div>
@@ -223,7 +223,7 @@
     </section>
 
 
-    <section class="ftco-section">
+    <!-- <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-start mb-5 pb-3">
                 <div class="col-md-7 heading-section ftco-animate">
@@ -401,7 +401,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <section class="ftco-section testimony-section bg-light">
         <div class="container">
@@ -470,7 +470,7 @@
         </div>
     </section>
 
-    <section class="ftco-section">
+    <!-- <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-start mb-5 pb-3">
                 <div class="col-md-7 heading-section ftco-animate">
@@ -585,7 +585,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <section class="ftco-section bg-light">
         <div class="container">
