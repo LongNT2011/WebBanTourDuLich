@@ -52,6 +52,7 @@ Route::view('/orderConfirm', 'orderConfirm');
 Route::view('/orderDetail', 'orderDetail');
 Route::get('/tour.html', [HomeController::class, 'tour'])->name('tour');
 Route::get('/searchtour', [HomeController::class, 'searchTour'])->name('searchTour');
+Route::get('/toursite/{site}', [HomeController::class, 'getTourBySite'])->name('tour.getTour');
 
 
 

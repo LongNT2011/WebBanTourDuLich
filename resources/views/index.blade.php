@@ -105,7 +105,7 @@
                                         </div>
                                     </a>
                                     <div class="text p-3">
-                                        <h3><a href="#">{{$site->siteName}}</a></h3>
+                                        <h3><a href="{{route('tour.getTour',[$site])}}">{{$site->siteName}}</a></h3>
                                         <span class="listing">{{$site->tour->count()}} Tour Tất Cả</span>
                                     </div>
                                 </div>

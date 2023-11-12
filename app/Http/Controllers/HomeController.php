@@ -53,4 +53,11 @@ class HomeController extends Controller
       $tours = Tour::with('tourDetail')->paginate(9);
       return view('tour', compact('tours'));
     }
+
+    public function getTourBySite(Site $site){
+        $tours = $site->tour()->with('tourDetail')->paginate(9);
+        return view('tour', compact('tours'));
+    }
+
+
 }
